@@ -262,7 +262,7 @@ class _AppHomePageState extends State<AppHomePage> {
   }
 
   Widget _buildListTile(String imgPath , String title){
-     return                       ListTile(leading: Image.asset(imgPath,width: 30,height: 30,),title: Text(title,style: TextStyle(color: Colors.white),),);
+     return                       ListTile(leading: Image.asset(imgPath,width: 20,height: 30,),title: Text(title,style: TextStyle(color: Colors.white),),);
 
   }
 
@@ -272,7 +272,7 @@ class _AppHomePageState extends State<AppHomePage> {
       onTap: onTap,
       child: Container(
         width: MediaQuery.of(context).size.width,
-        margin: EdgeInsets.only(bottom: 15),
+        margin: EdgeInsets.only(bottom: 5),
         height: 120,
         decoration: new BoxDecoration(
             image: new DecorationImage(
