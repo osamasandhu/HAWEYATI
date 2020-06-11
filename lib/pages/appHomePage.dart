@@ -74,7 +74,9 @@ class _AppHomePageState extends State<AppHomePage> {
                   ListView(
                     children: <Widget>[
                       Center(
-                        child: CircleAvatar(backgroundColor: Colors.white,foregroundColor: Colors.white,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.white,
                           radius: 50,
                         ),
                       ),
@@ -88,7 +90,6 @@ class _AppHomePageState extends State<AppHomePage> {
                                   fontSize: 18,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold))),
-
                       Center(
                         child: FlatButton.icon(
                             onPressed: null,
@@ -102,12 +103,17 @@ class _AppHomePageState extends State<AppHomePage> {
                               style: TextStyle(color: Colors.white),
                             )),
                       ),
-                      SizedBox(height:10,),
-            _buildListTile("assets/images/order.png", "Your Orders"),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      _buildListTile("assets/images/order.png", "Your Orders"),
                       _buildListTile("assets/images/ride.png", "Your Rides"),
-                      _buildListTile("assets/images/setting.png", "Your Settings"),
-                      _buildListTile("assets/images/invite.png", "Invite Friends"),
-                      _buildListTile("assets/images/term.png", "Terms and Conditions"),
+                      _buildListTile(
+                          "assets/images/setting.png", "Your Settings"),
+                      _buildListTile(
+                          "assets/images/invite.png", "Invite Friends"),
+                      _buildListTile(
+                          "assets/images/term.png", "Terms and Conditions"),
                       _buildListTile("assets/images/rate.png", "Rate App"),
                     ],
                     padding: EdgeInsets.fromLTRB(0, 100, 0, 10),
@@ -261,9 +267,18 @@ class _AppHomePageState extends State<AppHomePage> {
     );
   }
 
-  Widget _buildListTile(String imgPath , String title){
-     return                       ListTile(leading: Image.asset(imgPath,width: 20,height: 30,),title: Text(title,style: TextStyle(color: Colors.white),),);
-
+  Widget _buildListTile(String imgPath, String title) {
+    return ListTile(
+      leading: Image.asset(
+        imgPath,
+        width: 20,
+        height: 30,
+      ),
+      title: Text(
+        title,
+        style: TextStyle(color: Colors.white),
+      ),
+    );
   }
 
   Widget _buildContainer(

@@ -4,8 +4,11 @@ import 'package:flutter/rendering.dart';
 
 class PlusMinusContainer extends StatefulWidget {
 
+
   String extra;
   String dayprice;
+
+
 
   PlusMinusContainer({this.dayprice,this.extra});
 
@@ -14,6 +17,23 @@ class PlusMinusContainer extends StatefulWidget {
 }
 
 class _PlusMinusContainerState extends State<PlusMinusContainer> {
+
+  int quantity = 1;
+
+  _increment(){
+
+ setState(() {
+   quantity++;
+ });
+  }
+  _decrement(){
+
+
+    setState(() {
+      quantity--;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -60,6 +80,12 @@ Row(children: <Widget>[
       icon:
       Icon(Icons.remove,color: Colors.white,),
       onPressed: () {
+
+
+      if(quantity>1){
+        _decrement();
+
+      }
       },
     ),
   )
@@ -73,7 +99,7 @@ Row(children: <Widget>[
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
         child: Text(
-          "12",             style: TextStyle(
+          "$quantity",             style: TextStyle(
             fontSize: 12,color: Colors.black),
         ),
       ),
@@ -91,6 +117,9 @@ Row(children: <Widget>[
       icon:
       Icon(Icons.add,color: Colors.white,),
       onPressed: () {
+
+        _increment();
+
       },
     ),
   )
