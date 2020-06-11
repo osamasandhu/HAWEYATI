@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:haweyati/models/dumpstermodel.dart';
+import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/orderDetail/orderDetail.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
@@ -8,9 +9,8 @@ import 'package:haweyati/widgits/emptyContainer.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
 
 class TimeAndLocation extends StatefulWidget {
-  DumpSterModel timeAndLocation;
-
-  TimeAndLocation({this.timeAndLocation});
+  ConstructionService constructionService;
+  TimeAndLocation({this.constructionService});
   @override
   _TimeAndLocationState createState() => _TimeAndLocationState();
 }
@@ -72,39 +72,51 @@ class _TimeAndLocationState extends State<TimeAndLocation> {
                 ],
               ),
             ),
-            SizedBox(height: 20,),
-
+            SizedBox(
+              height: 20,
+            ),
             _buildRow(
                 dropoffdate: "Drop-off Date", dropofftime: "Drop-off Time"),
-
-
             _buildRowwithDetail(
-                child1:
-                Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("17 April 2020"),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.calendar_today),
-                )
-              ],
-            ),child2: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("3:00 - 6:00"),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.access_time),
-                )
-              ],
+                child1: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("17 April 2020"),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.calendar_today),
+                    )
+                  ],
+                ),
+                child2: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("3:00 - 6:00"),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.access_time),
+                    )
+                  ],
+                )),
+            TextFormField(
+              scrollPadding: EdgeInsets.only(bottom: 150),
+              maxLength: 80,
+              maxLines: 2,
+              decoration: InputDecoration(
+                  labelText: "Note",
+                  hintText: "Write note here",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10))),
             )
-            ),
-
-            TextFormField(scrollPadding: EdgeInsets.only(bottom: 150), maxLength: 80,maxLines: 2, decoration: InputDecoration( labelText: "Note",hintText: "Write note here",border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),)
           ],
         ),
-        showButton: true, onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (context)=>OrderDetail(orderDetail: widget.timeAndLocation,)));},
+        showButton: true,
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => OrderDetail(
+                    constructionService: widget.constructionService,
+                  )));
+        },
         btnName: "Continue",
       ),
     );
@@ -145,7 +157,7 @@ class _TimeAndLocationState extends State<TimeAndLocation> {
       children: <Widget>[
         Expanded(flex: 2, child: EmptyContainer(child: child1)),
         SizedBox(
-          width: 20,
+          width: 10,
         ),
         Expanded(flex: 2, child: EmptyContainer(child: child2)),
       ],

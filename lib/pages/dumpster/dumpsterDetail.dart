@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/dumpstermodel.dart';
+import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/dumpster/dumpsterServicesdetail.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/stackButton.dart';
 
-class DumpsterDetail extends StatefulWidget {
-  DumpSterModel dumpSterdetail;
+class ServicesItemDetail extends StatefulWidget {
+  ConstructionService serviceDetail;
 
-  DumpsterDetail({this.dumpSterdetail});
+  ServicesItemDetail({this.serviceDetail});
   @override
-  _DumpsterDetailState createState() => _DumpsterDetailState();
+  _ServicesItemDetailState createState() => _ServicesItemDetailState();
 }
 
-class _DumpsterDetailState extends State<DumpsterDetail> {
+class _ServicesItemDetailState extends State<ServicesItemDetail> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: Color(0xffffffff),
       appBar: HaweyatiAppBar(),
       body: Stack(
         fit: StackFit.expand,
@@ -28,13 +29,13 @@ class _DumpsterDetailState extends State<DumpsterDetail> {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 250,
-                  color: Colors.greenAccent,
+                  decoration: BoxDecoration(image: DecorationImage(image: AssetImage(widget.serviceDetail.image))),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 Text(
-                  widget.dumpSterdetail.name,
+                  widget.serviceDetail.title,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 SizedBox(
@@ -44,14 +45,14 @@ class _DumpsterDetailState extends State<DumpsterDetail> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      widget.dumpSterdetail.rate,
+                      widget.serviceDetail.detail.sr,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     Text(
-                      widget.dumpSterdetail.days,
+                      widget.serviceDetail.detail.days,
                       style: TextStyle(color: Colors.black54),
                     )
                   ],
@@ -59,15 +60,15 @@ class _DumpsterDetailState extends State<DumpsterDetail> {
                 SizedBox(
                   height: 20,
                 ),
-                Text(widget.dumpSterdetail.detail),
+                Text(widget.serviceDetail.detail.description),
               ],
             ),
           ),
           StackButton(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => DumpsterServicesDetail(
-                        dumpSterServicesdetail: widget.dumpSterdetail,
+                  builder: (context) => DumpsterServicesDetail(constructionService: widget.serviceDetail,
+
                       )));
             },
             buttonName: "Rent Now",

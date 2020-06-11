@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 class HaweyatiAppBar extends AppBar{
  bool showAction;
 
-  HaweyatiAppBar({this.showAction = false}):super(
+  HaweyatiAppBar({double progress = 0.0, this.showAction = false}):super(
   elevation:0,  iconTheme: new IconThemeData(color: Colors.white),
          centerTitle: true,
          backgroundColor: Color(0xff313f53),
@@ -14,9 +14,9 @@ class HaweyatiAppBar extends AppBar{
              height: 40,
            ),
          ),actions:[
- showAction? IconButton(icon: Icon(Icons.shopping_cart,color: Colors.white,),):Container()
+ showAction? IconButton(icon: Icon(Icons.shopping_cart,color: Colors.white,),onPressed: (){},):Container()
  ],
-     bottom:PreferredSize(child: Container (height: 3, child: LinearProgressIndicator(value: .7,backgroundColor: Colors.transparent,)))
+     bottom:PreferredSize(child: Container (height: 3, child: LinearProgressIndicator(value: progress,backgroundColor: Colors.transparent,)))
 
  );
 }

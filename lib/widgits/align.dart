@@ -1,35 +1,41 @@
 import 'package:flutter/material.dart';
 
-class AlignImages extends StatefulWidget {
-  double dx; double dy; String imgUrl; double height; double width;
-  AlignImages({this.width,this.imgUrl,this.height,this.dx,this.dy});
+class AlignedImage extends StatelessWidget {
+  final double dx;
+  final double dy;
+  final double width;
+  final double height;
 
-  @override
-  _AlignImagesState createState() => _AlignImagesState();
-}
+  final String image;
 
-class _AlignImagesState extends State<AlignImages> {
+  AlignedImage({
+    this.dx,
+    this.dy,
+    this.width,
+    this.height,
+    this.image
+  }): assert(dx != null),
+      assert(dy != null),
+      assert(width != null),
+      assert(height != null),
+      assert(image != null);
+
   @override
   Widget build(BuildContext context) {
     return Align(
-        alignment: Alignment(widget.dx,widget.dy),
-        child: Material(
-          elevation: 16,borderRadius: BorderRadius.circular(120),
-          child: Container(
-            height: widget.height,
-            width: widget.width,
-            decoration: BoxDecoration(
-                image: new DecorationImage(
-                  image: NetworkImage(
-                    widget.imgUrl,
-                  ),
-                  fit: BoxFit.fill,
-                ),
-                borderRadius: BorderRadius.circular(120),
-                border: Border.all(color: Colors.white, width: 4)
-
-            ),
+      alignment: Alignment(dx, dy),
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          image: new DecorationImage(
+            fit: BoxFit.cover,
+            image: AssetImage(image)
           ),
-        ));
+//
+          borderRadius: BorderRadius.circular(120),
+       ),
+      ),
+    );
   }
 }

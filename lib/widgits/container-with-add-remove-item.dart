@@ -25,11 +25,14 @@ class _PlusMinusContainerState extends State<PlusMinusContainer> {
       width: MediaQuery.of(context).size.width,
       child: Padding(
         padding: const EdgeInsets.all(20),
-        child: Row(children: <Widget>[
+        child: Row(
+          children: <Widget>[
 
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Column( mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment:CrossAxisAlignment.start,children: <Widget>[Text(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment:CrossAxisAlignment.start,children: <Widget>[
+                Text(
               widget.extra,
               style: TextStyle(
                   fontWeight: FontWeight.bold, fontSize: 16),

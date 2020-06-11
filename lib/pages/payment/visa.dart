@@ -1,14 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/dumpstermodel.dart';
+import 'package:haweyati/models/temp-model.dart';
+import 'package:haweyati/pages/phoneNumber.dart';
 import 'package:haweyati/src/app.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
 import 'package:haweyati/widgits/haweyati_Textfield.dart';
 
 class VisaCard extends StatefulWidget {
-  DumpSterModel visaCard;
-  VisaCard({this.visaCard});
+  ConstructionService constructionService;
+  VisaCard({this.constructionService});
   @override
   _VisaCardState createState() => _VisaCardState();
 }
@@ -26,11 +28,13 @@ class _VisaCardState extends State<VisaCard> {
     return Scaffold(
       appBar: HaweyatiAppBar(),
       body: HaweyatiAppBody(
-          onTap: () {},
+          onTap: () {print(widget.constructionService);
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PhoneNumber(constructionService: widget.constructionService,)));
+            },
           title: "Visa Card",
           detail: "Card Payment Visa",
           showButton: true,
-          btnName: " Pay ${widget.visaCard.rate}",
+          btnName: " Pay ${widget.constructionService.detail.rate}",
           child: Form(
               autovalidate: autoValidate,
               key: _formKey,

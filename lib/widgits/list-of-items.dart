@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:haweyati/models/temp-model.dart';
 
 class ContainerDetailList extends StatefulWidget {
-
+String imgpath;
   Function ontap;
   String name;
-  ContainerDetailList({this.name,this.ontap});
+  ContainerDetailList({this.name,this.ontap,this.imgpath});
 
 
   @override
@@ -26,12 +27,14 @@ class _ContainerDetailListState extends State<ContainerDetailList> {
         padding: const EdgeInsets.only(top: 30),
         child: ListTile(
           onTap: widget.ontap,
-          leading: Container(
-            height: 50,
-            width: 50,
-            color: Colors.greenAccent,
-          ),
-          title: Text(
+          leading:
+          Image.asset(widget.imgpath)
+//          Container(
+//            height: 50,
+//            width: 50,
+//            color: Colors.greenAccent,
+//          ),
+         , title: Text(
             widget.name,
             style: TextStyle(
                 fontWeight: FontWeight.bold, fontSize: 16),

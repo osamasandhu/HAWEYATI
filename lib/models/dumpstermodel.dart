@@ -33,9 +33,8 @@ List<DumpSterModel> dumpsterdummy =[
       days: "per 19 days"
       ,
       rate: "203 SR",
-      detail: "Lorem ipsum dolor sit amet, consectr adipiscing elit,do eiusm webdmstemporasio. Lorem ipsum dolorsit amet. Lorem ipsum dolor sit amet, consectradipiscing elit, do eiusm webdmstemporasio. Loremipsum dolor sit amet"
 
-,    priceperday:"21 SR/day",
+    priceperday:"21 SR/day",
 
   )
 

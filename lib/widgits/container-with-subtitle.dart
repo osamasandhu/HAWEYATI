@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:haweyati/models/temp-model.dart';
 
 
 class SubtileContainer extends StatefulWidget {
 
+  ConstructionService constructionService;
   String name;
   String subtitle;
   Function onTap;
-  SubtileContainer({this.name,this.onTap,this.subtitle});
+  SubtileContainer({this.name,this.onTap,this.subtitle,this.constructionService});
 
   @override
   _SubtileContainerState createState() => _SubtileContainerState();
@@ -26,12 +28,8 @@ class _SubtileContainerState extends State<SubtileContainer> {
         padding: const EdgeInsets.only(top: 30),
         child: ListTile(
           onTap: widget.onTap,
-          leading: Container(
-            height: 50,
-            width: 50,
-            color: Colors.greenAccent,
-          ),
-          title: Text(
+          leading: Image.asset(widget.constructionService.image)
+,          title: Text(
             widget.name,
             style: TextStyle(
                 fontWeight: FontWeight.bold, fontSize: 16),
