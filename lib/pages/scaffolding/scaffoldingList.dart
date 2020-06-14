@@ -3,21 +3,33 @@ import 'package:haweyati/models/dumpstermodel.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/dumpster/dumpsterDetail.dart';
 import 'package:haweyati/src/app.dart';
+import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
 import 'package:haweyati/widgits/list-of-items.dart';
-import 'package:haweyati/widgits/service-item-listing.dart';
 
-class ScaffoldingList extends StatefulWidget {
+class ScaffoldingListing extends StatefulWidget {
 
+  ConstructionService service;
+  ScaffoldingListing(this.service);
   @override
-  _ScaffoldingListState createState() => _ScaffoldingListState();
+  _ScaffoldingListingState createState() => _ScaffoldingListingState();
 }
 
-class _ScaffoldingListState extends State<ScaffoldingList> {
+class _ScaffoldingListingState extends State<ScaffoldingListing> {
   @override
   Widget build(BuildContext context) {
-    return ServiceItemListing(pageDetail: "Following Scaffolding",title:"Scaffolding",service: dummyScaffolding,);
+    return Scaffold(
+      appBar: HaweyatiAppBar(showAction: true,),
+      body: HaweyatiAppBody(title: "Scaffolding",detail: loremIpsum.substring(0,70),
+          child:ListView.builder(padding: EdgeInsets.symmetric(horizontal: 20), itemCount: dummyScaffolding.length, itemBuilder: (context,i){
+            return   ContainerDetailList(name: dummyScaffolding[i].title,imgpath: dummyScaffolding[i].image,ontap: (){},) ;
+          },
+
+          )
+      ),
+      //  backgroundColor: Color(0xfff2f2f2f2),
+    );
   }
 }

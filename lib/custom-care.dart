@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
 import 'package:haweyati/widgits/stackButton.dart';
@@ -16,7 +17,7 @@ class _CustomCareState extends State<CustomCare> {
         body: HaweyatiAppBody(
             title: "Need Help ?",
             detail:
-                "Lorem ipsu m s bkj sab kj sab fk sb fklj sb fl jb s lk  jksanbflkbfklban k",
+                loremIpsum.substring(0,70),
             child: Padding(padding: EdgeInsets.only(bottom: 100),
               child: Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
 

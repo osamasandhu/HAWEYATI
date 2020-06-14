@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/finishing-material/finishing_material_detail.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
@@ -8,6 +9,9 @@ import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:haweyati/widgits/list-of-items.dart';
 
 class FinishingMaterialSubList extends StatefulWidget {
+ ConstructionService service;
+ FinishingMaterialSubList(this.service);
+
   @override
   _FinishingMaterialSubListState createState() =>
       _FinishingMaterialSubListState();
@@ -29,17 +33,18 @@ class _FinishingMaterialSubListState extends State<FinishingMaterialSubList> {
               children: <Widget>[
                 Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
+                  image: DecorationImage(image: AssetImage(widget.service.image)),  borderRadius: BorderRadius.circular(20),
                     color: Colors.red,
                   ),
                   width: 100,
                   height: 100,
+                  
                 ),
                 SizedBox(
                   width: 10,
                 ),
                 Text(
-                  "Mapei",
+                  widget.service.title,
                   textAlign: TextAlign.center,
                   style: boldText,
                 )
@@ -70,7 +75,7 @@ class _FinishingMaterialSubListState extends State<FinishingMaterialSubList> {
                     ontap: () {
 
                       print("ds");
-                      CustomNavigator.navigateTo(context, FinishingMaterialDetail());},
+                      CustomNavigator.navigateTo(context, FinishingMaterialDetail(constructionService: widget.service,));},
                   );
                 },
 

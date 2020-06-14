@@ -3,6 +3,7 @@ class HaweyatiAppBar extends AppBar{
  bool showAction;
 
   HaweyatiAppBar({double progress = 0.0, this.showAction = false}):super(
+      brightness:Brightness.dark,
   elevation:0,  iconTheme: new IconThemeData(color: Colors.white),
          centerTitle: true,
          backgroundColor: Color(0xff313f53),

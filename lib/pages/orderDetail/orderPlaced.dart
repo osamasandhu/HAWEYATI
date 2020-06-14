@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/appHomePage.dart';
 import 'package:haweyati/pages/orderDetail/all-orders.dart';
+import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:haweyati/widgits/stackButton.dart';
@@ -51,7 +52,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
                       height: 20,
                     ),
                     Text(
-                      "slnosahfoisanfoisabfdkbfdnflanflasnflkanflanfslnslnfon",
+                      loremIpsum.substring(0,40),
                       style: TextStyle(),
                       textAlign: TextAlign.center,
                     ),
@@ -81,7 +82,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
             StackButton(
               onTap: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => AppHomePage()),
+                    MaterialPageRoute(builder: (context) => AppHomePage(address: '',)),
                     (Route<dynamic> route) => false);
               },
               buttonName: "Home",

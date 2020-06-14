@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:haweyati/models/temp-model.dart';
+import 'package:haweyati/pages/finishing-material/finishingorderdetail.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/container-with-add-remove-item.dart';
 import 'package:haweyati/widgits/container-with-subtitle.dart';
+import 'package:haweyati/widgits/custom-navigator.dart';
+import 'package:haweyati/widgits/stackButton.dart';
 
 class OrderGenerate extends StatefulWidget {
+
+  ConstructionService service;
+  OrderGenerate(this.service);
   @override
   _OrderGenerateState createState() => _OrderGenerateState();
 }
@@ -62,54 +69,60 @@ class _OrderGenerateState extends State<OrderGenerate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(),body: ListView(padding: EdgeInsets.fromLTRB(20, 20, 20, 20), children: <Widget>[
-      Row(
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.red,
-            ),
-            width: 100,
-            height: 100,
+      appBar: HaweyatiAppBar(),body: Stack(
+        children: <Widget>[StackButton(
+          buttonName: 'Proceed',
+          onTap: (){CustomNavigator.navigateTo(context, FinishingOrderDetail(constructionService:widget.service ,));},)
+          ,ListView(padding: EdgeInsets.fromLTRB(20, 20, 20, 20), children: <Widget>[
+          Row(
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.red,
+                ),
+                width: 100,
+                height: 100,
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Text(
+                "Plastimul",
+                textAlign: TextAlign.center,
+                style: boldText,
+              ),
+            ],
           ),
-          SizedBox(
-            width: 10,
-          ),
-          Text(
-            "Plastimul",
-            textAlign: TextAlign.center,
-            style: boldText,
-          ),
-        ],
-      ),
 
-        SizedBox(height: 30,),
+            SizedBox(height: 30,),
 
 
-      Text("Drum Weight",style: boldText,),
+          Text("Drum Weight",style: boldText,),
 
-      SizedBox(height: 30,),
+          SizedBox(height: 30,),
 Row(children: <Widget>[
   Expanded(
     child: RadioListTile(value: null, groupValue: null, onChanged: null,title: Text("12 gram Drum", style: TextStyle(
-      fontSize: 12
+          fontSize: 12
     ))),
   ),
   Expanded(
     child: RadioListTile(value: null, groupValue: null, onChanged: null,title: Text("12 gram Drum", style: TextStyle(
-      fontSize: 12
+          fontSize: 12
     ))),
   )
 //
 ],mainAxisAlignment: MainAxisAlignment.spaceBetween,),
-      PlusMinusContainer(
-        extra: "Add Extra Days",
-        dayprice:" 670.00",
-      ),
+          PlusMinusContainer(
+            extra: "Add Extra Days",
+            dayprice:" 670.00",
+          ),
 
 
     ],),
+        ],
+      ),
     );
   }
 }

@@ -9,15 +9,15 @@ import 'package:haweyati/widgits/emptyContainer.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
 import 'package:haweyati/widgits/stackButton.dart';
 
-class OrderDetail extends StatefulWidget {
+class FinishingOrderDetail extends StatefulWidget {
   ConstructionService constructionService;
-  OrderDetail({this.constructionService});
+  FinishingOrderDetail({this.constructionService});
 
   @override
-  _OrderDetailState createState() => _OrderDetailState();
+  _FinishingOrderDetailState createState() => _FinishingOrderDetailState();
 }
 
-class _OrderDetailState extends State<OrderDetail> {
+class _FinishingOrderDetailState extends State<FinishingOrderDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,8 +29,8 @@ class _OrderDetailState extends State<OrderDetail> {
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => PaymentMethod(
-             constructionService: widget.constructionService,
-                    )));
+                  constructionService: widget.constructionService,
+                )));
           },
           showButton: true,
           detail: "Lorem ipsum",
@@ -68,8 +68,8 @@ class _OrderDetailState extends State<OrderDetail> {
                     ),
                     Row(
                       children: <Widget>[
-Image.asset(widget.constructionService.image,width: 60,height: 60,)
-,                        SizedBox(
+                        Image.asset(widget.constructionService.image,width: 60,height: 60,)
+                        ,                        SizedBox(
                           width: 12,
                         ),
                         Text(
@@ -225,7 +225,7 @@ Image.asset(widget.constructionService.image,width: 60,height: 60,)
           Text(
             detail,
             style:
-                TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold),
+            TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold),
           ),
         ],
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

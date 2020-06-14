@@ -7,6 +7,9 @@ class HaweyatiApp extends MaterialApp {
   HaweyatiApp(): super(
       debugShowCheckedModeBanner:false,
     theme: ThemeData(fontFamily: "Lato",
+  appBarTheme: AppBarTheme(
+  brightness: Brightness.dark,
+  ),
       primaryColor: Color(0xffff974d),
       accentColor: Color(0xffff974d),
     ),
@@ -14,8 +17,6 @@ class HaweyatiApp extends MaterialApp {
   ) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Color(0xff313f53),
-      statusBarBrightness: Brightness.light,
-      statusBarIconBrightness: Brightness.light,
     ));
   }
 }

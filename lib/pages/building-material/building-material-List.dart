@@ -3,21 +3,33 @@ import 'package:haweyati/models/dumpstermodel.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/dumpster/dumpsterDetail.dart';
 import 'package:haweyati/src/app.dart';
+import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
 import 'package:haweyati/widgits/list-of-items.dart';
-import 'package:haweyati/widgits/service-item-listing.dart';
 
-class BuildingMaterialList extends StatefulWidget {
+class BuildingMaterialListing extends StatefulWidget {
 
+  ConstructionService service;
+  BuildingMaterialListing(this.service);
   @override
-  _BuildingMaterialListState createState() => _BuildingMaterialListState();
+  _BuildingMaterialListingState createState() => _BuildingMaterialListingState();
 }
 
-class _BuildingMaterialListState extends State<BuildingMaterialList> {
+class _BuildingMaterialListingState extends State<BuildingMaterialListing> {
   @override
   Widget build(BuildContext context) {
-    return ServiceItemListing(pageDetail: "Following Building Material",title:"Building Material",service: dummyBuildingMaterial,);
+    return Scaffold(
+      appBar: HaweyatiAppBar(showAction: true,),
+      body: HaweyatiAppBody(title: "Building Material ",detail: loremIpsum.substring(0,70),
+          child:ListView.builder(padding: EdgeInsets.symmetric(horizontal: 20), itemCount: dummyBuildingMaterial.length, itemBuilder: (context,i){
+            return   ContainerDetailList(name: dummyBuildingMaterial[i].title,ontap: (){},imgpath: dummyBuildingMaterial[i].image,) ;
+          },
+
+          )
+      ),
+      //  backgroundColor: Color(0xfff2f2f2f2),
+    );
   }
 }

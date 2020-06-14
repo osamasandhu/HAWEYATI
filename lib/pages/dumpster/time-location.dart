@@ -1,6 +1,7 @@
+import 'dart:io';
+
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:haweyati/models/dumpstermodel.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/orderDetail/orderDetail.dart';
 import 'package:haweyati/src/utlis/const.dart';
@@ -16,13 +17,28 @@ class TimeAndLocation extends StatefulWidget {
 }
 
 class _TimeAndLocationState extends State<TimeAndLocation> {
+  File _image;
   @override
   Widget build(BuildContext context) {
+    Future getCamera() async {
+      var image = await ImagePicker.pickImage(source: ImageSource.camera);
+      setState(() {
+        _image = image;
+      });
+    }
+
+    Future getGallery() async {
+      var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+      setState(() {
+        _image = image;
+      });
+    }
+
     return Scaffold(
       appBar: HaweyatiAppBar(),
       body: HaweyatiAppBody(
         title: "Time & Location",
-        detail: "kdjhfkdsnfklashfklaslfjaslkfjlaskjflasjfliasjflasjflasj",
+        detail: loremIpsum.substring(0, 40),
         child: ListView(
           padding: EdgeInsets.fromLTRB(20, 10, 20, 100),
           children: <Widget>[
@@ -63,8 +79,7 @@ class _TimeAndLocationState extends State<TimeAndLocation> {
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.only(left: 10),
-                          child: Text(
-                              "dijdmlkdsmfldmsl;fmdl;m;slccccdm;f mdcfd cff f ff f "),
+                          child: Text(loremIpsum.substring(0, 40)),
                         ),
                       )
                     ],
@@ -107,7 +122,28 @@ class _TimeAndLocationState extends State<TimeAndLocation> {
                   hintText: "Write note here",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10))),
-            )
+            ),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                FlatButton(
+                    onPressed: () {
+                      getCamera();
+                    },
+                    child: Text("Camera")),
+                FlatButton(
+                    onPressed: () {
+                      getGallery();
+                    },
+                    child: Text("Gallery"))
+              ],
+            ), Container(
+              height: 200.0,
+              child: Center(
+                child: _image == null
+                    ? Text('No image selected.')
+                    : Image.file(_image,fit: BoxFit.cover,),
+              ),
+            ),
           ],
         ),
         showButton: true,

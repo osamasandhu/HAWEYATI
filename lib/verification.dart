@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:haweyati/auth-pages/signup.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/orderDetail/orderPlaced.dart';
+import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
 import 'package:haweyati/widgits/haweyati_Textfield.dart';
@@ -66,7 +67,7 @@ class _VerificationPhoneNumberState extends State<VerificationPhoneNumber> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(30, 15, 30, 10),
                   child: Text(
-                    "jslajflasjflsajfjsaojfopasjfopasjpofjspaojfpo",
+                    loremIpsum.substring(0,70),
                     style: TextStyle(fontSize: 15),
                     textAlign: TextAlign.center,
                   ),

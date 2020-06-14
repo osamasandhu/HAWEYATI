@@ -1,16 +1,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/custom-care.dart';
+import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/building-material/building-material-List.dart';
+import 'package:haweyati/pages/drawer/haweyati-rewards.dart';
+import 'package:haweyati/pages/drawer/haweyati-setting.dart';
+import 'package:haweyati/pages/drawer/rate.dart';
+import 'package:haweyati/pages/drawer/share-invite.dart';
+import 'package:haweyati/pages/drawer/term-condition.dart';
+import 'package:haweyati/pages/dumpster/dumpstersList.dart';
 import 'package:haweyati/pages/dumpster/dumpstersList.dart';
 import 'package:haweyati/pages/finishing-material/finishing-material-List.dart';
 import 'package:haweyati/pages/notification.dart';
+import 'package:haweyati/pages/orderDetail/orderDetail.dart';
+import 'package:haweyati/pages/orderDetail/orderPlaced.dart';
 import 'package:haweyati/pages/scaffolding/scaffoldingList.dart';
-import 'package:haweyati/pages/vehicles/vehicles-List.dart';
+import 'package:haweyati/pages/vehicles-map_page.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 
+import 'dumpster/dumpstersList.dart';
+import 'dumpster/dumpstersList.dart';
+
 class AppHomePage extends StatefulWidget {
+  String address;
+  AppHomePage({this.address});
   @override
   _AppHomePageState createState() => _AppHomePageState();
 }
@@ -81,7 +95,7 @@ class _AppHomePageState extends State<AppHomePage> {
                         ),
                       ),
                       SizedBox(
-                        height: 25,
+                        height: 15,
                       ),
                       Center(
                           child: Text("Arslan Khan",
@@ -106,17 +120,24 @@ class _AppHomePageState extends State<AppHomePage> {
                       SizedBox(
                         height: 10,
                       ),
-                      _buildListTile("assets/images/order.png", "Your Orders"),
-                      _buildListTile("assets/images/ride.png", "Your Rides"),
+                      _buildListTile("assets/images/order.png", "Your Orders" ,(){
+//                        CustomNavigator.navigateTo(context, null);
+                      }),
+                      _buildListTile("assets/images/ride.png", "Your Rides",(){CustomNavigator.navigateTo(context, HaweyatiRewards());}),
                       _buildListTile(
-                          "assets/images/setting.png", "Your Settings"),
+                          "assets/images/setting.png", "Your Settings",(){CustomNavigator.navigateTo(context, HaweyatiSetting());}),
                       _buildListTile(
-                          "assets/images/invite.png", "Invite Friends"),
+                          "assets/images/invite.png", "Invite Friends",(){CustomNavigator.navigateTo(context, ShareInvite());}),
+                      _buildListTile("assets/images/order.png", "Rewards",(){CustomNavigator.navigateTo(context, HaweyatiRewards());} ),
+
                       _buildListTile(
-                          "assets/images/term.png", "Terms and Conditions"),
-                      _buildListTile("assets/images/rate.png", "Rate App"),
+                          "assets/images/term.png", "Terms and Conditions",(){CustomNavigator.navigateTo(context, TermAndCondition());}),
+                      _buildListTile("assets/images/rate.png", "Rate App",(){CustomNavigator.navigateTo(context, Rate());}),
+                      _buildListTile("assets/images/logout.png", "Logout",(){
+//                        CustomNavigator.navigateTo(context, Rate());
+                      }),
                     ],
-                    padding: EdgeInsets.fromLTRB(0, 100, 0, 10),
+                    padding: EdgeInsets.fromLTRB(0, 70, 0, 10),
                   ),
                   Align(
                     alignment: Alignment(-0.9, -0.95),
@@ -125,13 +146,7 @@ class _AppHomePageState extends State<AppHomePage> {
                       width: 70,
                     ),
                   ),
-                  Align(
-                    alignment: Alignment(0, 0.95),
-                    child: Image.asset(
-                      "assets/images/logout.png",
-                      width: 80,
-                    ),
-                  )
+
                 ],
               )),
         ),
@@ -139,7 +154,7 @@ class _AppHomePageState extends State<AppHomePage> {
       body: Column(
         children: <Widget>[
           Container(
-            height: MediaQuery.of(context).size.height / 4.2,
+           height: MediaQuery.of(context).size.height / 4.8,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -162,7 +177,7 @@ class _AppHomePageState extends State<AppHomePage> {
                           height: 100,
                         ))),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -179,17 +194,17 @@ class _AppHomePageState extends State<AppHomePage> {
                         style: TextStyle(color: Colors.white),
                       ),
                       SizedBox(
-                        height: 25,
+                        height: 18,
                       ),
                       Container(
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(30)),
-                        //height: 50,
+                        height: 50,
                         width: MediaQuery.of(context).size.width,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 18),
+                              vertical: 15, horizontal: 18),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
@@ -202,7 +217,7 @@ class _AppHomePageState extends State<AppHomePage> {
                               ),
                               Expanded(
                                   child: Text(
-                                      "8233 An Najah Khalidiyah District, Jeddah"))
+                                      widget.address ?? '',overflow: TextOverflow.ellipsis,))
                             ],
                           ),
                         ),
@@ -215,35 +230,35 @@ class _AppHomePageState extends State<AppHomePage> {
           ),
           Expanded(
               child: ListView(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.fromLTRB(20, 6, 20, 10),
             children: <Widget>[
               _buildContainer(
                   title: "Construction Dumpster",
                   imgPath: "assets/images/dumpster-bg.png",
                   onTap: () =>
-                      CustomNavigator.navigateTo(context, DumpsterList())),
+                      CustomNavigator.navigateTo(context,DumpsterListing(ConstructionService()))),
               _buildContainer(
                   title: "Scaffolding",
                   imgPath: "assets/images/scaffolding-bg.png",
                   onTap: () =>
-                      CustomNavigator.navigateTo(context, ScaffoldingList())),
+                      CustomNavigator.navigateTo(context, ScaffoldingListing(ConstructionService()))),
               _buildContainer(
                 title: "Building Material",
                 imgPath: "assets/images/building-materials-bg.png",
                 onTap: () =>
-                    CustomNavigator.navigateTo(context, BuildingMaterialList()),
+                    CustomNavigator.navigateTo(context, BuildingMaterialListing(ConstructionService())),
               ),
               _buildContainer(
                   imgPath: "assets/images/finishing-materials-bg.png",
                   onTap: () {
                     CustomNavigator.navigateTo(
-                        context, FisnishingMaterialList());
+                        context,FinishingMaterialListing(ConstructionService()) );
                   },
                   title: "Finishing Material"),
               _buildContainer(
                   imgPath: "assets/images/delivery-vehaicles-bg.png",
                   onTap: () {
-                    CustomNavigator.navigateTo(context, VehicleList());
+                    CustomNavigator.navigateTo(context, VehiclesMapPage());
                   },
                   title: "Vehicles"),
             ],
@@ -267,8 +282,8 @@ class _AppHomePageState extends State<AppHomePage> {
     );
   }
 
-  Widget _buildListTile(String imgPath, String title) {
-    return ListTile(
+  Widget _buildListTile(String imgPath, String title,Function onTap) {
+    return ListTile(onTap: onTap,
       leading: Image.asset(
         imgPath,
         width: 20,
@@ -287,7 +302,7 @@ class _AppHomePageState extends State<AppHomePage> {
       onTap: onTap,
       child: Container(
         width: MediaQuery.of(context).size.width,
-        margin: EdgeInsets.only(bottom: 5),
+ //       margin: EdgeInsets.only(bottom: 1),
         height: 120,
         decoration: new BoxDecoration(
             image: new DecorationImage(

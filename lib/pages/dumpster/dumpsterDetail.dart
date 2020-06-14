@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:haweyati/models/dumpstermodel.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/dumpster/dumpsterServicesdetail.dart';
 import 'package:haweyati/widgits/appBar.dart';

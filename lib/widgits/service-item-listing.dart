@@ -8,36 +8,28 @@ import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
 import 'package:haweyati/widgits/list-of-items.dart';
 
-class ServiceItemListing extends StatefulWidget {
+class DumpsterListing extends StatefulWidget {
   String title;
   String pageDetail;
   List<ConstructionService> service;
 
-  ServiceItemListing({ this.service,this.title,this.pageDetail});
+  DumpsterListing({ this.service,this.title,this.pageDetail});
   @override
-  _ServiceItemListingState createState() => _ServiceItemListingState();
+  _DumpsterListingState createState() => _DumpsterListingState();
 }
 
-class _ServiceItemListingState extends State<ServiceItemListing> {
+class _DumpsterListingState extends State<DumpsterListing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HaweyatiAppBar(showAction: true,),
-      body: HaweyatiAppBody(title: widget.title,detail: widget.pageDetail,
-        child: ListView.builder(
-            padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
-            itemCount: widget.service.length,
-            itemBuilder: (_, i) {
-              return ContainerDetailList(
-                name: widget.service[i].title ,imgpath: widget.service[i].image,
-                  ontap: ()=> CustomNavigator.navigateTo(
-                      context, ServicesItemDetail(
-                serviceDetail: widget.service[i],
-              )));
-            }
-            ),
+      body: HaweyatiAppBody(title: "Construction Dumpster ",
+        child:ListView(children: <Widget>[
+
+          ContainerDetailList(name: "12 Yard",)
+        ],)
       ),
-      backgroundColor: Color(0xfff2f2f2f2),
+    //  backgroundColor: Color(0xfff2f2f2f2),
     );
   }
 }

@@ -1,11 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/pages/appHomePage.dart';
 import 'package:haweyati/pages/finishing-material/finishing-material-sub-list.dart';
+import 'package:haweyati/pages/map-page.dart';
+import 'package:haweyati/pages/map/location.dart';
+import 'package:haweyati/pages/map/nolocation.dart';
 import 'package:haweyati/pages/orderDetail/orderDetail.dart';
 import 'package:haweyati/pages/startInstructions/pages/complete-tracking.dart';
 import 'package:haweyati/pages/startInstructions/pages/our-products.dart';
 import 'package:haweyati/pages/startInstructions/pages/our-services.dart';
 import 'package:haweyati/pages/startInstructions/pages/secure-payment.dart';
+import 'package:haweyati/pages/vehicles-map_page.dart';
+import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/align.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 
@@ -17,6 +23,8 @@ class InstructionsPage extends StatefulWidget {
 class _InstructionsPageState extends State<InstructionsPage> {
   int _currentPage = 0;
   PageController _pageController = PageController(initialPage: 0);
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +52,9 @@ class _InstructionsPageState extends State<InstructionsPage> {
         actions: <Widget>[
           FlatButton(
               onPressed: () {
-                CustomNavigator.navigateTo(context, FinishingMaterialSubList());
+
+                CustomNavigator.navigateTo(context, AppHomePage());
+
               },
               child: Text(
                 "Skip",
@@ -52,153 +62,157 @@ class _InstructionsPageState extends State<InstructionsPage> {
               ))
         ],
       ),
-      body: Column(
-        children: <Widget>[
-          Expanded(child: PageView(
-              physics: NeverScrollableScrollPhysics(),
-              controller: _pageController,
-              children: <Widget>[
+      body: Container(
+        decoration: BoxDecoration(image:DecorationImage(fit: BoxFit.cover, image: AssetImage("assets/images/pattern.png")) ),
+        child: Column(
+          children: <Widget>[
+            Expanded(child:
+            PageView(
+                physics: NeverScrollableScrollPhysics(),
+                controller: _pageController,
+                children: <Widget>[
+                  generateInstructionPage(<Widget>[
+                    AlignedImage(
+                        dx: -0.55,
+                        dy: 0.55,
+                        width: 100,
+                        height: 100,
+                        image: "assets/images/welcome-page-1_image-5.png"),
+                    AlignedImage(
+                        dx: 0.55,
+                        dy: -0.45,
+                        width: 100,
+                        height: 100,
+                        image: "assets/images/welcome-page-1_image-3.png"),
+                    AlignedImage(
+                        dx: -0.53,
+                        dy: -0.55,
+                        width: 145,
+                        height: 145,
+                        image: "assets/images/welcome-page-1_image-2.png"),
+                    AlignedImage(
+                        dx: -0.79,
+                        dy: -0,
+                        width: 80,
+                        height: 80,
+                        image: "assets/images/welcome-page-1_image-4.png"),
+                    AlignedImage(
+                        dy: 0.0,
+                        dx: 0.0,
+                        width: 220,
+                        height: 220,
+                        image: "assets/images/welcome-page-1_image-1.png"),
+                    AlignedImage(
+                        dx: 0.55,
+                        dy: 0.45,
+                        width: 130,
+                        height: 130,
+                        image: "assets/images/welcome-page-1_image-6.png"),
+                  ], 'Our Services', 'Lorem ipsum dolor sit amet, consectr adipiscing elit, do eiusm webdmstemporasio.'),
                 generateInstructionPage(<Widget>[
                   AlignedImage(
-                      dx: -0.55,
-                      dy: 0.55,
-                      width: 100,
-                      height: 100,
-                      image: "assets/images/welcome-page-1_image-5.png"),
-                  AlignedImage(
                       dx: 0.55,
-                      dy: -0.45,
+                      dy: 0.45,
                       width: 100,
                       height: 100,
-                      image: "assets/images/welcome-page-1_image-3.png"),
+                      image: "assets/images/welcome-page-2_image-5.png"),
                   AlignedImage(
-                      dx: -0.53,
-                      dy: -0.55,
-                      width: 145,
-                      height: 145,
-                      image: "assets/images/welcome-page-1_image-2.png"),
+                      dx: -0.5,
+                      dy: 0.50,
+                      width: 100,
+                      height: 100,
+                      image: "assets/images/welcome-page-2_image-4.png"),
                   AlignedImage(
-                      dx: -0.79,
-                      dy: -0,
-                      width: 80,
-                      height: 80,
-                      image: "assets/images/welcome-page-1_image-4.png"),
+                      dx: -0.80,
+                      dy: -0.15,
+                      width: 130,
+                      height: 130,
+                      image: "assets/images/welcome-page-2_image-2.png"),
                   AlignedImage(
                       dy: 0.0,
                       dx: 0.0,
                       width: 220,
                       height: 220,
-                      image: "assets/images/welcome-page-1_image-1.png"),
+                      image: "assets/images/welcome-page-2_image-3.png"),
+                  AlignedImage(
+                      dx: 0.55,
+                      dy: -0.45,
+                      width: 150,
+                      height: 150,
+                      image: "assets/images/welcome-page-2_image-1.png"),
+                ], 'Our Products', 'Lorem ipsum dolor sit amet, consectr adipiscing elit, do eiusm webdmstemporasio.'),
+                generateInstructionPage(<Widget>[
                   AlignedImage(
                       dx: 0.55,
                       dy: 0.45,
-                      width: 130,
-                      height: 130,
-                      image: "assets/images/welcome-page-1_image-6.png"),
-                ], 'Our Services', 'Lorem ipsum dolor sit amet, consectr adipiscing elit, do eiusm webdmstemporasio.'),
-              generateInstructionPage(<Widget>[
-                AlignedImage(
-                    dx: 0.55,
-                    dy: 0.45,
-                    width: 100,
-                    height: 100,
-                    image: "assets/images/welcome-page-2_image-5.png"),
-                AlignedImage(
-                    dx: -0.5,
-                    dy: 0.50,
-                    width: 100,
-                    height: 100,
-                    image: "assets/images/welcome-page-2_image-4.png"),
-                AlignedImage(
-                    dx: -0.80,
-                    dy: -0.15,
-                    width: 130,
-                    height: 130,
-                    image: "assets/images/welcome-page-2_image-2.png"),
-                AlignedImage(
-                    dy: 0.0,
-                    dx: 0.0,
-                    width: 220,
-                    height: 220,
-                    image: "assets/images/welcome-page-2_image-3.png"),
-                AlignedImage(
-                    dx: 0.55,
-                    dy: -0.45,
-                    width: 150,
-                    height: 150,
-                    image: "assets/images/welcome-page-2_image-1.png"),
-              ], 'Our Products', 'Lorem ipsum dolor sit amet, consectr adipiscing elit, do eiusm webdmstemporasio.'),
-              generateInstructionPage(<Widget>[
-                AlignedImage(
-                    dx: 0.55,
-                    dy: 0.45,
-                    width: 100,
-                    height: 100,
-                    image: "assets/images/welcome-page-3_image-3.png"),
-                AlignedImage(
-                    dx: -0.55,
-                    dy: -0.45,
-                    width: 100,
-                    height: 100,
-                    image: "assets/images/welcome-page-3_image-2.png"),
-                AlignedImage(
-                    dy: 0.0,
-                    dx: 0.0,
-                    width: 220,
-                    height: 220,
-                    image: "assets/images/welcome-page-3_image-1.png"),
-              ], 'Complete Tracking', 'Lorem ipsum dolor sit amet, consectr adipiscing elit, do eiusm webdmstemporasio.'),
-              generateInstructionPage(<Widget>[
-                AlignedImage(
-                    dx: -0.55,
-                    dy: 0.45,
-                    width: 100,
-                    height: 100,
-                    image: "assets/images/welcome-page-4_image-1.png"),
-                AlignedImage(
-                    dx: 0.55,
-                    dy: -0.45,
-                    width: 100,
-                    height: 100,
-                    image: "assets/images/welcome-page-4_image-3.png"),
-                AlignedImage(
-                    dy: 0.0,
-                    dx: 0.0,
-                    width: 220,
-                    height: 220,
-                    image: "assets/images/welcome-page-4_image-2.png"),
-              ], 'Secure Payment', 'Lorem ipsum dolor sit amet, consectr adipiscing elit, do eiusm webdmstemporasio.'),
-            ]
-          )),
+                      width: 100,
+                      height: 100,
+                      image: "assets/images/welcome-page-3_image-3.png"),
+                  AlignedImage(
+                      dx: -0.55,
+                      dy: -0.45,
+                      width: 100,
+                      height: 100,
+                      image: "assets/images/welcome-page-3_image-2.png"),
+                  AlignedImage(
+                      dy: 0.0,
+                      dx: 0.0,
+                      width: 220,
+                      height: 220,
+                      image: "assets/images/welcome-page-3_image-1.png"),
+                ], 'Complete Tracking', 'Lorem ipsum dolor sit amet, consectr adipiscing elit, do eiusm webdmstemporasio.'),
+                generateInstructionPage(<Widget>[
+                  AlignedImage(
+                      dx: -0.55,
+                      dy: 0.45,
+                      width: 100,
+                      height: 100,
+                      image: "assets/images/welcome-page-4_image-1.png"),
+                  AlignedImage(
+                      dx: 0.55,
+                      dy: -0.45,
+                      width: 100,
+                      height: 100,
+                      image: "assets/images/welcome-page-4_image-3.png"),
+                  AlignedImage(
+                      dy: 0.0,
+                      dx: 0.0,
+                      width: 220,
+                      height: 220,
+                      image: "assets/images/welcome-page-4_image-2.png"),
+                ], 'Secure Payment', 'Lorem ipsum dolor sit amet, consectr adipiscing elit, do eiusm webdmstemporasio.'),
+              ]
+            )),
 
-          Container(
-            margin: EdgeInsets.fromLTRB(15, 0, 15, 15),
-            height: 60,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: List.generate(4, (val) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 3),
-                  child: Container(
-                    width: 7,
-                    height: 7,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color:
-                      _currentPage == val ? Colors.black : Colors.grey
+            Container(
+              margin: EdgeInsets.fromLTRB(15, 0, 15, 15),
+              height: 60,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: List.generate(4, (val) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 3),
+                    child: Container(
+                      width: 7,
+                      height: 7,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color:
+                        _currentPage == val ? Colors.black : Colors.grey
+                      ),
                     ),
-                  ),
-                );
-              })
-            ),
-          )
-        ],
+                  );
+                })
+              ),
+            )
+          ],
+        ),
       ),
       floatingActionButton: _currentPage == 3
           ? FloatingActionButton.extended(
               elevation: 0,
               onPressed: () {
-                CustomNavigator.navigateTo(context, AppHomePage());
+              CustomNavigator.navigateTo(context, Location());
               },
               foregroundColor: Colors.white,
               label: Icon(Icons.arrow_forward),

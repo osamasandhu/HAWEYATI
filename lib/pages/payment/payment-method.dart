@@ -7,6 +7,14 @@ import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
 
 
+
+enum PaymentMeths{
+  Mada,
+  Apple,
+  CreditCard,
+  COD,
+}
+
 class PaymentMethod extends StatefulWidget {
   ConstructionService constructionService;
   PaymentMethod({this.constructionService});
@@ -15,7 +23,32 @@ class PaymentMethod extends StatefulWidget {
 }
 
 
+
 class _PaymentMethodState extends State<PaymentMethod> {
+
+  PaymentMeths paymentMeths;
+
+  void func(){
+    switch(paymentMeths){
+
+      case PaymentMeths.Mada:
+        // TODO: Handle this case.
+        break;
+      case PaymentMeths.Apple:
+        // TODO: Handle this case.
+        break;
+      case PaymentMeths.CreditCard:
+        // TODO: Handle this case.
+        break;
+      case PaymentMeths.COD:
+        // TODO: Handle this case.
+        break;
+    }
+  }
+
+  bool selected = false;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +64,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
         btnName: "Done",
         title: "Payment Method",
         detail:
-            "Payent Methodskdnlan lksmflsan klnclkanl lk clk lka lka lkc lk alk lk",
+        loremIpsum.substring(0,40),
         child: ListView(
           padding: EdgeInsets.fromLTRB(15, 30, 15, 30),
           children: <Widget>[

@@ -22,6 +22,7 @@ class _FinishingMaterialDetailState extends State<FinishingMaterialDetail> {
         body: Stack(
             fit: StackFit.expand,
             children: <Widget>[
+
               SingleChildScrollView(
                 padding: EdgeInsets.fromLTRB(20, 30, 20, 10),
                 child: Column(
@@ -97,7 +98,7 @@ class _FinishingMaterialDetailState extends State<FinishingMaterialDetail> {
                     Expanded(flex: 1, child: _buildButton("Add to Cart", null))
                     ,
                     Expanded(flex: 1,
-                        child: _buildButton("Buy Now", (){CustomNavigator.navigateTo(context, OrderGenerate());}))
+                        child: _buildButton("Buy Now", (){CustomNavigator.navigateTo(context, OrderGenerate(widget.constructionService));}))
                   ],
                 ),
               )
@@ -109,7 +110,8 @@ class _FinishingMaterialDetailState extends State<FinishingMaterialDetail> {
 
 
 
-  Widget _buildButton(String buttonName ,Function onTap ){return Align(
+  Widget _buildButton(String buttonName ,Function onTap ){return
+    Align(
     alignment: Alignment(0, 0.98),
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5),
