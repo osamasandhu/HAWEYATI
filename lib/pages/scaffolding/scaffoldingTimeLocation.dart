@@ -1,6 +1,8 @@
 
 import 'dart:io';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:haweyati/models/order-model.dart';
+import 'package:haweyati/src/utlis/local-data.dart';
 
 
 import 'package:image_picker/image_picker.dart';
@@ -186,6 +188,12 @@ class _ScaffoldingTimeAndLocationState extends State<ScaffoldingTimeAndLocation>
         ),
         showButton: true,
         onTap: () {
+          print(widget.constructionService.title);
+//          var order = Order(
+//            name: widget.constructionService.title
+//          );
+//          LocalData.addToCart(order);
+//
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => OrderDetail(
                 //constructionService: widget.constructionService,

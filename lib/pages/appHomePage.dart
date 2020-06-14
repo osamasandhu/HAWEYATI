@@ -15,7 +15,6 @@ import 'package:haweyati/pages/scaffolding/scaffoldingList.dart';
 import 'package:haweyati/pages/vehicles-map_page.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 import 'dumpster/dumpstersList.dart';
-import 'dumpster/dumpstersList.dart';
 
 class AppHomePage extends StatefulWidget {
   String address;

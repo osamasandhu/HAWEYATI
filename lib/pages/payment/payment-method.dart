@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:haweyati/models/dumpstermodel.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/payment/visa.dart';
 import 'package:haweyati/src/utlis/const.dart';

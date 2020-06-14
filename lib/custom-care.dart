@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
-import 'package:haweyati/widgits/stackButton.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CustomCare extends StatefulWidget {
@@ -13,14 +12,7 @@ class CustomCare extends StatefulWidget {
 class _CustomCareState extends State<CustomCare> {
 
 
-  _launchURL() async {
-    const url = 'https://flutter.dev';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

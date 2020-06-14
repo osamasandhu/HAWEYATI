@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:haweyati/pages/map/setLocation.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:haweyati/widgits/locationAppBar.dart';
 import 'package:haweyati/widgits/stackButton.dart';

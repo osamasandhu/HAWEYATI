@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:haweyati/models/order-model.dart';
+import 'package:haweyati/src/utlis/local-data.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/temp-model.dart';
@@ -20,6 +22,7 @@ class TimeAndLocation extends StatefulWidget {
 
 class _TimeAndLocationState extends State<TimeAndLocation> {
   File _image;
+  DateTime dateTime = DateTime.now();
 
 String start = "...";
   @override
@@ -110,6 +113,7 @@ String start = "...";
                             showTitleActions: true,
                             minTime: DateTime(1990, 1, 1),
                             maxTime: DateTime(2082, 12, 31), onConfirm: (date) {
+                          date = date;
                               print('confirm $date');
                               start = ' ${date.day} - ${date.month} - ${date.year} ';
                               setState(() {});
@@ -155,6 +159,24 @@ GestureDetector(onTap: (){getCamera();}, child: Container(padding: EdgeInsets.al
         ),
         showButton: true,
         onTap: () {
+
+          var data = widget.constructionService;
+          var quantity = int.parse(data.detail.quantity);
+          var pricePerDay = int.parse(data.detail.priceperday);
+          print(widget.constructionService.title);
+
+          var order = Order(
+            name:   data.title,
+            image:  data.image,
+            price: data.detail.priceperday,
+            total: (quantity * pricePerDay).toDouble(),
+            dropOffDate: dateTime.toIso8601String(),
+            dropOffTime: dateTime.toIso8601String(),
+            quantity: 2,
+          );
+
+          LocalData.addToCart(order);
+
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => OrderDetail(
                     constructionService: widget.constructionService,

@@ -7,10 +7,11 @@ class PlusMinusContainer extends StatefulWidget {
 
   String extra;
   String dayprice;
+  Function(int) onValueChange;
 
 
 
-  PlusMinusContainer({this.dayprice,this.extra});
+  PlusMinusContainer({this.dayprice,this.extra, this.onValueChange});
 
   @override
   _PlusMinusContainerState createState() => _PlusMinusContainerState();
@@ -25,6 +26,8 @@ class _PlusMinusContainerState extends State<PlusMinusContainer> {
  setState(() {
    quantity++;
  });
+ widget.onValueChange(quantity);
+
   }
   _decrement(){
 
@@ -32,6 +35,7 @@ class _PlusMinusContainerState extends State<PlusMinusContainer> {
     setState(() {
       quantity--;
     });
+    widget.onValueChange(quantity);
   }
 
   @override

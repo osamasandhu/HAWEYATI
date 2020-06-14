@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:haweyati/models/dumpstermodel.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/dumpster/dumpsterDetail.dart';
-import 'package:haweyati/pages/scaffolding/scaffoldingDetail.dart';
+import 'package:haweyati/pages/scaffolding/ScaffoldingOptions.dart';
 import 'package:haweyati/src/app.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
@@ -35,8 +35,8 @@ class _ScaffoldingListingState extends State<ScaffoldingListing> {
                 ontap: () {
                   CustomNavigator.navigateTo(
                       context,
-                      ScaffoldingDetail(
-                        serviceDetail: dummyScaffolding[i],
+                      ScaffoldingOptions(
+                        constructionService:  dummyScaffolding[i],
                       ));
                 },
               );

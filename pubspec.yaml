@@ -37,6 +37,7 @@ dev_dependencies:
   flutter_datetime_picker:
   url_launcher:
   app_settings: 4.0.1+1
+  path_provider:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
