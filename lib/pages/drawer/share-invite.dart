@@ -12,7 +12,7 @@ class _ShareInviteState extends State<ShareInvite> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(),
+      appBar: HaweyatiAppBar(context: context,),
       body: Stack(
         children: <Widget>[
           Column(

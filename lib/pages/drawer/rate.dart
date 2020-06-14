@@ -12,7 +12,7 @@ class _RateState extends State<Rate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(),
+      appBar: HaweyatiAppBar(context: context,),
       body: Stack(
         children: <Widget>[
           Column(

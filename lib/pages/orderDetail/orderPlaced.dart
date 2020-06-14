@@ -18,7 +18,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: HaweyatiAppBar(),
+        appBar: HaweyatiAppBar(context: context,),
         body: Stack(
           children: <Widget>[
             Center(
@@ -65,7 +65,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
                           CustomNavigator.navigateTo(
                               context,
                               ViewAllOrders(
-                                constructionService: widget.constructionService,
+                               // constructionService: widget.constructionService,
                               ));
                         },
                         child: Text(

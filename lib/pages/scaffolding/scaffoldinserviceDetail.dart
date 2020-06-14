@@ -20,7 +20,7 @@ class _ScaffoldingServicesDetailState extends State<ScaffoldingServicesDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(),
+      appBar: HaweyatiAppBar(context: context,),
       body: HaweyatiAppBody(
         title: "Services Detail",
         detail: loremIpsum.substring(0,50), btnName: "Continue",onTap: (){

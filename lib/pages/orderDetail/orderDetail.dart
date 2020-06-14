@@ -22,7 +22,7 @@ class _OrderDetailState extends State<OrderDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color(0xffffffff),
-        appBar: HaweyatiAppBar(),
+        appBar: HaweyatiAppBar(context: context,),
         body: HaweyatiAppBody(
           title: "Orders",
           btnName: "Continue",

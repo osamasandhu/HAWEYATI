@@ -24,7 +24,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(showAction: true,),
+      appBar: HaweyatiAppBar(showCart: false,showHome: false,),
       body: Form(
         autovalidate: autoValidate,
         key: _formKey,

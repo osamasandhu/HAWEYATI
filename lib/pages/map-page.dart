@@ -101,7 +101,7 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: HaweyatiAppBar(),
+      appBar: HaweyatiAppBar(context: context,),
 //      floatingActionButton: currentLocation !=null ? FloatingActionButton.extended(onPressed: (){
 //        CustomNavigator.navigateTo(context, AppHomePage(address: userAddress,));
 //      }, label: Row(

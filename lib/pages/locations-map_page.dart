@@ -101,7 +101,7 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: HaweyatiAppBar(),
+        appBar: HaweyatiAppBar(context: context,),
         
         body: Stack(children: <Widget>[
 

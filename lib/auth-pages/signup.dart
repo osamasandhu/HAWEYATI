@@ -23,7 +23,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(),
+      appBar: HaweyatiAppBar(context: context,),
       body: Form(
         autovalidate: autoValidate,
         key: _formKey,

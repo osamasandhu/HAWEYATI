@@ -22,7 +22,8 @@ class _DumpsterListingState extends State<DumpsterListing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(showAction: true,),
+      appBar: HaweyatiAppBar(context: context,
+      ),
       body: HaweyatiAppBody(title: "Construction Dumpster ",
         child:ListView(children: <Widget>[
 

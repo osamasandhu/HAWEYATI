@@ -52,7 +52,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(),
+      appBar: HaweyatiAppBar(context: context,),
       body: HaweyatiAppBody(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(

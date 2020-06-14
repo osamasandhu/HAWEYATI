@@ -22,7 +22,7 @@ class _BuildingMaterialSubListState extends State<BuildingMaterialSubList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(),
+      appBar: HaweyatiAppBar(context: context,),
       body: HaweyatiAppBody(
 //          showButton: true,
 //          onTap: () {},

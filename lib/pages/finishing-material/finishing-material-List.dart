@@ -22,8 +22,7 @@ class _FinishingMaterialListingState extends State<FinishingMaterialListing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(
-        showAction: true,
+      appBar: HaweyatiAppBar(context: context,
       ),
       body: HaweyatiAppBody(
           title: "Finishing Material",

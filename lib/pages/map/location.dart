@@ -47,8 +47,9 @@ class _LocationState extends State<Location> {
                   )),
               FlatButton(splashColor: Theme.of(context).accentColor,
                   onPressed: () {
-                   // CustomNavigator.navigateTo(context, MyLocationMapPage());
-                    AppSettings.openLocationSettings();
+      //              AppSettings.openLocationSettings();
+                    AppSettings.openLocationSettings().whenComplete(                CustomNavigator.navigateTo(context, MyLocationMapPage())
+                    );
 
                   },
                   child: Text(

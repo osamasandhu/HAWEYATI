@@ -18,7 +18,7 @@ class _BuildingProductDetailState extends State<BuildingProductDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(),
+      appBar: HaweyatiAppBar(context: context,),
       body: HaweyatiAppBody(
         title: "Product Detail",
         detail: loremIpsum.substring(0, 90),

@@ -45,7 +45,7 @@ onSwtich(bool newVal){
 //    }
 
     return Scaffold(
-      appBar: HaweyatiAppBar(),
+      appBar: HaweyatiAppBar(context: context,),
       body: HaweyatiAppBody(
         title: "Time & Location",
         detail: loremIpsum.substring(0, 40),

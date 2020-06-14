@@ -18,7 +18,7 @@ class _ScaffoldingDetailState extends State<ScaffoldingDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: Color(0xffffffff),
-      appBar: HaweyatiAppBar(),
+      appBar: HaweyatiAppBar(context: context,),
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[

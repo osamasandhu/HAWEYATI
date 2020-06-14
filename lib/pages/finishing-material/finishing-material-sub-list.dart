@@ -22,8 +22,7 @@ class _FinishingMaterialSubListState extends State<FinishingMaterialSubList> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff2f2f2f2),
-      appBar: HaweyatiAppBar(
-        showAction: true,
+      appBar: HaweyatiAppBar(context: context,
       ),
       body: Padding(
         padding: EdgeInsets.all(20),

@@ -7,8 +7,6 @@ import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/emptyContainer.dart';
 
 class PendingOrder extends StatefulWidget {
-  ConstructionService constructionService;
-  PendingOrder({this.constructionService});
 
   @override
   _PendingOrderState createState() => _PendingOrderState();
@@ -18,7 +16,7 @@ class _PendingOrderState extends State<PendingOrder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(),
+      appBar: HaweyatiAppBar(context: context,),
       body: ListView(
         padding: EdgeInsets.fromLTRB(15, 20, 15, 5),
         children: <Widget>[
@@ -122,8 +120,8 @@ SizedBox(height: 20,),
 
           EmptyContainer(child: Column(children: <Widget>[
             _buildRow(type: "Weight", detail: "345 KG"),
-            _buildRow(type: "Quantity", detail: widget.constructionService.detail.quantity),
-            _buildRow(type: "Price", detail: widget.constructionService.detail.rate),
+            _buildRow(type: "Quantity", detail: "5"),
+            _buildRow(type: "Price", detail:"65 SR"),
             _buildRowBold(type: "Total", detail: "345.00 Sar")
           ],),)
 
@@ -131,7 +129,7 @@ SizedBox(height: 20,),
           SizedBox(height: 10,),
 
 
-        _buildRow(type: "Sub Total",detail:widget.constructionService.detail.rate )
+        _buildRow(type: "Sub Total",detail:"2600 SR"   )
          , _buildRow(type: "Delivery Fee",detail:"65 SR" ),
 
           SizedBox(height: 10,),

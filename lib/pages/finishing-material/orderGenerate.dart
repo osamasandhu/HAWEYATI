@@ -71,7 +71,7 @@ class _OrderGenerateState extends State<OrderGenerate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(),body: Stack(
+      appBar: HaweyatiAppBar(context: context,),body: Stack(
         children: <Widget>[
 
          ListView(padding: EdgeInsets.fromLTRB(20, 20, 20, 20), children: <Widget>[

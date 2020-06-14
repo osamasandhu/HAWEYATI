@@ -28,7 +28,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: HaweyatiAppBar(),
+        appBar: HaweyatiAppBar(context: context,),
         floatingActionButton: FloatingActionButton(
           onPressed: (){
 print(widget.constructionService);

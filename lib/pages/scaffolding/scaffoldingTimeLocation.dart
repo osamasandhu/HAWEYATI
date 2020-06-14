@@ -51,7 +51,7 @@ class _ScaffoldingTimeAndLocationState extends State<ScaffoldingTimeAndLocation>
 //    }
 
     return Scaffold(
-      appBar: HaweyatiAppBar(),
+      appBar: HaweyatiAppBar(context: context,),
       body: HaweyatiAppBody(
         title: "Time & Location",
         detail: loremIpsum.substring(0, 40),
@@ -188,7 +188,7 @@ class _ScaffoldingTimeAndLocationState extends State<ScaffoldingTimeAndLocation>
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => OrderDetail(
-                constructionService: widget.constructionService,
+                //constructionService: widget.constructionService,
               )));
         },
         btnName: "Continue",

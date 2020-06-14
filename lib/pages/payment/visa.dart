@@ -26,7 +26,7 @@ class _VisaCardState extends State<VisaCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(),
+      appBar: HaweyatiAppBar(context: context,),
       body: HaweyatiAppBody(
           onTap: () {print(widget.constructionService);
           Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PhoneNumber(constructionService: widget.constructionService,)));

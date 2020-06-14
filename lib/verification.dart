@@ -30,7 +30,7 @@ class _VerificationPhoneNumberState extends State<VerificationPhoneNumber> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: HaweyatiAppBar(),
+        appBar: HaweyatiAppBar(context: context,),
         body: Stack(
           fit: StackFit.expand,
           children: <Widget>[

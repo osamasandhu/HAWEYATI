@@ -21,7 +21,8 @@ class _DumpsterListingState extends State<DumpsterListing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(showAction: true,),
+      appBar: HaweyatiAppBar(context: context,
+      ),
       body: HaweyatiAppBody(title: "Construction Dumpster ",detail: loremIpsum.substring(0,70),
           child:ListView.builder(padding: EdgeInsets.symmetric(horizontal: 20),itemCount: dummyDumpster.length, itemBuilder: (context,i){
             return   ContainerDetailList(name: dummyDumpster[i].title,imgpath: dummyDumpster[i].image,ontap: (){CustomNavigator.navigateTo(context, ServicesItemDetail(serviceDetail: dummyDumpster[i]));}) ;

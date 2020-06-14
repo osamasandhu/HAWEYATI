@@ -20,7 +20,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(),
+      appBar: HaweyatiAppBar(context: context,),
       body: Form(
         autovalidate: autoValidate,
         key: _formKey,

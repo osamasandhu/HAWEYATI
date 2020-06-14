@@ -12,7 +12,7 @@ class _HaweyatiRewardsState extends State<HaweyatiRewards> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(),
+      appBar: HaweyatiAppBar(context: context,),
       body: ListView(
         padding: EdgeInsets.fromLTRB(10, 40, 10, 10),
         children: <Widget>[

@@ -21,9 +21,7 @@ class _ScaffoldingListingState extends State<ScaffoldingListing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(
-        showAction: true,
-      ),
+      appBar: HaweyatiAppBar(   context: context,   ),
       body: HaweyatiAppBody(
           title: "Scaffolding",
           detail: loremIpsum.substring(0, 70),

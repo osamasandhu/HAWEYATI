@@ -11,7 +11,7 @@ class _HaweyatiSettingState extends State<HaweyatiSetting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(),
+      appBar: HaweyatiAppBar(context: context,),
       body: ListView(
         children: <Widget>[
 

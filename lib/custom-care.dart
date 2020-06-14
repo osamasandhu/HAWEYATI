@@ -24,7 +24,7 @@ class _CustomCareState extends State<CustomCare> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: HaweyatiAppBar(),
+        appBar: HaweyatiAppBar(context: context,),
         body: HaweyatiAppBody(
             title: "Need Help ?",
             detail:

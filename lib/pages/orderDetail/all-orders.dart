@@ -7,8 +7,6 @@ import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:haweyati/widgits/emptyContainer.dart';
 
 class ViewAllOrders extends StatefulWidget {
-  ConstructionService constructionService;
-  ViewAllOrders({this.constructionService});
   @override
   _ViewAllOrdersState createState() => _ViewAllOrdersState();
 }
@@ -17,10 +15,13 @@ class _ViewAllOrdersState extends State<ViewAllOrders> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(),
+      appBar: HaweyatiAppBar(context: context,),
       body: ListView(padding: EdgeInsets.all(10),
         children: <Widget>[
-          GestureDetector(onTap: (){CustomNavigator.navigateTo(context, PendingOrder(constructionService: widget.constructionService,));},
+          GestureDetector(onTap: (){CustomNavigator.navigateTo(
+              context, PendingOrder(
+          //  constructionService: widget.constructionService,
+          ));},
             child: EmptyContainer(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -52,7 +53,7 @@ _buildImageRow(),
                     SizedBox(height: 20,),
                     Row(children: <Widget>[_buildtext("Quantity"),_buildtext("1 Piece"),],mainAxisAlignment: MainAxisAlignment.spaceBetween,)
 ,                  SizedBox(height: 15,),
-                    Row(children: <Widget>[_buildtext("Total"),Text(widget.constructionService.detail.rate,style: TextStyle(fontWeight: FontWeight.bold),)],mainAxisAlignment: MainAxisAlignment.spaceBetween,)
+                    Row(children: <Widget>[_buildtext("Total"),Text("203 SR",style: TextStyle(fontWeight: FontWeight.bold),)],mainAxisAlignment: MainAxisAlignment.spaceBetween,)
 
                   ],
                 ),
@@ -70,12 +71,11 @@ _buildImageRow(),
   Widget _buildImageRow(){
     return Row(
       children: <Widget>[
-        Image.asset(widget.constructionService.image,width: 70,height: 70)
-        ,                        SizedBox(
+        Container(width: 60,height: 60,color: Theme.of(context).accentColor,),
+                               SizedBox(
           width: 12,
         ),
-        Text(
-          widget.constructionService.title,
+        Text("Order",
           style: TextStyle(
               fontSize: 16, fontWeight: FontWeight.bold),
         )
