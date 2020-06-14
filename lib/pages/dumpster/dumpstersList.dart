@@ -24,7 +24,7 @@ class _DumpsterListingState extends State<DumpsterListing> {
       appBar: HaweyatiAppBar(showAction: true,),
       body: HaweyatiAppBody(title: "Construction Dumpster ",detail: loremIpsum.substring(0,70),
           child:ListView.builder(padding: EdgeInsets.symmetric(horizontal: 20),itemCount: dummyDumpster.length, itemBuilder: (context,i){
-            return   ContainerDetailList(name: dummyDumpster[i].title,imgpath: dummyDumpster[i].image,ontap: (){}) ;
+            return   ContainerDetailList(name: dummyDumpster[i].title,imgpath: dummyDumpster[i].image,ontap: (){CustomNavigator.navigateTo(context, ServicesItemDetail(serviceDetail: dummyDumpster[i]));}) ;
           },
 
           )

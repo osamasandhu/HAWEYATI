@@ -1,42 +1,54 @@
-import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+
+
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/orderDetail/orderDetail.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
-import 'package:haweyati/widgits/emptyContainer.dart';import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-
+import 'package:haweyati/widgits/emptyContainer.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
 
-class TimeAndLocation extends StatefulWidget {
+class ScaffoldingTimeAndLocation extends StatefulWidget {
   ConstructionService constructionService;
-  TimeAndLocation({this.constructionService});
+  ScaffoldingTimeAndLocation({this.constructionService});
   @override
-  _TimeAndLocationState createState() => _TimeAndLocationState();
+  _ScaffoldingTimeAndLocationState createState() => _ScaffoldingTimeAndLocationState();
 }
 
-class _TimeAndLocationState extends State<TimeAndLocation> {
-  File _image;
+class _ScaffoldingTimeAndLocationState extends State<ScaffoldingTimeAndLocation> {
+//  File _image;
 
-String start = "...";
+  String start = "....";
+
+
+  bool val =false;
+
+
+  onSwtich(bool newVal){
+
+    setState(() {
+      val =newVal;
+    });
+  }
   @override
   Widget build(BuildContext context) {
-    Future getCamera() async {
-      var image = await ImagePicker.pickImage(source: ImageSource.camera);
-      setState(() {
-        _image = image;
-      });
-    }
-
-    Future getGallery() async {
-      var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-      setState(() {
-        _image = image;
-      });
-    }
+//    Future getCamera() async {
+//      var image = await ImagePicker.pickImage(source: ImageSource.camera);
+//      setState(() {
+//        _image = image;
+//      });
+//    }
+//
+//    Future getGallery() async {
+//      var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+//      setState(() {
+//        _image = image;
+//      });
+//    }
 
     return Scaffold(
       appBar: HaweyatiAppBar(),
@@ -67,7 +79,7 @@ String start = "...";
                           label: Text(
                             "Edit",
                             style:
-                                TextStyle(color: Theme.of(context).accentColor),
+                            TextStyle(color: Theme.of(context).accentColor),
                           ))
                     ],
                   ),
@@ -102,7 +114,7 @@ String start = "...";
                   children: <Widget>[
                     Text("$start"),
                     IconButton(
-                      onPressed:  ()  {
+                      onPressed: ()  {
                         DatePicker.showDatePicker(context,
                             theme: DatePickerTheme(
                               containerHeight: 210.0,
@@ -129,36 +141,55 @@ String start = "...";
                     )
                   ],
                 )),
-            TextFormField(
-              scrollPadding: EdgeInsets.only(bottom: 150),
-              maxLength: 80,
-              maxLines: 2,
-              decoration: InputDecoration(
-                  labelText: "Note",
-                  hintText: "Write note here",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10))),
-            ),SizedBox(height: 15,),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-GestureDetector(onTap: (){getCamera();}, child: Container(padding: EdgeInsets.all(15), decoration:   BoxDecoration(borderRadius: BorderRadius.circular(30),border: Border.all(width: 2, color: Theme.of(context).accentColor)), child: Text("Camera",style: TextStyle(color: Theme.of(context).accentColor),),)),
-                GestureDetector(onTap: (){getGallery();}, child: Container(padding: EdgeInsets.all(15), decoration:   BoxDecoration(borderRadius: BorderRadius.circular(30),border: Border.all(width: 2, color: Theme.of(context).accentColor)), child: Text("Gallery",style: TextStyle(color: Theme.of(context).accentColor),),)),
-              ],
-            ),
-            SizedBox(height: 20,),Container(
-              height: 200.0,width: 150,
-              child: _image == null
-                  ? Container(  decoration:   BoxDecoration(borderRadius: BorderRadius.circular(30),border: Border.all(width: 2, color: Theme.of(context).accentColor)),child: Center(child: Text('No image selected.')))
-                  : ClipRRect(borderRadius: BorderRadius.circular(30), child: Image.file(_image,fit: BoxFit.cover,)),
-            ),
+//            TextFormField(
+//              scrollPadding: EdgeInsets.only(bottom: 150),
+//              maxLength: 80,
+//              maxLines: 2,
+//              decoration: InputDecoration(
+//                  labelText: "Note",
+//                  hintText: "Write note here",
+//                  border: OutlineInputBorder(
+//                      borderRadius: BorderRadius.circular(10))),
+//            ),
+//            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//              children: <Widget>[
+//                FlatButton(
+//                    onPressed: () {
+//                      getCamera();
+//                    },
+//                    child: Text("Camera")),
+//                FlatButton(
+//                    onPressed: () {
+//                      getGallery();
+//                    },
+//                    child: Text("Gallery"))
+//              ],
+//            ), Container(
+//              height: 200.0,
+//              child: Center(
+//                child: _image == null
+//                    ? Text('No image selected.')
+//                    : Image.file(_image,fit: BoxFit.cover,),
+//              ),
+//            ),
+
+
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+              Text("Scaffolding Fixing",style: TextStyle(fontWeight: FontWeight.bold),),
+              Switch(value: val, onChanged: (newVal){
+                onSwtich(newVal);
+              })
+            ],),
+
+            Text(loremIpsum.substring(0,90))
           ],
         ),
         showButton: true,
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => OrderDetail(
-                    constructionService: widget.constructionService,
-                  )));
+                constructionService: widget.constructionService,
+              )));
         },
         btnName: "Continue",
       ),

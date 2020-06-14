@@ -3,6 +3,7 @@ import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
 import 'package:haweyati/widgits/stackButton.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomCare extends StatefulWidget {
   @override
@@ -10,6 +11,16 @@ class CustomCare extends StatefulWidget {
 }
 
 class _CustomCareState extends State<CustomCare> {
+
+
+  _launchURL() async {
+    const url = 'https://flutter.dev';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +40,6 @@ SizedBox(height: 20,),
                , SizedBox(height: 20,),
 Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[    Icon(Icons.fiber_manual_record,color: Colors.green,size: 15,),SizedBox(width: 6,),          Text("Avaliable for call",style: TextStyle(color: Colors.green, fontSize: 18,fontWeight: FontWeight.bold),)
 ],)            ],),
-            ),onTap: (){},btnName: "Call Now",showButton: true,));
+            ),onTap: (){launch("tel://03472363720");},btnName: "Call Now",showButton: true,));
   }
 }

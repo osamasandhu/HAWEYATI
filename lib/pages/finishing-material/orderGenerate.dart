@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/temp-model.dart';
+import 'package:haweyati/pages/finishing-material/finishing-material-sub-list.dart';
 import 'package:haweyati/pages/finishing-material/finishingorderdetail.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/container-with-add-remove-item.dart';
 import 'package:haweyati/widgits/container-with-subtitle.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
+import 'package:haweyati/widgits/emptyContainer.dart';
 import 'package:haweyati/widgits/stackButton.dart';
 
 class OrderGenerate extends StatefulWidget {
@@ -70,25 +72,21 @@ class _OrderGenerateState extends State<OrderGenerate> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HaweyatiAppBar(),body: Stack(
-        children: <Widget>[StackButton(
-          buttonName: 'Proceed',
-          onTap: (){CustomNavigator.navigateTo(context, FinishingOrderDetail(constructionService:widget.service ,));},)
-          ,ListView(padding: EdgeInsets.fromLTRB(20, 20, 20, 20), children: <Widget>[
+        children: <Widget>[
+
+         ListView(padding: EdgeInsets.fromLTRB(20, 20, 20, 20), children: <Widget>[
           Row(
             children: <Widget>[
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.red,
-                ),
+               image: DecorationImage(image: AssetImage(widget.service.image)),   ),
                 width: 100,
                 height: 100,
               ),
               SizedBox(
                 width: 10,
               ),
-              Text(
-                "Plastimul",
+              Text(widget.service.title,
                 textAlign: TextAlign.center,
                 style: boldText,
               ),
@@ -120,7 +118,58 @@ Row(children: <Widget>[
           ),
 
 
-    ],),
+           EmptyContainer(
+             child: Column(
+               mainAxisAlignment: MainAxisAlignment.start,
+               crossAxisAlignment: CrossAxisAlignment.start,
+               children: <Widget>[
+                 Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                   children: <Widget>[
+                     Text(
+                       "Drop off Location",
+                       style: boldText,
+                     ),
+                     FlatButton.icon(
+                         onPressed: (null),
+                         icon: Icon(
+                           Icons.edit,
+                           color: Theme.of(context).accentColor,
+                         ),
+                         label: Text(
+                           "Edit",
+                           style:
+                           TextStyle(color: Theme.of(context).accentColor),
+                         ))
+                   ],
+                 ),
+                 SizedBox(
+                   height: 15,
+                 ),
+                 Row(
+                   children: <Widget>[
+                     Icon(
+                       Icons.location_on,
+                       color: Theme.of(context).accentColor,
+                     ),
+                     Expanded(
+                       child: Padding(
+                         padding: const EdgeInsets.only(left: 10),
+                         child: Text(loremIpsum.substring(0, 40)),
+                       ),
+                     )
+                   ],
+                 ),
+               ],
+             ),
+           ),
+
+    ],),  StackButton(
+            buttonName: 'Proceed',
+            onTap: (){
+              print("afshasjk");
+              CustomNavigator.navigateTo(context, FinishingOrderDetail(constructionService: widget.service,));},
+          )
         ],
       ),
     );

@@ -194,7 +194,7 @@ Image.asset(widget.constructionService.image,width: 60,height: 60,)
                 height: 30,
               ),
               Text(
-                "20 Yard Container Dumpster",
+                widget.constructionService.title,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
               SizedBox(

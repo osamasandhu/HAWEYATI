@@ -40,7 +40,7 @@ class _HaweyatiAppBodyState extends State<HaweyatiAppBody> {
                 height: 40,
               ),
               Text(
-                widget.title,
+                widget. title,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),

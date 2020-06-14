@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:haweyati/widgits/stackButton.dart';
+import 'package:app_settings/app_settings.dart';
 
 import '../locations-map_page.dart';
 

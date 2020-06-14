@@ -176,7 +176,10 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
             ),) : SizedBox(),
           Align(alignment: Alignment(0, 0.95),child: Container(decoration: BoxDecoration(color: Theme.of(context).accentColor,borderRadius: BorderRadius.circular(30)), child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: FlatButton.icon( onPressed: (null), icon:Icon(Icons.location_on,color: Colors.white,), label: Text("Set Your Location",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+            child: FlatButton.icon(
+                onPressed:                  currentLocation !=null ?(){CustomNavigator.navigateTo(context, AppHomePage(address: userAddress,));}:SizedBox(),
+
+                 icon:Icon(Icons.location_on,color: Colors.white,), label: Text("Set Your Location",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
           )),)
         ],
         )

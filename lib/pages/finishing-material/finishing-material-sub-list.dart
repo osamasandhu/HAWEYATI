@@ -33,9 +33,7 @@ class _FinishingMaterialSubListState extends State<FinishingMaterialSubList> {
               children: <Widget>[
                 Container(
                   decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage(widget.service.image)),  borderRadius: BorderRadius.circular(20),
-                    color: Colors.red,
-                  ),
+                  image: DecorationImage(image: AssetImage(widget.service.image)), ),
                   width: 100,
                   height: 100,
                   
@@ -70,8 +68,8 @@ class _FinishingMaterialSubListState extends State<FinishingMaterialSubList> {
                   itemCount: 20,
                   itemBuilder: (build,i){
                   return  ContainerDetailList(
-                    imgpath: "sadss",
-                    name: "ds",
+                    imgpath: widget.service.image,
+                    name: widget.service.title,
                     ontap: () {
 
                       print("ds");

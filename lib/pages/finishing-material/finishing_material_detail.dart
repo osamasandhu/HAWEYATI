@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/finishing-material/orderGenerate.dart';
+import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:haweyati/widgits/stackButton.dart';
@@ -29,18 +30,19 @@ class _FinishingMaterialDetailState extends State<FinishingMaterialDetail> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
+                      
                       width: MediaQuery
                           .of(context)
                           .size
                           .width,
                       height: 250,
-
+child: Image.asset(widget.constructionService.image),
                     ),
                     SizedBox(
                       height: 20,
                     ),
                     Text(
-                      "Plastimul",
+                     widget.constructionService.title,
                       style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 20),
                     ),
@@ -51,14 +53,13 @@ class _FinishingMaterialDetailState extends State<FinishingMaterialDetail> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "345.00 SR -",
-                          //      style: TextStyle(fontWeight: FontWeight.bold),
+                          widget.constructionService.detail.rate,                          //      style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
                           width: 10,
                         ),
                         Text(
-                          "675.00",
+"345 Sr"
                           //    style: TextStyle(color: Colors.black54),
                         )
                       ],
@@ -67,7 +68,7 @@ class _FinishingMaterialDetailState extends State<FinishingMaterialDetail> {
                       height: 20,
                     ),
                     Text(
-                      "sdsadsdssssssssssssssssssdasdsad hjabds hj chsch  sc s cos cos coj sojc saojc ojsa cosa cos cosa co saoc saoc aoi sad",
+                      loremIpsum.substring(0,70),
                       style: TextStyle(color: Colors.black54),),
                     SizedBox(
                       height: 20,

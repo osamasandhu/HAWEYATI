@@ -52,8 +52,8 @@ class _InstructionsPageState extends State<InstructionsPage> {
         actions: <Widget>[
           FlatButton(
               onPressed: () {
-
-                CustomNavigator.navigateTo(context, AppHomePage());
+CustomNavigator.navigateTo(context, MyLocationMapPage());
+                //CustomNavigator.navigateTo(context, AppHomePage());
 
               },
               child: Text(

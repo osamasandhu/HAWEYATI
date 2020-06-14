@@ -9,16 +9,11 @@ import 'package:haweyati/pages/drawer/rate.dart';
 import 'package:haweyati/pages/drawer/share-invite.dart';
 import 'package:haweyati/pages/drawer/term-condition.dart';
 import 'package:haweyati/pages/dumpster/dumpstersList.dart';
-import 'package:haweyati/pages/dumpster/dumpstersList.dart';
 import 'package:haweyati/pages/finishing-material/finishing-material-List.dart';
 import 'package:haweyati/pages/notification.dart';
-import 'package:haweyati/pages/orderDetail/orderDetail.dart';
-import 'package:haweyati/pages/orderDetail/orderPlaced.dart';
 import 'package:haweyati/pages/scaffolding/scaffoldingList.dart';
 import 'package:haweyati/pages/vehicles-map_page.dart';
-import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
-
 import 'dumpster/dumpstersList.dart';
 import 'dumpster/dumpstersList.dart';
 
@@ -31,6 +26,7 @@ class AppHomePage extends StatefulWidget {
 
 class _AppHomePageState extends State<AppHomePage> {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+
 
   @override
   Widget build(BuildContext context) {
