@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/temp-model.dart';
+import 'package:haweyati/pages/scaffolding/ScaffoldingPlusMinusDropContainer.dart';
 import 'package:haweyati/pages/scaffolding/scaffoldingTimeLocation.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
@@ -31,26 +32,26 @@ class _ScaffoldingServicesDetailState extends State<ScaffoldingServicesDetail> {
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 20),
           children: <Widget>[
-            PlusMinusContainer(
+            DropDownContainer(
               extra: "Main Frame",
               dayprice: "SAR 345/day",
             ),
-            PlusMinusContainer(
+            DropDownContainer(
               extra: "Cross Brace",
               dayprice: "SAR 365/day",
             ),
-            PlusMinusContainer(
+            DropDownContainer(
               extra: "Connecting Bar",
               dayprice: "SAR 345/day",
             ),
-            PlusMinusContainer(
+            DropDownContainer(
               extra: "Adjustable Base",
               dayprice: "SAR 365/day",
-            ),PlusMinusContainer(
+            ),DropDownContainer(
               extra: "Stabilizer",
               dayprice: "SAR 345/day",
             ),
-            PlusMinusContainer(
+            DropDownContainer(
               extra: "Wood Planks",
               dayprice: "SAR 365/day",
             ),
