@@ -121,7 +121,7 @@ class _DropDownContainerState extends State<DropDownContainer> {
 
                   Container(
                     child: DropdownButton<String>( value: selection,
-                      items: <String>["Small", "Medium", "Large"]
+                      items: <String>["1 Meter", "1.5 Meter", "2 Meter","2.5 Meter", "3 Meter", "3.5 Meter","4 Meter"]
                           .map((String value) {
                         return new DropdownMenuItem<String>(
                           value: value,
