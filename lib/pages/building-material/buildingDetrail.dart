@@ -31,9 +31,7 @@ class _BuildingDetailState extends State<BuildingDetail> {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 250,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(widget.serviceDetail.image))),
+                  child: (Image.asset(widget.serviceDetail.image,fit: BoxFit.cover,)),
                 ),
                 SizedBox(
                   height: 20,

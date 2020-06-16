@@ -19,7 +19,7 @@ class PlusMinusContainer extends StatefulWidget {
 
 class _PlusMinusContainerState extends State<PlusMinusContainer> {
 
-  int quantity = 1;
+  int quantity = 0;
 
   _increment(){
 
@@ -86,7 +86,7 @@ Row(children: <Widget>[
       onPressed: () {
 
 
-      if(quantity>1){
+      if(quantity>0){
         _decrement();
 
       }

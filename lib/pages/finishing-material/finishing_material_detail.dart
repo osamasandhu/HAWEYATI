@@ -30,13 +30,9 @@ class _FinishingMaterialDetailState extends State<FinishingMaterialDetail> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
-                      
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width,
+                      width: MediaQuery.of(context).size.width,
                       height: 250,
-child: Image.asset(widget.constructionService.image),
+                      child: (Image.asset(widget.constructionService.image,fit: BoxFit.cover,)),
                     ),
                     SizedBox(
                       height: 20,

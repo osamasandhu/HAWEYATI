@@ -11,6 +11,7 @@ import 'package:haweyati/pages/drawer/term-condition.dart';
 import 'package:haweyati/pages/dumpster/dumpstersList.dart';
 import 'package:haweyati/pages/finishing-material/finishing-material-List.dart';
 import 'package:haweyati/pages/notification.dart';
+import 'package:haweyati/pages/orderDetail/all-orders.dart';
 import 'package:haweyati/pages/scaffolding/scaffoldingList.dart';
 import 'package:haweyati/pages/vehicles-map_page.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
@@ -74,77 +75,75 @@ class _AppHomePageState extends State<AppHomePage> {
         ],
       ),
       drawer: Drawer(
-        child: SafeArea(
-          child: Container(
-              color: Color(0xff313f53),
-              height: MediaQuery.of(context).size.height,
-              child: Stack(
-                children: <Widget>[
-                  ListView(
-                    children: <Widget>[
-                      Center(
-                        child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          foregroundColor: Colors.white,
-                          radius: 50,
-                        ),
+        child: Container(
+            color: Color(0xff313f53),
+            height: MediaQuery.of(context).size.height,
+            child: Stack(
+              children: <Widget>[
+                ListView(
+                  children: <Widget>[
+                    Center(
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.white,
+                        radius: 50,
                       ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Center(
-                          child: Text("Arslan Khan",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold))),
-                      Center(
-                        child: FlatButton.icon(
-                            onPressed: null,
-                            icon: Image.asset(
-                              "assets/images/star.png",
-                              width: 20,
-                              height: 20,
-                            ),
-                            label: Text(
-                              "Rated 5.0",
-                              style: TextStyle(color: Colors.white),
-                            )),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      _buildListTile("assets/images/order.png", "Your Orders" ,(){
-//                        CustomNavigator.navigateTo(context, null);
-                      }),
-                      _buildListTile("assets/images/ride.png", "Your Rides",(){CustomNavigator.navigateTo(context, HaweyatiRewards());}),
-                      _buildListTile(
-                          "assets/images/setting.png", "Your Settings",(){CustomNavigator.navigateTo(context, HaweyatiSetting());}),
-                      _buildListTile(
-                          "assets/images/invite.png", "Invite Friends",(){CustomNavigator.navigateTo(context, ShareInvite());}),
-                      _buildListTile("assets/images/order.png", "Rewards",(){CustomNavigator.navigateTo(context, HaweyatiRewards());} ),
-
-                      _buildListTile(
-                          "assets/images/term.png", "Terms and Conditions",(){CustomNavigator.navigateTo(context, TermAndCondition());}),
-                      _buildListTile("assets/images/rate.png", "Rate App",(){CustomNavigator.navigateTo(context, Rate());}),
-                      _buildListTile("assets/images/logout.png", "Logout",(){
-//                        CustomNavigator.navigateTo(context, Rate());
-                      }),
-                    ],
-                    padding: EdgeInsets.fromLTRB(0, 70, 0, 10),
-                  ),
-                  Align(
-                    alignment: Alignment(-0.9, -0.95),
-                    child: Image.asset(
-                      "assets/images/language.png",
-                      width: 70,
                     ),
-                  ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Center(
+                        child: Text("Arslan Khan",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold))),
+                    Center(
+                      child: FlatButton.icon(
+                          onPressed: null,
+                          icon: Image.asset(
+                            "assets/images/star.png",
+                            width: 20,
+                            height: 20,
+                          ),
+                          label: Text(
+                            "Rated 5.0",
+                            style: TextStyle(color: Colors.white),
+                          )),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    _buildListTile("assets/images/order.png", "My Orders" ,(){
+                        CustomNavigator.navigateTo(context, ViewAllOrders());
+                    }),
+                    //_buildListTile("assets/images/ride.png", "Your Rides",(){CustomNavigator.navigateTo(context, HaweyatiRewards());}),
+                    _buildListTile(
+                        "assets/images/setting.png", "Your Settings",(){CustomNavigator.navigateTo(context, HaweyatiSetting());}),
+                    _buildListTile(
+                        "assets/images/invite.png", "Invite Friends",(){CustomNavigator.navigateTo(context, ShareInvite());}),
+                    _buildListTile("assets/images/order.png", "Rewards",(){CustomNavigator.navigateTo(context, HaweyatiRewards());} ),
 
-                ],
-              )),
-        ),
+                    _buildListTile(
+                        "assets/images/term.png", "Terms and Conditions",(){CustomNavigator.navigateTo(context, TermAndCondition());}),
+                    _buildListTile("assets/images/rate.png", "Rate App",(){CustomNavigator.navigateTo(context, Rate());}),
+                    _buildListTile("assets/images/logout.png", "Logout",(){
+//                        CustomNavigator.navigateTo(context, Rate());
+                    }),
+                  ],
+                  padding: EdgeInsets.fromLTRB(0, 70, 0, 10),
+                ),
+                Align(
+                  alignment: Alignment(-0.9, -0.95),
+                  child: Image.asset(
+                    "assets/images/language.png",
+                    width: 70,
+                  ),
+                ),
+
+              ],
+            )),
       ),
       body: Column(
         children: <Widget>[
@@ -278,7 +277,7 @@ class _AppHomePageState extends State<AppHomePage> {
   }
 
   Widget _buildListTile(String imgPath, String title,Function onTap) {
-    return ListTile(onTap: onTap,
+    return ListTile(onTap: onTap,dense: true,
       leading: Image.asset(
         imgPath,
         width: 20,

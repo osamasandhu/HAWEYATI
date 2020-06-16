@@ -20,7 +20,7 @@ class DumpsterListing extends StatefulWidget {
 class _DumpsterListingState extends State<DumpsterListing> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: Color(0xfff2f2f2),
       appBar: HaweyatiAppBar(context: context,
       ),
       body: HaweyatiAppBody(title: "Construction Dumpster ",detail: loremIpsum.substring(0,70),

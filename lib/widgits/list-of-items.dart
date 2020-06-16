@@ -21,10 +21,10 @@ class _ContainerDetailListState extends State<ContainerDetailList> {
         border: Border.all(color: Colors.black38, width: 1),
         borderRadius: BorderRadius.circular(15),
       ),
-      height: 120,
+  //    height: 120,
       width: MediaQuery.of(context).size.width,
       child: Padding(
-        padding: const EdgeInsets.only(top: 30),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: ListTile(
           onTap: widget.ontap,
           leading:
