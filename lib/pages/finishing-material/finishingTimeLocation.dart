@@ -14,14 +14,14 @@ import 'package:haweyati/widgits/haweyati-appbody.dart';
 
 import '../locations-map_page.dart';
 
-class BuildingTimeAndLocation extends StatefulWidget {
+class FinishingTimeAndLocation extends StatefulWidget {
   ConstructionService constructionService;
-  BuildingTimeAndLocation({this.constructionService});
+  FinishingTimeAndLocation({this.constructionService});
   @override
-  _BuildingTimeAndLocationState createState() => _BuildingTimeAndLocationState();
+  _FinishingTimeAndLocationState createState() => _FinishingTimeAndLocationState();
 }
 
-class _BuildingTimeAndLocationState extends State<BuildingTimeAndLocation> {
+class _FinishingTimeAndLocationState extends State< FinishingTimeAndLocation> {
 //  File _image;
 
   DateTime dateTime;
@@ -166,7 +166,7 @@ class _BuildingTimeAndLocationState extends State<BuildingTimeAndLocation> {
                 date: dateTime,
                 constructionService: widget.constructionService,
               )));
-          },
+        },
         btnName: "Continue",
       ),
     );

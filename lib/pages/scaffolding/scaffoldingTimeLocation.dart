@@ -122,7 +122,9 @@ key: scaffoldKey,      appBar: HaweyatiAppBar(context: context,),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
 
 
-                        _preferredTime!=null ? Text("${_preferredTime.hour}:${_preferredTime.minute}") : Text(" Select Time"),
+                        _preferredTime!=null ? Text(
+                          "${_preferredTime.hour}:${_preferredTime.minute} - ${(_preferredTime.hour + 3) % 24}:${_preferredTime.minute}"
+                        ) : Text(" Select Time"),
                         IconButton(icon: Icon(Icons.access_time),onPressed:
 
 

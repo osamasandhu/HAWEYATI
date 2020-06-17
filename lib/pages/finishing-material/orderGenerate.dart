@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/temp-model.dart';
+import 'package:haweyati/pages/finishing-material/finishingTimeLocation.dart';
 import 'package:haweyati/pages/finishing-material/finishingorderdetail.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
@@ -129,7 +130,13 @@ Row(children: <Widget>[
                        style: boldText,
                      ),
                      FlatButton.icon(
-                         onPressed: (null),
+                         onPressed: (){
+                       Navigator.of(context).pop();
+                       Navigator.of(context).pop();
+                       Navigator.of(context).pop();
+                       Navigator.of(context).pop();
+                       Navigator.of(context).pop();
+                         },
                          icon: Icon(
                            Icons.edit,
                            color: Theme.of(context).accentColor,
@@ -166,7 +173,9 @@ Row(children: <Widget>[
             buttonName: 'Proceed',
             onTap: (){
               print("afshasjk");
-              CustomNavigator.navigateTo(context, FinishingOrderDetail(constructionService: widget.service,));},
+              CustomNavigator.navigateTo(context,
+                  FinishingTimeAndLocation(constructionService: widget.service,));
+              },
           )
         ],
       ),

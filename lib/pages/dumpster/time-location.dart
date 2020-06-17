@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:haweyati/models/order-model.dart';
+import 'package:haweyati/pages/building-material/building-material-List.dart';
 import 'package:haweyati/pages/dumpster/calender/custom-datepicker.dart';
 import 'package:haweyati/pages/map-page.dart';
 import 'package:haweyati/src/utlis/local-data.dart';
@@ -74,7 +75,7 @@ class _TimeAndLocationState extends State<TimeAndLocation> {
                       FlatButton.icon(
                           onPressed: () {
                             CustomNavigator.navigateTo(
-                                context, MyLocationMapPage());
+                                context, BuildingMaterialListing(ConstructionService()));
                           },
                           icon: Icon(
                             Icons.edit,
@@ -127,7 +128,9 @@ class _TimeAndLocationState extends State<TimeAndLocation> {
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
 
 
-                      _preferredTime!=null ? Text("${_preferredTime.hour}:${_preferredTime.minute}") : Text(" Select Time"),
+                      _preferredTime!=null ? Text(
+                          "${_preferredTime.hour}:${_preferredTime.minute} - ${(_preferredTime.hour + 3) % 24}:${_preferredTime.minute}"
+                      ) : Text(" Select Time"),
 IconButton(icon: Icon(Icons.access_time),onPressed:
 
 

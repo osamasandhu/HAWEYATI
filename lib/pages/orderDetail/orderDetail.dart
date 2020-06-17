@@ -195,7 +195,7 @@ Image.asset(widget.constructionService.image,width: 60,height: 60,)
                       height: 15,
                     ),
                     _builddetailRow(
-                        text1: "1 June 2020", text2: "3.00 - 6.00 PM"),
+                        text1: formattedDate(widget.date), text2: "3.00 - 6.00 PM"),
                     SizedBox(
                       height: 30,
                     ),
@@ -203,8 +203,7 @@ Image.asset(widget.constructionService.image,width: 60,height: 60,)
                     SizedBox(
                       height: 15,
                     ),
-                    _builddetailRow(
-                        text1: formattedDate(widget.date), text2: "3.00 - 6.00 PM")
+                    _builddetailRow(text1: formattedDate(widget.date.add(Duration(days: 10))), text2: "3.00 - 6.00 PM")
 
 /////////////////////////////,
                   ],
