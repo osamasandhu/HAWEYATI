@@ -68,20 +68,20 @@ class _PaymentMethodState extends State<PaymentMethod> {
           padding: EdgeInsets.fromLTRB(15, 30, 15, 30),
           children: <Widget>[
             _buildPaymentContainer(
-                color: Colors.red, onTap: () {}, text: "Mada"),
+                imgPath: "assets/images/mada.png", onTap: () {}, text: "Mada"),
             _buildPaymentContainer(
-                color: Colors.greenAccent, onTap: () {}, text: "Apple"),
+                imgPath: "assets/images/apple-pay.png", onTap: () {}, text: "Apple"),
             _buildPaymentContainer(
-                color: Colors.teal, onTap: () {}, text: "Credit Card "),
+                imgPath: "assets/images/credit-card.png", onTap: () {}, text: "Credit Card "),
             _buildPaymentContainer(
-                color: Colors.amber, onTap: () {}, text: "Cash on Delivery")
+                imgPath: "assets/images/cash-on-delivery.png", onTap: () {}, text: "Cash on Delivery")
           ],
         ),
       ),
     );
   }
 
-  Widget _buildPaymentContainer({Function onTap, String text, Color color}) {
+  Widget _buildPaymentContainer({Function onTap, String text,String imgPath}) {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
@@ -103,8 +103,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                 Container(
                   height: 50,
                   width: 50,
-                  color: color,
-                ),
+child: Image.asset(imgPath),                ),
               ],
             ),
           ),

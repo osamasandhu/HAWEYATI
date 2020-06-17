@@ -2,7 +2,9 @@
 import 'dart:io';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:haweyati/models/order-model.dart';
+import 'package:haweyati/pages/dumpster/calender/custom-datepicker.dart';
 import 'package:haweyati/src/utlis/local-data.dart';
+import 'package:haweyati/widgits/custom-navigator.dart';
 
 
 import 'package:image_picker/image_picker.dart';
@@ -14,6 +16,8 @@ import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/emptyContainer.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
 
+import '../locations-map_page.dart';
+
 class ScaffoldingTimeAndLocation extends StatefulWidget {
   ConstructionService constructionService;
   ScaffoldingTimeAndLocation({this.constructionService});
@@ -24,7 +28,11 @@ class ScaffoldingTimeAndLocation extends StatefulWidget {
 class _ScaffoldingTimeAndLocationState extends State<ScaffoldingTimeAndLocation> {
 //  File _image;
 
-  String start = "....";
+  DateTime dateTime;
+  var scaffoldKey = GlobalKey<ScaffoldState>();
+
+  String start = "...";
+  TimeOfDay _preferredTime;
 
 
   bool val =false;
@@ -38,143 +46,102 @@ class _ScaffoldingTimeAndLocationState extends State<ScaffoldingTimeAndLocation>
   }
   @override
   Widget build(BuildContext context) {
-//    Future getCamera() async {
-//      var image = await ImagePicker.pickImage(source: ImageSource.camera);
-//      setState(() {
-//        _image = image;
-//      });
-//    }
-//
-//    Future getGallery() async {
-//      var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-//      setState(() {
-//        _image = image;
-//      });
-//    }
 
     return Scaffold(
-      appBar: HaweyatiAppBar(context: context,),
+key: scaffoldKey,      appBar: HaweyatiAppBar(context: context,),
       body: HaweyatiAppBody(
         title: "Time & Location",
         detail: loremIpsum.substring(0, 40),
         child: ListView(
           padding: EdgeInsets.fromLTRB(20, 10, 20, 100),
-          children: <Widget>[
-            EmptyContainer(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Drop off Location",
-                        style: boldText,
-                      ),
-                      FlatButton.icon(
-                          onPressed: (null),
-                          icon: Icon(
-                            Icons.edit,
-                            color: Theme.of(context).accentColor,
-                          ),
-                          label: Text(
-                            "Edit",
-                            style:
-                            TextStyle(color: Theme.of(context).accentColor),
-                          ))
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Icon(
-                        Icons.location_on,
-                        color: Theme.of(context).accentColor,
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Text(loremIpsum.substring(0, 40)),
+          children: <Widget>[  EmptyContainer(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      "Drop off Location",
+                      style: boldText,
+                    ),
+                    FlatButton.icon(
+                        onPressed: () {
+                          CustomNavigator.navigateTo(
+                              context, MyLocationMapPage());
+                        },
+                        icon: Icon(
+                          Icons.edit,
+                          color: Theme.of(context).accentColor,
                         ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
+                        label: Text(
+                          "Edit",
+                          style:
+                          TextStyle(color: Theme.of(context).accentColor),
+                        ))
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.location_on,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(loremIpsum.substring(0, 40)),
+                      ),
+                    )
+                  ],
+                ),
+              ],
             ),
+          ),
             SizedBox(
               height: 20,
             ),
             _buildRow(
                 dropoffdate: "Drop-off Date", dropofftime: "Drop-off Time"),
-            _buildRowwithDetail(
-                child1: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text("$start"),
-                    IconButton(
-                      onPressed: ()  {
-                        DatePicker.showDatePicker(context,
-                            theme: DatePickerTheme(
-                              containerHeight: 210.0,
-                            ),
-                            showTitleActions: true,
-                            minTime: DateTime(1990, 1, 1),
-                            maxTime: DateTime(2082, 12, 31), onConfirm: (date) {
-                              print('confirm $date');
-                              start = ' ${date.day} - ${date.month} - ${date.year} ';
-                              setState(() {});
-                            }, currentTime: DateTime.now(), locale: LocaleType.en);
-                      },
-                      icon: Icon(Icons.calendar_today),
-                    )
-                  ],
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: DatePickerField(
+                    onChanged: (date) => dateTime = date,
+                  ),
                 ),
-                child2: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text("3:00 - 6:00"),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.access_time),
-                    )
-                  ],
-                )),
-//            TextFormField(
-//              scrollPadding: EdgeInsets.only(bottom: 150),
-//              maxLength: 80,
-//              maxLines: 2,
-//              decoration: InputDecoration(
-//                  labelText: "Note",
-//                  hintText: "Write note here",
-//                  border: OutlineInputBorder(
-//                      borderRadius: BorderRadius.circular(10))),
-//            ),
-//            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//              children: <Widget>[
-//                FlatButton(
-//                    onPressed: () {
-//                      getCamera();
-//                    },
-//                    child: Text("Camera")),
-//                FlatButton(
-//                    onPressed: () {
-//                      getGallery();
-//                    },
-//                    child: Text("Gallery"))
-//              ],
-//            ), Container(
-//              height: 200.0,
-//              child: Center(
-//                child: _image == null
-//                    ? Text('No image selected.')
-//                    : Image.file(_image,fit: BoxFit.cover,),
-//              ),
-//            ),
+                SizedBox(
+                  width: 15,
+                ),
+                Expanded(
+                  child: EmptyContainer(
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
 
+
+                        _preferredTime!=null ? Text("${_preferredTime.hour}:${_preferredTime.minute}") : Text(" Select Time"),
+                        IconButton(icon: Icon(Icons.access_time),onPressed:
+
+
+                            () async {
+                          FocusScope.of(context).nextFocus();
+                          TimeOfDay t = await showTimePicker(
+                              context: context,
+                              initialTime: TimeOfDay.now()
+                          );
+                          if(t != null)
+                            setState(() {
+                              _preferredTime = t;
+                            });
+                        },)
+                      ],)
+                  ),
+                )
+              ],
+            ),
 
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
               Text("Scaffolding Fixing",style: TextStyle(fontWeight: FontWeight.bold),),
@@ -188,17 +155,20 @@ class _ScaffoldingTimeAndLocationState extends State<ScaffoldingTimeAndLocation>
         ),
         showButton: true,
         onTap: () {
-          print(widget.constructionService.title);
-//          var order = Order(
-//            name: widget.constructionService.title
-//          );
-//          LocalData.addToCart(order);
-//
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => OrderDetail(
-                //constructionService: widget.constructionService,
-              )));
-        },
+          if(dateTime==null){
+            scaffoldKey.currentState.showSnackBar(SnackBar(
+              content: Text('Please select drop off date'),
+              behavior: SnackBarBehavior.floating,
+            ));
+            return;
+          }
+          if(_preferredTime==null){
+            scaffoldKey.currentState.showSnackBar(SnackBar(
+              behavior: SnackBarBehavior.floating,
+              content: Text('Please select drop off time'),
+            ));
+            return;
+          }},
         btnName: "Continue",
       ),
     );

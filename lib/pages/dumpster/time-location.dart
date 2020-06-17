@@ -2,14 +2,18 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:haweyati/models/order-model.dart';
+import 'package:haweyati/pages/dumpster/calender/custom-datepicker.dart';
+import 'package:haweyati/pages/map-page.dart';
 import 'package:haweyati/src/utlis/local-data.dart';
+import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/orderDetail/orderDetail.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
-import 'package:haweyati/widgits/emptyContainer.dart';import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:haweyati/widgits/emptyContainer.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 import 'package:haweyati/widgits/haweyati-appbody.dart';
 
@@ -21,10 +25,13 @@ class TimeAndLocation extends StatefulWidget {
 }
 
 class _TimeAndLocationState extends State<TimeAndLocation> {
-  File _image;
-  DateTime dateTime = DateTime.now();
+  var scaffoldKey = GlobalKey<ScaffoldState>();
 
-String start = "...";
+  File _image;
+  DateTime dateTime;
+
+  String start = "...";
+  TimeOfDay _preferredTime;
   @override
   Widget build(BuildContext context) {
     Future getCamera() async {
@@ -42,7 +49,10 @@ String start = "...";
     }
 
     return Scaffold(
-      appBar: HaweyatiAppBar(context: context,),
+      key: scaffoldKey,
+      appBar: HaweyatiAppBar(
+        context: context,
+      ),
       body: HaweyatiAppBody(
         title: "Time & Location",
         detail: loremIpsum.substring(0, 40),
@@ -62,7 +72,10 @@ String start = "...";
                         style: boldText,
                       ),
                       FlatButton.icon(
-                          onPressed: (null),
+                          onPressed: () {
+                            CustomNavigator.navigateTo(
+                                context, MyLocationMapPage());
+                          },
                           icon: Icon(
                             Icons.edit,
                             color: Theme.of(context).accentColor,
@@ -99,41 +112,104 @@ String start = "...";
             ),
             _buildRow(
                 dropoffdate: "Drop-off Date", dropofftime: "Drop-off Time"),
-            _buildRowwithDetail(
-                child1: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text("$start"),
-                    IconButton(
-                      onPressed:  ()  {
-                        DatePicker.showDatePicker(context,
-                            theme: DatePickerTheme(
-                              containerHeight: 210.0,
-                            ),
-                            showTitleActions: true,
-                            minTime: DateTime(1990, 1, 1),
-                            maxTime: DateTime(2082, 12, 31), onConfirm: (date) {
-                          date = date;
-                              print('confirm $date');
-                              start = ' ${date.day} - ${date.month} - ${date.year} ';
-                              setState(() {});
-                            }, currentTime: DateTime.now(), locale: LocaleType.en);
-                      },
-                      icon: Icon(Icons.calendar_today),
-                    )
-                  ],
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: DatePickerField(
+                    onChanged: (date) => dateTime = date,
+                  ),
                 ),
-                child2: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text("3:00 - 6:00"),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.access_time),
-                    )
-                  ],
-                )),
-            TextFormField(
+                SizedBox(
+                  width: 15,
+                ),
+                Expanded(
+                  child: EmptyContainer(
+                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+
+
+                      _preferredTime!=null ? Text("${_preferredTime.hour}:${_preferredTime.minute}") : Text(" Select Time"),
+IconButton(icon: Icon(Icons.access_time),onPressed:
+
+
+    () async {
+  FocusScope.of(context).nextFocus();
+  TimeOfDay t = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now()
+  );
+  if(t != null)
+    setState(() {
+      _preferredTime = t;
+    });
+},)
+                    ],)
+                  ),
+                )
+              ],
+            ),
+
+            
+            
+            Text("Take a photo for contact less deliver and make sure to pay online.",style: boldText,)
+           ,
+            SizedBox(height: 15,),Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                GestureDetector(
+                    onTap: () {
+                      getCamera();
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(color: Theme.of(context).accentColor,
+                          borderRadius: BorderRadius.circular(30),
+                          border: Border.all(
+                              width: 2, color: Theme.of(context).accentColor)),
+                      child: Text(
+                        "Camera",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    )),
+                GestureDetector(
+                    onTap: () {
+                      getGallery();
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(color: Theme.of(context).accentColor,
+                          borderRadius: BorderRadius.circular(30),
+                          border: Border.all(
+                              width: 2, color: Theme.of(context).accentColor)),
+                      child: Text(
+                        "Gallery",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    )),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              height: 200.0,
+              width: 150,
+              child: _image == null
+                  ? Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          border: Border.all(
+                              width: 2, color: Theme.of(context).accentColor)),
+                      child: Center(child: Text('No image selected.')))
+                  : ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: Image.file(
+                        _image,
+                        fit: BoxFit.cover,
+                      )),
+            ),
+            SizedBox(
+              height: 25,
+            ),            TextFormField(
               scrollPadding: EdgeInsets.only(bottom: 150),
               maxLength: 80,
               maxLines: 2,
@@ -142,32 +218,33 @@ String start = "...";
                   hintText: "Write note here",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10))),
-            ),SizedBox(height: 15,),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-GestureDetector(onTap: (){getCamera();}, child: Container(padding: EdgeInsets.all(15), decoration:   BoxDecoration(borderRadius: BorderRadius.circular(30),border: Border.all(width: 2, color: Theme.of(context).accentColor)), child: Text("Camera",style: TextStyle(color: Theme.of(context).accentColor),),)),
-                GestureDetector(onTap: (){getGallery();}, child: Container(padding: EdgeInsets.all(15), decoration:   BoxDecoration(borderRadius: BorderRadius.circular(30),border: Border.all(width: 2, color: Theme.of(context).accentColor)), child: Text("Gallery",style: TextStyle(color: Theme.of(context).accentColor),),)),
-              ],
-            ),
-            SizedBox(height: 20,),Container(
-              height: 200.0,width: 150,
-              child: _image == null
-                  ? Container(  decoration:   BoxDecoration(borderRadius: BorderRadius.circular(30),border: Border.all(width: 2, color: Theme.of(context).accentColor)),child: Center(child: Text('No image selected.')))
-                  : ClipRRect(borderRadius: BorderRadius.circular(30), child: Image.file(_image,fit: BoxFit.cover,)),
             ),
           ],
         ),
         showButton: true,
         onTap: () {
-
+          if(dateTime==null){
+            scaffoldKey.currentState.showSnackBar(SnackBar(
+              content: Text('Please select drop off date'),
+              behavior: SnackBarBehavior.floating,
+            ));
+            return;
+          }
+          if(_preferredTime==null){
+            scaffoldKey.currentState.showSnackBar(SnackBar(
+              behavior: SnackBarBehavior.floating,
+              content: Text('Please select drop off time'),
+            ));
+            return;
+          }
           var data = widget.constructionService;
           var quantity = int.parse(data.detail.quantity);
           var pricePerDay = int.parse(data.detail.priceperday);
           print(widget.constructionService.title);
 
           var order = Order(
-            name:   data.title,
-            image:  data.image,
+            name: data.title,
+            image: data.image,
             price: data.detail.priceperday,
             total: (quantity * pricePerDay).toDouble(),
             dropOffDate: dateTime.toIso8601String(),
@@ -179,6 +256,8 @@ GestureDetector(onTap: (){getCamera();}, child: Container(padding: EdgeInsets.al
 
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => OrderDetail(
+                time: _preferredTime,
+                date: dateTime.add(Duration(days: 10)),
                     constructionService: widget.constructionService,
                   )));
         },
@@ -220,7 +299,7 @@ GestureDetector(onTap: (){getCamera();}, child: Container(padding: EdgeInsets.al
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Expanded(flex: 2, child: EmptyContainer(child: child1)),
+        Expanded(flex: 2, child: child1),
         SizedBox(
           width: 10,
         ),

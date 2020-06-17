@@ -45,28 +45,27 @@ class _PlusMinusContainerState extends State<PlusMinusContainer> {
       decoration: BoxDecoration(color:Color(0xfff2f2f2f2),
         borderRadius: BorderRadius.circular(15),
       ),
-      height: 120,
+
       width: MediaQuery.of(context).size.width,
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Row(
           children: <Widget>[
 
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment:CrossAxisAlignment.start,children: <Widget>[
-                Text(
-              widget.extra,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 16),
-            ),Text(
-              widget.dayprice,
-              style: TextStyle(
-                   fontSize: 16),
-            ),],
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment:CrossAxisAlignment.start,children: <Widget>[
+              Text(
+            widget.extra,
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+            SizedBox(height: 10,),
+            Text(
+            widget.dayprice,
+            style: TextStyle(
+                 fontSize: 16),
+          ),],
 
-            ),
           ),
 
 Row(children: <Widget>[

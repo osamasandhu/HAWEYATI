@@ -30,7 +30,7 @@ class _ScaffoldingServicesDetailState extends State<ScaffoldingServicesDetail> {
 
       },showButton: true,
         child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.fromLTRB(20, 20, 20, 100),
           children: <Widget>[
             DropDownContainer(
               extra: "Main Frame",

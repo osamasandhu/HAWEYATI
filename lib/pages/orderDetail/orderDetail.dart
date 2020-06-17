@@ -1,15 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/temp-model.dart';
+import 'package:haweyati/pages/dumpster/dumpstersList.dart';
 import 'package:haweyati/pages/payment/payment-method.dart';
 import 'package:haweyati/src/utlis/const.dart';
+import 'package:haweyati/src/utlis/date-formatter.dart';
 import 'package:haweyati/widgits/appBar.dart';
+import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:haweyati/widgits/emptyContainer.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
+import 'package:haweyati/pages/dumpster/dumpstersList.dart';
+
+import 'package:haweyati/widgits/service-item-listing.dart';
 
 class OrderDetail extends StatefulWidget {
+  DateTime date;
+  TimeOfDay time;
   ConstructionService constructionService;
-  OrderDetail({this.constructionService});
+  OrderDetail({this.constructionService,this.date,this.time});
 
   @override
   _OrderDetailState createState() => _OrderDetailState();
@@ -31,9 +39,9 @@ class _OrderDetailState extends State<OrderDetail> {
                     )));
           },
           showButton: true,
-          detail: "Lorem ipsum",
+          detail: loremIpsum.substring(0,60,),
           child: ListView(
-            padding: EdgeInsets.fromLTRB(15, 30, 15, 100),
+            padding: EdgeInsets.fromLTRB(15, 20, 15, 100),
             children: <Widget>[
               EmptyContainer(
                 child: Column(
@@ -49,7 +57,14 @@ class _OrderDetailState extends State<OrderDetail> {
                               fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                         FlatButton.icon(
-                            onPressed: (null),
+                            onPressed: (){
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+//                              CustomNavigator.navigateTo(context, DumpsterListing());
+
+                              },
                             icon: Icon(
                               Icons.edit,
                               color: Theme.of(context).accentColor,
@@ -60,9 +75,6 @@ class _OrderDetailState extends State<OrderDetail> {
                                   color: Theme.of(context).accentColor),
                             ))
                       ],
-                    ),
-                    SizedBox(
-                      height: 15,
                     ),
                     Row(
                       children: <Widget>[
@@ -78,7 +90,7 @@ Image.asset(widget.constructionService.image,width: 60,height: 60,)
                       ],
                     ),
                     SizedBox(
-                      height: 30,
+                      height: 12,
                     ),
                     Row(
                       children: <Widget>[
@@ -141,7 +153,15 @@ Image.asset(widget.constructionService.image,width: 60,height: 60,)
                               fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                         FlatButton.icon(
-                            onPressed: (null),
+                            onPressed: (){
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+
+                            },
                             icon: Icon(
                               Icons.edit,
                               color: Theme.of(context).accentColor,
@@ -162,7 +182,9 @@ Image.asset(widget.constructionService.image,width: 60,height: 60,)
                           Icons.location_on,
                           color: Theme.of(context).accentColor,
                         ),
-                        label: Text(loremIpsum.substring(0,30),
+                        label: Expanded(
+                          child: Text(loremIpsum.substring(0,60),
+                          ),
                         )),
                     SizedBox(
                       height: 30,
@@ -182,7 +204,7 @@ Image.asset(widget.constructionService.image,width: 60,height: 60,)
                       height: 15,
                     ),
                     _builddetailRow(
-                        text1: "1 June 2020", text2: "3.00 - 6.00 PM")
+                        text1: formattedDate(widget.date), text2: "3.00 - 6.00 PM")
 
 /////////////////////////////,
                   ],
@@ -201,9 +223,9 @@ Image.asset(widget.constructionService.image,width: 60,height: 60,)
               _buildRow(type: "Price", detail: "345.00 Sar"),
               _buildRow(type: "Quantity", detail: "1 Piece"),
               _buildRow(type: "Service Days", detail: "11 Days"),
-              _buildRow(type: "Delivery fee", detail: "50.00 SAR"),
-              _buildRow(type: "Total", detail: "345.00 Sar")
-            ],
+              _buildRow(type: "Delivery fee", detail: "50.00 SAR"),SizedBox(height: 8,),
+
+Row(children: <Widget>[ Text("Total", style: TextStyle(color: Colors.blueGrey),),Text("515.00 SR",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),) ],mainAxisAlignment: MainAxisAlignment.spaceBetween,)            ],
           ),
         ));
   }
@@ -236,14 +258,14 @@ Image.asset(widget.constructionService.image,width: 60,height: 60,)
       children: <Widget>[
         Expanded(
           child: Text(
-            "Drop-off-Date",
+            text1,
             style: TextStyle(color: Colors.blueGrey),
           ),
           flex: 4,
         ),
         Expanded(
           child: Text(
-            "Drop-off-Date",
+            text2,
             style: TextStyle(color: Colors.blueGrey),
           ),
           flex: 3,

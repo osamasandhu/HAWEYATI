@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/pages/appHomePage.dart';
@@ -23,44 +24,84 @@ class InstructionsPage extends StatefulWidget {
 class _InstructionsPageState extends State<InstructionsPage> {
   int _currentPage = 0;
   PageController _pageController = PageController(initialPage: 0);
-
-
+  static List<String> languages = ['English','Arabic'];
+  String selectedLanguage = languages[0];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        titleSpacing: 2,
         iconTheme: new IconThemeData(color: Colors.white),
-        centerTitle: true,
         backgroundColor: Color(0xff313f53),
-        title: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Image.asset(
-            "assets/images/haweyati_logo1.png",
-            width: 40,
-            height: 40,
-          ),
-        ),
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: InkWell(
-              child: Image.asset(
-            "assets/images/language.png",
-            width: 100,
-          )),
-        ),
-        actions: <Widget>[
-          FlatButton(
-              onPressed: () {
-CustomNavigator.navigateTo(context, MyLocationMapPage());
-                //CustomNavigator.navigateTo(context, AppHomePage());
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Theme(
+              data: Theme.of(context).copyWith(
+                canvasColor: Color(0xff313f53),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: DropdownButton<String>(
+underline: SizedBox(),                value: selectedLanguage,
+                  items: languages.map((String value) {
+                    return new DropdownMenuItem<String>(
+                      value: value,
+                      child: Image.asset('assets/images/$value.png',height: 20,color:Colors.white,),
+                    );
+                  }).toList(),
+                  onChanged: (_) {setState(() {
+                    EasyLocalization.of(context).locale = Locale(_=='English' ? 'en' : 'ar');
+                    selectedLanguage=_;
+                  });
 
-              },
-              child: Text(
-                "Skip",
-                style: TextStyle(fontSize: 16, color: Colors.white),
-              ))
-        ],
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Image.asset(
+                "assets/images/haweyati_logo1.png",
+                width: 40,
+                height: 40,
+              ),
+            ),
+
+            FlatButton(
+                onPressed: () {
+                  CustomNavigator.navigateTo(context, MyLocationMapPage());
+                  //CustomNavigator.navigateTo(context, AppHomePage());
+
+                },
+                child: Text(
+                  "Skip",
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ))
+          ],
+        ),
+//        leading: Padding(
+//          padding: const EdgeInsets.only(left: 8.0),
+//          child: InkWell(
+//              child: Image.asset(
+//            "assets/images/language.png",
+//            width: 100,
+//          )),
+//        ),
+//        actions: <Widget>[
+//          FlatButton(
+//              onPressed: () {
+//CustomNavigator.navigateTo(context, MyLocationMapPage());
+//                //CustomNavigator.navigateTo(context, AppHomePage());
+//
+//              },
+//              child: Text(
+//                "Skip",
+//                style: TextStyle(fontSize: 16, color: Colors.white),
+//              ))
+//        ],
       ),
       body: Container(
         decoration: BoxDecoration(image:DecorationImage(fit: BoxFit.cover, image: AssetImage("assets/images/pattern.png")) ),
@@ -68,7 +109,12 @@ CustomNavigator.navigateTo(context, MyLocationMapPage());
           children: <Widget>[
             Expanded(child:
             PageView(
-                physics: NeverScrollableScrollPhysics(),
+              onPageChanged: (int val){
+                setState(() {
+                  _currentPage = val;
+                });
+              },
+               // physics: NeverScrollableScrollPhysics(),
                 controller: _pageController,
                 children: <Widget>[
                   generateInstructionPage(<Widget>[

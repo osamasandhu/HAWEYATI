@@ -27,7 +27,7 @@ class ConstructionServiceDetail {
         rate: "203 SR",
         quantity: "2",
 
-        priceperday:"21 SR/day",
+        priceperday:"21",
 
         description: 'Lorem Impsum',
     )
@@ -40,7 +40,7 @@ class ConstructionServiceDetail {
 
         rate: "203 SR",
 
-        priceperday:"21 SR/day",
+        priceperday:"21",
         quantity: "6",        days: '10 days',
         description: 'Lorem Impsum',
       )
@@ -58,7 +58,7 @@ var dummyScaffolding = [
         quantity: "9",
         rate: "303 SR",
 
-        priceperday:"21 SR/day",
+        priceperday:"21",
         description: 'Lorem Impsum',
       )
   ),
@@ -72,7 +72,7 @@ var dummyScaffolding = [
 
         rate: "203 SR",
 
-        priceperday:"21 SR/day",
+        priceperday:"21",
         description: 'Lorem Impsum',
       )
   ),
@@ -84,7 +84,7 @@ var dummyScaffolding = [
         quantity: "3",
         rate: "203 SR",
 
-        priceperday:"21 SR/day",
+        priceperday:"21",
         days: '30 days',
         description: 'Lorem Impsum',
       )
@@ -100,7 +100,7 @@ var dummyBuildingMaterial = [
         quantity: "7",
         rate: "203 SR",
 
-        priceperday:"21 SR/day",
+        priceperday:"21",
         sr: '202',
         days: '6 days',
         description: 'Lorem Impsum',
@@ -115,7 +115,7 @@ var dummyBuildingMaterial = [
         ,
         quantity: "1",     rate: "203 SR",
 
-        priceperday:"21 SR/day",
+        priceperday:"21",
         description: 'Lorem Impsum',
       )
   ),
@@ -126,7 +126,7 @@ var dummyBuildingMaterial = [
         sr: '560',
         rate: "203 SR",
         quantity: "3",
-        priceperday:"21 SR/day",
+        priceperday:"21",
         days: '22 days',
         description: 'Lorem Impsum',
       )
@@ -138,7 +138,7 @@ var dummyBuildingMaterial = [
         sr: '560',
         rate: "203 SR",
 
-        priceperday:"21 SR/day",
+        priceperday:"21",
         days: '22 days',
         description: 'Lorem Impsum',
       )
@@ -150,7 +150,7 @@ var dummyBuildingMaterial = [
         sr: '560',
         rate: "203 SR",
 
-        priceperday:"21 SR/day",
+        priceperday:"21 ",
         days: '22 days',
         description: 'Lorem Impsum',
       )
@@ -162,7 +162,7 @@ var dummyBuildingMaterial = [
         sr: '560',
         rate: "203 SR",
 
-        priceperday:"21 SR/day",
+        priceperday:"21",
         days: '22 days',
         description: 'Lorem Impsum',
       )
@@ -178,7 +178,7 @@ var dummyFinishingMaterial = [
         description: 'Lorem Impsum',
         rate: "203 SR",
 
-        priceperday:"21 SR/day",
+        priceperday:"21",
       )
   ),
   ConstructionService(
@@ -189,7 +189,7 @@ var dummyFinishingMaterial = [
         days: '10 days',
         rate: "203 SR",
 
-        priceperday:"21 SR/day",
+        priceperday:"21",
         description: 'Lorem Impsum',
       )
   ),
@@ -202,7 +202,7 @@ var dummyFinishingMaterial = [
         description: 'Lorem Impsum',
         rate: "203 SR",
 
-        priceperday:"21 SR/day",
+        priceperday:"21 ",
       )
   ),
   ConstructionService(
@@ -213,7 +213,7 @@ var dummyFinishingMaterial = [
         days: '10 days',
         rate: "203 SR",
 
-        priceperday:"21 SR/day",
+        priceperday:"21",
         description: 'Lorem Impsum',
       )
   ),
@@ -225,7 +225,7 @@ var dummyFinishingMaterial = [
         days: '10 days',
         rate: "203 SR",
 
-        priceperday:"21 SR/day",
+        priceperday:"21 ",
         description: 'Lorem Impsum',
       )
   ),
@@ -240,7 +240,7 @@ var dummyVehicles = [
     days: '10 days',
     rate: "203 SR",
 
-    priceperday:"21 SR/day",
+    priceperday:"21 ",
     description: 'Lorem Impsum',
   ) ),
   ConstructionService(
@@ -251,7 +251,7 @@ var dummyVehicles = [
     days: '10 days',
     rate: "203 SR",
 
-    priceperday:"21 SR/day",
+    priceperday:"21",
     description: 'Lorem Impsum',
   )),
   ConstructionService(
@@ -262,7 +262,7 @@ var dummyVehicles = [
     days: '10 days',
     rate: "203 SR",
 
-    priceperday:"21 SR/day",
+    priceperday:"21",
     description: 'Lorem Impsum',
   )),
   ConstructionService(
@@ -273,7 +273,7 @@ var dummyVehicles = [
     days: '10 days',
     rate: "203 SR",
 
-    priceperday:"21 SR/day",
+    priceperday:"21",
     description: 'Lorem Impsum',
   )),
 ];

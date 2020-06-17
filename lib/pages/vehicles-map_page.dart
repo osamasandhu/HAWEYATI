@@ -168,7 +168,7 @@ class VehiclesMapPageState extends State<VehiclesMapPage> {
                       rawLocation = position.target;
                     },
                     compassEnabled: true,
-                    padding: EdgeInsets.only(top: 500),
+                    padding: EdgeInsets.only(bottom: 80),
                     mapType: MapType.normal,
                     myLocationEnabled: true,
                     initialCameraPosition:
@@ -250,7 +250,7 @@ class VehiclesMapPageState extends State<VehiclesMapPage> {
               child: Align(
                 alignment: Alignment(0, 0.85),
                 child: Container(
-                    margin: EdgeInsets.fromLTRB(15, 0, 15, 25),
+                    margin: EdgeInsets.fromLTRB(15, 0, 65, 25),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(30)),

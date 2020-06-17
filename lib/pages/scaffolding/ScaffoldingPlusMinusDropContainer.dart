@@ -13,8 +13,13 @@ class DropDownContainer extends StatefulWidget {
 }
 
 class _DropDownContainerState extends State<DropDownContainer> {
-  int quantity = 1;
-  String selection;
+  int quantity = 0;
+ static List<String> sizeList =<String>[
+
+    "1 Meter", "1.5 Meter", "2 Meter","2.5 Meter", "3 Meter", "3.5 Meter","4 Meter"
+  ];
+  String selection = sizeList[0];
+
 
   _increment() {
     setState(() {
@@ -40,7 +45,7 @@ class _DropDownContainerState extends State<DropDownContainer> {
       ),
       width: MediaQuery.of(context).size.width,
       child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
           child: Column(
             children: <Widget>[
               Row(
@@ -65,7 +70,7 @@ class _DropDownContainerState extends State<DropDownContainer> {
                             color: Colors.white,
                           ),
                           onPressed: () {
-                            if (quantity > 1) {
+                            if (quantity > 0) {
                               _decrement();
                             }
                           },
@@ -120,8 +125,13 @@ class _DropDownContainerState extends State<DropDownContainer> {
 
 
                   Container(
-                    child: DropdownButton<String>( value: selection,
-                      items: <String>["1 Meter", "1.5 Meter", "2 Meter","2.5 Meter", "3 Meter", "3.5 Meter","4 Meter"]
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    color: Colors.white,
+                    child: DropdownButton<String>(
+                      underline: SizedBox(),
+
+                      value: selection,
+                      items: sizeList
                           .map((String value) {
                         return new DropdownMenuItem<String>(
                           value: value,

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:haweyati/pages/drawer/setting/change-password.dart';
+import 'package:haweyati/pages/drawer/setting/notification.dart';
 import 'package:haweyati/widgits/appBar.dart';
+import 'package:haweyati/widgits/custom-navigator.dart';
 
 
 class HaweyatiSetting extends StatefulWidget {
@@ -29,21 +32,25 @@ class _HaweyatiSettingState extends State<HaweyatiSetting> {
           ),
 
 SizedBox(height: 25,),
-          Container(margin: EdgeInsets.symmetric(vertical: 12), decoration: BoxDecoration(color:Color(0xfff2f2f2f2),borderRadius: BorderRadius.circular(15)), child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(children: <Widget>[Text("Profile"),Icon(Icons.arrow_forward_ios,size: 15,)],mainAxisAlignment: MainAxisAlignment.spaceBetween,),
-          ),),
-          Container(margin: EdgeInsets.symmetric(vertical: 12), decoration: BoxDecoration(color:Color(0xfff2f2f2f2),borderRadius: BorderRadius.circular(15)), child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(children: <Widget>[Text("Notification"),Icon(Icons.arrow_forward_ios,size: 15,)],mainAxisAlignment: MainAxisAlignment.spaceBetween,),
-          ),),
-          Container(margin: EdgeInsets.symmetric(vertical: 12), decoration: BoxDecoration(color:Color(0xfff2f2f2f2),borderRadius: BorderRadius.circular(15)), child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(children: <Widget>[Text("Change Password"),Icon(Icons.arrow_forward_ios,size: 15,)],mainAxisAlignment: MainAxisAlignment.spaceBetween,),
-          ),),
+          _buildContainer(title: "Profile",onTap: null,)
+          ,
+          _buildContainer(title: "Notification",onTap: (){CustomNavigator.navigateTo(context,NotificationPage());}),
+          _buildContainer(title: "Change Password",onTap: (){CustomNavigator.navigateTo(context,ChangePassword());}),
         ],
         padding: EdgeInsets.fromLTRB(15, 30, 15, 0),
       ),
     );
+  }
+
+  Widget _buildContainer({Function onTap,String title}){
+
+    return GestureDetector(onTap:onTap,
+      child: Container(margin: EdgeInsets.symmetric(vertical: 12), decoration: BoxDecoration(color:Color(0xfff2f2f2f2),borderRadius: BorderRadius.circular(15)), child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(children: <Widget>[Text(title),Icon(Icons.arrow_forward_ios,size: 15,)],mainAxisAlignment: MainAxisAlignment.spaceBetween,),
+      ),),
+    );
+
+
   }
 }

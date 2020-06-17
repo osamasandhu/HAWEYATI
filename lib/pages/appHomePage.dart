@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/custom-care.dart';
@@ -10,7 +11,7 @@ import 'package:haweyati/pages/drawer/share-invite.dart';
 import 'package:haweyati/pages/drawer/term-condition.dart';
 import 'package:haweyati/pages/dumpster/dumpstersList.dart';
 import 'package:haweyati/pages/finishing-material/finishing-material-List.dart';
-import 'package:haweyati/pages/notification.dart';
+import 'package:haweyati/pages/drawer/setting/notification.dart';
 import 'package:haweyati/pages/orderDetail/all-orders.dart';
 import 'package:haweyati/pages/scaffolding/scaffoldingList.dart';
 import 'package:haweyati/pages/vehicles-map_page.dart';
@@ -26,6 +27,9 @@ class AppHomePage extends StatefulWidget {
 
 class _AppHomePageState extends State<AppHomePage> {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+
+  static List<String> languages = ['English','Arabic',];
+  String selectedLanguage = languages[0];
 
 
   @override
@@ -136,9 +140,29 @@ class _AppHomePageState extends State<AppHomePage> {
                 ),
                 Align(
                   alignment: Alignment(-0.9, -0.95),
-                  child: Image.asset(
-                    "assets/images/language.png",
-                    width: 70,
+                  child: Theme(
+                    data: Theme.of(context).copyWith(
+                      canvasColor: Color(0xff313f53),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: DropdownButton<String>(
+                        underline: SizedBox(),                value: selectedLanguage,
+                        items: languages.map((String value) {
+                          return new DropdownMenuItem<String>(
+                            value: value,
+                            child: Image.asset('assets/images/$value.png',height: 20,color:Colors.white,),
+                          );
+                        }).toList(),
+                        onChanged: (_) {setState(() {
+                          EasyLocalization.of(context).locale = Locale(_=='English' ? 'en' : 'ar');
+
+                          selectedLanguage=_;
+                        });
+
+                        },
+                      ),
+                    ),
                   ),
                 ),
 
@@ -175,7 +199,8 @@ class _AppHomePageState extends State<AppHomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text("Hello",
+                      Text(
+                          tr('hello'),
                           style: TextStyle(
                               fontSize: 17,
                               color: Colors.white,
@@ -184,7 +209,7 @@ class _AppHomePageState extends State<AppHomePage> {
                         height: 15,
                       ),
                       Text(
-                        "Explore our Product And Services",
+                        tr('explore'),
                         style: TextStyle(color: Colors.white),
                       ),
                       SizedBox(
@@ -227,17 +252,17 @@ class _AppHomePageState extends State<AppHomePage> {
             padding: EdgeInsets.fromLTRB(20, 6, 20, 10),
             children: <Widget>[
               _buildContainer(
-                  title: "Construction Dumpster",
+                  title:  tr('construction_dumpster'),
                   imgPath: "assets/images/dumpster-bg.png",
                   onTap: () =>
                       CustomNavigator.navigateTo(context,DumpsterListing(ConstructionService()))),
               _buildContainer(
-                  title: "Scaffolding",
+                  title: tr('scaffolding'),
                   imgPath: "assets/images/scaffolding-bg.png",
                   onTap: () =>
                       CustomNavigator.navigateTo(context, ScaffoldingListing(ConstructionService()))),
               _buildContainer(
-                title: "Building Material",
+                title: tr('building'),
                 imgPath: "assets/images/building-materials-bg.png",
                 onTap: () =>
                     CustomNavigator.navigateTo(context, BuildingMaterialListing(ConstructionService())),
@@ -248,13 +273,15 @@ class _AppHomePageState extends State<AppHomePage> {
                     CustomNavigator.navigateTo(
                         context,FinishingMaterialListing(ConstructionService()) );
                   },
-                  title: "Finishing Material"),
+                  title: tr('finishing_material'),
+              ),
               _buildContainer(
                   imgPath: "assets/images/delivery-vehaicles-bg.png",
                   onTap: () {
                     CustomNavigator.navigateTo(context, VehiclesMapPage());
                   },
-                  title: "Vehicles"),
+                  title: tr('vehicles')
+              ),
             ],
           ))
         ],

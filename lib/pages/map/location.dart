@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:haweyati/widgits/locationAppBar.dart';
@@ -56,9 +57,9 @@ SizedBox(height: 15,),
 
                    SizedBox(height: 15,),
 
-                   Text("Learn More",style: TextStyle(color: Theme.of(context).accentColor),)
+                   //Text("Learn More",style: TextStyle(color: Theme.of(context).accentColor),)
 
-                   ,
+
                    Align(alignment: Alignment(1,0),child:
 
                    Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
@@ -66,21 +67,14 @@ SizedBox(height: 15,),
 
 
 
-                   FlatButton(splashColor: Theme.of(context).accentColor,
-                       onPressed: () {
-                         CustomNavigator.navigateTo(context, MyLocationMapPage());
-                       },
-                       child: Text(
-                         "Yes",
-                         style: TextStyle(
-                             fontWeight: FontWeight.bold,
-                             color: Theme.of(context).accentColor),
-                       )),
+
                FlatButton(splashColor: Theme.of(context).accentColor,
                    onPressed: () {
                      //              AppSettings.openLocationSettings();
-                     AppSettings.openLocationSettings().whenComplete(                CustomNavigator.navigateTo(context, MyLocationMapPage())
-                     );
+
+Navigator.of(context).pop();
+//                     AppSettings.openLocationSettings().whenComplete(                CustomNavigator.navigateTo(context, MyLocationMapPage())
+//                     );
 
                    },
                    child: Text(
@@ -89,7 +83,30 @@ SizedBox(height: 15,),
                          fontWeight: FontWeight.bold,
                          color: Theme.of(context).accentColor),
                    )),
+                     FlatButton(splashColor: Theme.of(context).accentColor,
+                         onPressed:() {
+                           //              AppSettings.openLocationSettings();
 
+
+                           AppSettings.openLocationSettings().whenComplete(
+                               CustomNavigator.navigateTo(context, MyLocationMapPage())
+                           );
+
+                         },
+         //() {
+//
+//
+//
+//                           CustomNavigator.navigateTo(context, MyLocationMapPage());
+//                         },
+                         child: Container(padding: EdgeInsets.fromLTRB(15, 10, 15, 10), decoration: BoxDecoration(color: Theme.of(context).accentColor,borderRadius: BorderRadius.circular(20)),
+                           child: Text(
+                             "Yes",
+                             style: TextStyle(
+                                 fontWeight: FontWeight.bold,
+                                 color: Colors.white),
+                           ),
+                         )),
 
 
 
@@ -151,10 +168,12 @@ SizedBox(height: 15,),
             ),
           ),
           StackButton(
-            onTap: () {
+            onTap: () async {
+              GeolocationStatus geolocationStatus  = await Geolocator().checkGeolocationPermissionStatus();
+              print(geolocationStatus);
               _showDialog();
             },
-            buttonName: "Set You Location",
+            buttonName: "Set Your Location",
           )
         ],
       ),

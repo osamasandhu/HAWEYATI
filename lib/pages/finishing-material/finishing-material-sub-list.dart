@@ -43,7 +43,7 @@ class _FinishingMaterialSubListState extends State<FinishingMaterialSubList> {
                 Text(
                   widget.service.title,
                   textAlign: TextAlign.center,
-                  style: boldText,
+                  style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
                 )
               ],
             ),
