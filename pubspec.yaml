@@ -22,6 +22,7 @@ dependencies:
 
 
   google_maps_flutter:
+  easy_localization:
   geolocator:
   google_maps_webservice:
   flutter_google_places:
