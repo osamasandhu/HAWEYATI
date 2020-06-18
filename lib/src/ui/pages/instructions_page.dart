@@ -45,11 +45,12 @@ class _InstructionsPageState extends State<InstructionsPage> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: DropdownButton<String>(
-underline: SizedBox(),                value: selectedLanguage,
+                underline: SizedBox(),
+                  value: selectedLanguage,
                   items: languages.map((String value) {
                     return new DropdownMenuItem<String>(
                       value: value,
-                      child: Image.asset('assets/images/$value.png',height: 20,color:Colors.white,),
+                      child: Image.asset('assets/images/$value.png',height: 30 ,width: 80, color:Colors.white,),
                     );
                   }).toList(),
                   onChanged: (_) {setState(() {
@@ -72,7 +73,7 @@ underline: SizedBox(),                value: selectedLanguage,
 
             FlatButton(
                 onPressed: () {
-                  CustomNavigator.navigateTo(context, MyLocationMapPage());
+                  CustomNavigator.navigateTo(context, Location());
                   //CustomNavigator.navigateTo(context, AppHomePage());
 
                 },

@@ -21,12 +21,40 @@ class PatentedOptions extends StatelessWidget {
         body: HaweyatiAppBody(
           title: "Scaffolding Options",
           detail: loremIpsum.substring(0, 66),
-          child: ListView(padding: EdgeInsets.fromLTRB(15, 30, 15, 0),
+          child: ListView(
+            padding: EdgeInsets.fromLTRB(15, 30, 15, 0),
             children: <Widget>[
-
-              EmptyContainer(child: ListTile(onTap: (){CustomNavigator.navigateTo(context, Facade(constructionService: constructionService,));}, title: Text("Facade"),trailing: Icon(Icons.arrow_forward_ios),),)
-              ,             EmptyContainer( child: ListTile( onTap: (){CustomNavigator.navigateTo(context, ScaffoldingServicesDetail(constructionService: constructionService,));},title: Text("Manual"),trailing: Icon(Icons.arrow_forward_ios),),)
-              ,           ],
+              GestureDetector(
+                onTap: () {
+                  CustomNavigator.navigateTo(
+                      context,
+                      Facade(
+                        constructionService: constructionService,
+                      ));
+                },
+                child: EmptyContainer(
+                  child: ListTile(
+                    title: Text("Facade"),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  CustomNavigator.navigateTo(
+                      context,
+                      ScaffoldingServicesDetail(
+                        constructionService: constructionService,
+                      ));
+                },
+                child: EmptyContainer(
+                  child: ListTile(
+                    title: Text("Manual"),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                  ),
+                ),
+              ),
+            ],
           ),
         ));
   }

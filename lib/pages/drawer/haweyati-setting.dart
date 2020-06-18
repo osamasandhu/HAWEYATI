@@ -4,6 +4,8 @@ import 'package:haweyati/pages/drawer/setting/notification.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 
+import 'setting/profile_page.dart';
+
 
 class HaweyatiSetting extends StatefulWidget {
   @override
@@ -32,7 +34,9 @@ class _HaweyatiSettingState extends State<HaweyatiSetting> {
           ),
 
 SizedBox(height: 25,),
-          _buildContainer(title: "Profile",onTap: null,)
+          _buildContainer(title: "Profile",onTap: (){
+            CustomNavigator.navigateTo(context, ProfilePage());
+          },)
           ,
           _buildContainer(title: "Notification",onTap: (){CustomNavigator.navigateTo(context,NotificationPage());}),
           _buildContainer(title: "Change Password",onTap: (){CustomNavigator.navigateTo(context,ChangePassword());}),

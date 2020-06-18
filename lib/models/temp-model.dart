@@ -1,3 +1,5 @@
+import 'package:haweyati/src/utlis/const.dart';
+
 class ConstructionService {
   String image;
   String title;
@@ -56,7 +58,7 @@ var dummyScaffolding = [
         sr: '',
         days: '10 days',
         quantity: "9",
-        rate: "303 SR",
+        rate: "303 ",
 
         priceperday:"21",
         description: 'Lorem Impsum',
@@ -67,7 +69,7 @@ var dummyScaffolding = [
       image: 'assets/images/steelscaffolding.png',
       detail: ConstructionServiceDetail(
         sr: '345',
-        days: '10 days',
+        days: '10 ',
         quantity:"13",
 
         rate: "203 SR",
@@ -82,7 +84,7 @@ var dummyScaffolding = [
       detail: ConstructionServiceDetail(
         sr: '303',
         quantity: "3",
-        rate: "203 SR",
+        rate: "203 ",
 
         priceperday:"21",
         days: '30 days',
@@ -95,7 +97,7 @@ var dummyScaffolding = [
 var dummyBuildingMaterial = [
   ConstructionService(
       title: 'Cement & Gypsum',
-      image: 'assets/images/Sand 1.png',
+      image: 'assets/images/sand-1.png',
       detail: ConstructionServiceDetail(
         quantity: "7",
         rate: "203 SR",
@@ -108,7 +110,7 @@ var dummyBuildingMaterial = [
   ),
   ConstructionService(
       title: 'Sand',
-      image: 'assets/images/Sand 2.png',
+      image: 'assets/images/sand-2.png',
       detail: ConstructionServiceDetail(
         sr: '369',
         days: "per 19 days"
@@ -121,7 +123,7 @@ var dummyBuildingMaterial = [
   ),
   ConstructionService(
       title: 'Gravel',
-      image: 'assets/images/Sand 4.png',
+      image: 'assets/images/sand-4.png',
       detail: ConstructionServiceDetail(
         sr: '560',
         rate: "203 SR",
@@ -133,7 +135,7 @@ var dummyBuildingMaterial = [
   ),
   ConstructionService(
       title: 'Gravel',
-      image: 'assets/images/Sand 5.png',
+      image: 'assets/images/sand-5.png',
       detail: ConstructionServiceDetail(
         sr: '560',
         rate: "203 SR",
@@ -145,7 +147,7 @@ var dummyBuildingMaterial = [
   ),
   ConstructionService(
       title: 'Gravel',
-      image: 'assets/images/Sand 6.png',
+      image: 'assets/images/sand-6.png',
       detail: ConstructionServiceDetail(
         sr: '560',
         rate: "203 SR",
@@ -157,7 +159,7 @@ var dummyBuildingMaterial = [
   ),
   ConstructionService(
       title: 'Gravel',
-      image: 'assets/images/Sand 7.png',
+      image: 'assets/images/sand-7.png',
       detail: ConstructionServiceDetail(
         sr: '560',
         rate: "203 SR",
@@ -171,11 +173,11 @@ var dummyBuildingMaterial = [
 var dummyFinishingMaterial = [
   ConstructionService(
       title: 'Mapei',
-      image: 'assets/images/Item 1.png',
+      image: 'assets/images/item-1.png',
       detail: ConstructionServiceDetail(
         sr: '345',
         days: '10 days',
-        description: 'Lorem Impsum',
+        description: loremIpsum.substring(0,35),
         rate: "203 SR",
 
         priceperday:"21",
@@ -183,23 +185,23 @@ var dummyFinishingMaterial = [
   ),
   ConstructionService(
       title: 'Cement & Gypsum',
-      image: 'assets/images/Item 2.png',
+      image: 'assets/images/item-2.png',
       detail: ConstructionServiceDetail(
         sr: '345',
         days: '10 days',
         rate: "203 SR",
 
         priceperday:"21",
-        description: 'Lorem Impsum',
+        description: loremIpsum.substring(0,35),
       )
   ),
   ConstructionService(
       title: 'Mapei',
-      image: 'assets/images/Item 3.png',
+      image: 'assets/images/item-3.png',
       detail: ConstructionServiceDetail(
         sr: '345',
         days: '10 days',
-        description: 'Lorem Impsum',
+        description: loremIpsum.substring(0,35),
         rate: "203 SR",
 
         priceperday:"21 ",
@@ -207,19 +209,19 @@ var dummyFinishingMaterial = [
   ),
   ConstructionService(
       title: 'Cement & Gypsum',
-      image: 'assets/images/Item 4.png',
+      image: 'assets/images/item-4.png',
       detail: ConstructionServiceDetail(
         sr: '345',
         days: '10 days',
         rate: "203 SR",
 
         priceperday:"21",
-        description: 'Lorem Impsum',
+        description: loremIpsum.substring(0,35),
       )
   ),
   ConstructionService(
       title: 'Cement & Gypsum',
-      image: 'assets/images/Item 5.png',
+      image: 'assets/images/item-5.png',
       detail: ConstructionServiceDetail(
         sr: '345',
         days: '10 days',

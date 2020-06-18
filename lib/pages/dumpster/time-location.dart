@@ -26,6 +26,9 @@ class TimeAndLocation extends StatefulWidget {
 }
 
 class _TimeAndLocationState extends State<TimeAndLocation> {
+  static List<String> timeIntervals = ['6:00am-9:00am', '9:00am-12:00pm' ,'12:pm-3:00pm', '6:00pm-9:00pm', '9:00pm-12:00am'];
+  String selectedInterval = timeIntervals[0];
+
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   File _image;
@@ -75,7 +78,7 @@ class _TimeAndLocationState extends State<TimeAndLocation> {
                       FlatButton.icon(
                           onPressed: () {
                             CustomNavigator.navigateTo(
-                                context, BuildingMaterialListing(ConstructionService()));
+                                context,MyLocationMapPage());
                           },
                           icon: Icon(
                             Icons.edit,
@@ -115,6 +118,7 @@ class _TimeAndLocationState extends State<TimeAndLocation> {
                 dropoffdate: "Drop-off Date", dropofftime: "Drop-off Time"),
             Row(
               children: <Widget>[
+
                 Expanded(
                   child: DatePickerField(
                     onChanged: (date) => dateTime = date,
@@ -126,25 +130,20 @@ class _TimeAndLocationState extends State<TimeAndLocation> {
                 Expanded(
                   child: EmptyContainer(
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-
-
-                      _preferredTime!=null ? Text(
-                          "${_preferredTime.hour}:${_preferredTime.minute} - ${(_preferredTime.hour + 3) % 24}:${_preferredTime.minute}"
-                      ) : Text(" Select Time"),
-IconButton(icon: Icon(Icons.access_time),onPressed:
-
-
-    () async {
-  FocusScope.of(context).nextFocus();
-  TimeOfDay t = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now()
-  );
-  if(t != null)
-    setState(() {
-      _preferredTime = t;
-    });
-},)
+                      DropdownButton<String>(
+                        underline: SizedBox(),
+                        value: selectedInterval,
+                        items: timeIntervals.map((String value) {
+                          return new DropdownMenuItem<String>(
+                            value: value,
+                            child: Text('$value'),
+                          );
+                        }).toList(),
+                        onChanged: (_) {setState(() {
+                          selectedInterval = _;
+                        });
+                        },
+                      ),
                     ],)
                   ),
                 )
@@ -219,7 +218,7 @@ IconButton(icon: Icon(Icons.access_time),onPressed:
               decoration: InputDecoration(
                   labelText: "Note",
                   hintText: "Write note here",
-                  border: OutlineInputBorder(
+                  border: OutlineInputBorder(borderSide: BorderSide(color:Theme.of(context).accentColor),
                       borderRadius: BorderRadius.circular(10))),
             ),
           ],
@@ -233,13 +232,13 @@ IconButton(icon: Icon(Icons.access_time),onPressed:
             ));
             return;
           }
-          if(_preferredTime==null){
-            scaffoldKey.currentState.showSnackBar(SnackBar(
-              behavior: SnackBarBehavior.floating,
-              content: Text('Please select drop off time'),
-            ));
-            return;
-          }
+//          if(_preferredTime==null){
+//            scaffoldKey.currentState.showSnackBar(SnackBar(
+//              behavior: SnackBarBehavior.floating,
+//              content: Text('Please select drop off time'),
+//            ));
+//            return;
+//          }
           var data = widget.constructionService;
           var quantity = int.parse(data.detail.quantity);
           var pricePerDay = int.parse(data.detail.priceperday);
@@ -259,7 +258,7 @@ IconButton(icon: Icon(Icons.access_time),onPressed:
 
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => OrderDetail(
-                time: _preferredTime,
+                time: selectedInterval,
                 date: dateTime.add(Duration(days: 10)),
                     constructionService: widget.constructionService,
                   )));

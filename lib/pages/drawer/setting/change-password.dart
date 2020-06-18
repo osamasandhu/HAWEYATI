@@ -18,6 +18,8 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   TextEditingController oldPass = new TextEditingController();
   TextEditingController newPass = new TextEditingController();
+  TextEditingController confirmPass = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +50,16 @@ SizedBox(height: 15,),
               controller:newPass,
               validator: (value) {
                 return value.isEmpty ? "Please Enter New Password" : null;
+              },
+              context: context,
+            ),
+
+            SizedBox(height: 15,),
+            HaweyatiPasswordField(
+              label: "Confirm Password",
+              controller:confirmPass,
+              validator: (value) {
+                return value.isEmpty ? "Please Enter Confirm Password" : null;
               },
               context: context,
             ),

@@ -28,7 +28,7 @@ class _DatePickerFieldState extends State<DatePickerField> {
       showDatePicker(
           context: context,
           lastDate: DateTime(3000),
-          firstDate: DateTime(1950),
+          firstDate: DateTime.now(),
           initialDate: DateTime.now(),
 
           builder: (context, child) => Theme(data: ThemeData.dark(), child: child,)

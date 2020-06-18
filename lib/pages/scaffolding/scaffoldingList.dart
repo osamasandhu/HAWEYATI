@@ -13,8 +13,8 @@ import 'package:haweyati/widgits/haweyati-appbody.dart';
 import 'package:haweyati/widgits/list-of-items.dart';
 
 class ScaffoldingListing extends StatefulWidget {
-  ConstructionService service;
-  ScaffoldingListing(this.service);
+  ConstructionService constructionService;
+  ScaffoldingListing(this.constructionService);
   @override
   _ScaffoldingListingState createState() => _ScaffoldingListingState();
 }
@@ -34,14 +34,24 @@ class _ScaffoldingListingState extends State<ScaffoldingListing> {
               ContainerDetailList(
                 name: "Steel Scaffolding",
                 ontap: () {
-                  CustomNavigator.navigateTo(context, ScaffoldingOptions());
+                  CustomNavigator.navigateTo(context, ScaffoldingOptions(constructionService: new ConstructionService(
+                  title: "Steel Scaffolding",
+                  image: "assets/images/steelscaffolding.png",
+                  detail: ConstructionServiceDetail(
+
+                  ))));
                 },
                 imgpath: 'assets/images/steelscaffolding.png',
               ),
               ContainerDetailList(
                 name: "Patented Scaffolding",
                 ontap: () {
-                  CustomNavigator.navigateTo(context, PatentedOptions());
+                  CustomNavigator.navigateTo(context, PatentedOptions(constructionService: new ConstructionService(
+                      title: "Patented Scaffolding",
+                      image: "assets/images/steelscaffolding.png",
+                      detail: ConstructionServiceDetail(
+
+                      ))));
                 },
                 imgpath: 'assets/images/steelscaffolding.png',
               ),
@@ -49,7 +59,12 @@ class _ScaffoldingListingState extends State<ScaffoldingListing> {
               ContainerDetailList(
                 name: "Single Scaffolding",
                 ontap: () {
-                  CustomNavigator.navigateTo(context, ScaffoldingServicesDetail());
+                  CustomNavigator.navigateTo(context, ScaffoldingServicesDetail(constructionService: new ConstructionService(
+                      title: "Single Scaffolding",
+                      image: "assets/images/steelscaffolding.png",
+                      detail: ConstructionServiceDetail(
+
+                      ))));
                 },
                 imgpath: 'assets/images/steelscaffolding.png',
               ),

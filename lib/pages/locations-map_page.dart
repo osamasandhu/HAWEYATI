@@ -174,13 +174,14 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
                 ),
               ),
             ),) : SizedBox(),
-        currentLocation!=null ?  Align(alignment: Alignment(0, 0.95),child: Container(decoration: BoxDecoration(color: Theme.of(context).accentColor,borderRadius: BorderRadius.circular(30)), child: Padding(
+        currentLocation!=null ?
+        Align(alignment: Alignment(0, 0.95),child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: FlatButton.icon(
+            child: FlatButton.icon(color: Theme.of(context).accentColor, shape: StadiumBorder(),
                 onPressed: ()
                 {CustomNavigator.navigateTo(context, AppHomePage(address: userAddress,));},
                  icon:Icon(Icons.location_on,color: Colors.white,), label: Text("Set Your Location",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-          )),) : SizedBox()
+          ),) : SizedBox()
         ],
         )
     );

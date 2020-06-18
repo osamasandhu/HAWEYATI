@@ -17,6 +17,7 @@ enum PaymentMeths{
 class PaymentMethod extends StatefulWidget {
   ConstructionService constructionService;
   PaymentMethod({this.constructionService});
+
   @override
   _PaymentMethodState createState() => _PaymentMethodState();
 }
@@ -24,7 +25,7 @@ class PaymentMethod extends StatefulWidget {
 
 
 class _PaymentMethodState extends State<PaymentMethod> {
-
+  int _selectedIndex = -1;
   PaymentMeths paymentMeths;
 
   void func(){
@@ -68,20 +69,20 @@ class _PaymentMethodState extends State<PaymentMethod> {
           padding: EdgeInsets.fromLTRB(15, 30, 15, 30),
           children: <Widget>[
             _buildPaymentContainer(
-                imgPath: "assets/images/mada.png", onTap: () {}, text: "Mada"),
+                imgPath: "assets/images/mada.png", onTap: () => setState(() => _selectedIndex = 0), text: "Mada", index: 0),
             _buildPaymentContainer(
-                imgPath: "assets/images/apple-pay.png", onTap: () {}, text: "Apple"),
+                imgPath: "assets/images/apple-pay.png", onTap: () => setState(() => _selectedIndex = 1), text: "Apple", index: 1),
             _buildPaymentContainer(
-                imgPath: "assets/images/credit-card.png", onTap: () {}, text: "Credit Card "),
+                imgPath: "assets/images/credit-card.png", onTap: () => setState(() => _selectedIndex = 2), text: "Credit Card ", index: 2),
             _buildPaymentContainer(
-                imgPath: "assets/images/cash-on-delivery.png", onTap: () {}, text: "Cash on Delivery")
+                imgPath: "assets/images/cash-on-delivery.png", onTap: () => setState(() => _selectedIndex = 3), text: "Cash on Delivery", index: 3)
           ],
         ),
       ),
     );
   }
 
-  Widget _buildPaymentContainer({Function onTap, String text,String imgPath}) {
+  Widget _buildPaymentContainer({Function onTap, String text,String imgPath, int index}) {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
@@ -89,7 +90,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            border: Border.all(color: Theme.of(context).accentColor, width: 1),
+            border: Border.all(color: _selectedIndex == index ? Theme.of(context).accentColor: Colors.grey, width: _selectedIndex == index ? 2: 1),
           ),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),

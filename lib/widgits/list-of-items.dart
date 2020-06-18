@@ -18,25 +18,23 @@ class _ContainerDetailListState extends State<ContainerDetailList> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: Material(elevation: 6,borderRadius: BorderRadius.circular(10),
-        child: Container(
+        child: GestureDetector(              onTap: widget.ontap,
 
-          width: MediaQuery.of(context).size.width,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15),
-            child: ListTile(
-              onTap: widget.ontap,
-              leading:
-              Image.asset(widget.imgpath)
-             , title: Text(
-                widget.name,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 16),
+          child: Container(
+
+            width: MediaQuery.of(context).size.width,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: ListTile(
+                leading:
+                Image.asset(widget.imgpath)
+               , title: Text(
+                  widget.name,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                trailing: Icon(Icons.arrow_forward_ios)
               ),
-              trailing: IconButton(
-                  icon: Icon(Icons.arrow_forward_ios),
-                  onPressed: () {
-                    print("dfds");
-                  }),
             ),
           ),
         ),

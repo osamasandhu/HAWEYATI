@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:haweyati/pages/building-material/orderBuilding.dart';
 import 'package:haweyati/pages/dumpster/calender/custom-datepicker.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 
@@ -40,6 +41,9 @@ class _BuildingTimeAndLocationState extends State<BuildingTimeAndLocation> {
       val =newVal;
     });
   }
+
+  static List<String> timeIntervals = ['6:00am-9:00am', '9:00am-12:00pm' ,'12:pm-3:00pm', '6:00pm-9:00pm', '9:00pm-12:00am'];
+  String selectedInterval = timeIntervals[0];
   @override
   Widget build(BuildContext context) {
 
@@ -105,6 +109,7 @@ class _BuildingTimeAndLocationState extends State<BuildingTimeAndLocation> {
                 dropoffdate: "Drop-off Date", dropofftime: "Drop-off Time"),
             Row(
               children: <Widget>[
+
                 Expanded(
                   child: DatePickerField(
                     onChanged: (date) => dateTime = date,
@@ -116,24 +121,20 @@ class _BuildingTimeAndLocationState extends State<BuildingTimeAndLocation> {
                 Expanded(
                   child: EmptyContainer(
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-
-
-                        _preferredTime!=null ? Text(
-                            "${_preferredTime.hour}:${_preferredTime.minute} - ${(_preferredTime.hour + 3) % 24}:${_preferredTime.minute}"
-                        ) : Text(" Select Time"),                        IconButton(icon: Icon(Icons.access_time),onPressed:
-
-
-                            () async {
-                          FocusScope.of(context).nextFocus();
-                          TimeOfDay t = await showTimePicker(
-                              context: context,
-                              initialTime: TimeOfDay.now()
-                          );
-                          if(t != null)
-                            setState(() {
-                              _preferredTime = t;
-                            });
-                        },)
+                        DropdownButton<String>(
+                          underline: SizedBox(),
+                          value: selectedInterval,
+                          items: timeIntervals.map((String value) {
+                            return new DropdownMenuItem<String>(
+                              value: value,
+                              child: Text('$value'),
+                            );
+                          }).toList(),
+                          onChanged: (_) {setState(() {
+                            selectedInterval = _;
+                          });
+                          },
+                        ),
                       ],)
                   ),
                 )
@@ -151,18 +152,20 @@ class _BuildingTimeAndLocationState extends State<BuildingTimeAndLocation> {
             ));
             return;
           }
-          if(_preferredTime==null){
-            scaffoldKey.currentState.showSnackBar(SnackBar(
-              behavior: SnackBarBehavior.floating,
-              content: Text('Please select drop off time'),
-            ));
-            return;
-          }
+//          if(_preferredTime==null){
+//            scaffoldKey.currentState.showSnackBar(SnackBar(
+//              behavior: SnackBarBehavior.floating,
+//              content: Text('Please select drop off time'),
+//            ));
+//            return;
+//          }
 
 
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => OrderDetail(
-                time: _preferredTime,
+              builder: (context) => BuildingOrderDetail(
+//                time: _preferredTime,
+                time: selectedInterval,
+
                 date: dateTime,
                 constructionService: widget.constructionService,
               )));

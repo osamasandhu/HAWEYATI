@@ -22,7 +22,8 @@ class _CustomCareState extends State<CustomCare> {
             detail:
                 loremIpsum.substring(0,70),
             child: Padding(padding: EdgeInsets.only(bottom: 100),
-              child: Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
+              child: Column(mainAxisAlignment: MainAxisAlignment.center
+                ,crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
 
 
                 Image.asset("assets/images/clock.png",height: 50,width: 50,)

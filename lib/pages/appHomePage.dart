@@ -12,11 +12,13 @@ import 'package:haweyati/pages/drawer/term-condition.dart';
 import 'package:haweyati/pages/dumpster/dumpstersList.dart';
 import 'package:haweyati/pages/finishing-material/finishing-material-List.dart';
 import 'package:haweyati/pages/drawer/setting/notification.dart';
+import 'package:haweyati/pages/helpline_page.dart';
 import 'package:haweyati/pages/orderDetail/all-orders.dart';
 import 'package:haweyati/pages/scaffolding/scaffoldingList.dart';
 import 'package:haweyati/pages/vehicles-map_page.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 import 'dumpster/dumpstersList.dart';
+import 'locations-map_page.dart';
 
 class AppHomePage extends StatefulWidget {
   String address;
@@ -30,6 +32,34 @@ class _AppHomePageState extends State<AppHomePage> {
 
   static List<String> languages = ['English','Arabic',];
   String selectedLanguage = languages[0];
+
+
+
+  showAlertDialog(BuildContext context) {
+
+    // set up the button
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () { Navigator.of(context).pop();},
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Warning",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),),
+      content: Text("This Functionality will be available after Supplier App is develop."),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 
 
   @override
@@ -67,7 +97,7 @@ class _AppHomePageState extends State<AppHomePage> {
                 height: 20,
               ),
               onPressed: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => CustomCare()))),
+                  .push(MaterialPageRoute(builder: (context) => HelplinePage()))),
           IconButton(
               icon: Image.asset(
                 "assets/images/notification.png",
@@ -135,6 +165,8 @@ class _AppHomePageState extends State<AppHomePage> {
                     _buildListTile("assets/images/logout.png", "Logout",(){
 //                        CustomNavigator.navigateTo(context, Rate());
                     }),
+                    
+                    ListTile(onTap: (){showAlertDialog(context);}, leading: Icon(Icons.person_add,color: Colors.white,),title: Text("Register as Supplier",style: TextStyle(color: Colors.white,),),dense: true,)
                   ],
                   padding: EdgeInsets.fromLTRB(0, 70, 0, 10),
                 ),
@@ -151,7 +183,7 @@ class _AppHomePageState extends State<AppHomePage> {
                         items: languages.map((String value) {
                           return new DropdownMenuItem<String>(
                             value: value,
-                            child: Image.asset('assets/images/$value.png',height: 20,color:Colors.white,),
+                            child: Image.asset('assets/images/$value.png',height: 30,width: 60, color:Colors.white,),
                           );
                         }).toList(),
                         onChanged: (_) {setState(() {
@@ -235,8 +267,13 @@ class _AppHomePageState extends State<AppHomePage> {
                                 width: 5,
                               ),
                               Expanded(
-                                  child: Text(
-                                      widget.address ?? '',overflow: TextOverflow.ellipsis,))
+                                  child: GestureDetector(onTap: (){
+
+                                    CustomNavigator.navigateTo(context, MyLocationMapPage());
+                                  },
+                                    child: Text(
+                                        widget.address ?? '',overflow: TextOverflow.ellipsis,),
+                                  ))
                             ],
                           ),
                         ),
@@ -292,7 +329,7 @@ class _AppHomePageState extends State<AppHomePage> {
         child: FloatingActionButton(
             elevation: 0,
             backgroundColor: Colors.white,
-            onPressed: () {},
+            onPressed: () {CustomNavigator.navigateTo(context, ViewAllOrders());},
             child: Image.asset(
               "assets/images/cart.png",
               width: 30,

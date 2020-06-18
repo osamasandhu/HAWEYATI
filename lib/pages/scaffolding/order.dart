@@ -13,17 +13,17 @@ import 'package:haweyati/pages/dumpster/dumpstersList.dart';
 
 import 'package:haweyati/widgits/service-item-listing.dart';
 
-class OrderDetail extends StatefulWidget {
+class ScaffoldingOrderDetail extends StatefulWidget {
   DateTime date;
   String time;
   ConstructionService constructionService;
-  OrderDetail({this.constructionService,this.date,this.time});
+  ScaffoldingOrderDetail({this.constructionService,this.date,this.time});
 
   @override
-  _OrderDetailState createState() => _OrderDetailState();
+  _ScaffoldingOrderDetailState createState() => _ScaffoldingOrderDetailState();
 }
 
-class _OrderDetailState extends State<OrderDetail> {
+class _ScaffoldingOrderDetailState extends State<ScaffoldingOrderDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,8 +35,8 @@ class _OrderDetailState extends State<OrderDetail> {
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => PaymentMethod(
-             constructionService: widget.constructionService,
-                    )));
+                  constructionService: widget.constructionService,
+                )));
           },
           showButton: true,
           detail: loremIpsum.substring(0,60,),
@@ -61,10 +61,9 @@ class _OrderDetailState extends State<OrderDetail> {
                               Navigator.pop(context);
                               Navigator.pop(context);
                               Navigator.pop(context);
-                              Navigator.pop(context);
 //                              CustomNavigator.navigateTo(context, DumpsterListing());
 
-                              },
+                            },
                             icon: Icon(
                               Icons.edit,
                               color: Theme.of(context).accentColor,
@@ -78,12 +77,12 @@ class _OrderDetailState extends State<OrderDetail> {
                     ),
                     Row(
                       children: <Widget>[
-Image.asset(widget.constructionService.image ?? "",width: 60,height: 60,)??null
-,                        SizedBox(
+                        Image.asset(widget.constructionService.image ?? "",width: 60,height: 60,)
+                       ??SizedBox() ,                        SizedBox(
                           width: 12,
                         ),
                         Text(
-                          widget.constructionService.title,
+                          widget.constructionService.title ?? "",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         )
@@ -123,7 +122,7 @@ Image.asset(widget.constructionService.image ?? "",width: 60,height: 60,)??null
                     Row(
                       children: <Widget>[
                         Expanded(
-                          child: Text(widget.constructionService.detail.rate),
+                          child: Text("600 SAR"),
                           flex: 4,
                         ),
                         Expanded(
@@ -155,7 +154,6 @@ Image.asset(widget.constructionService.image ?? "",width: 60,height: 60,)??null
                         FlatButton.icon(
                             onPressed: (){
                               Navigator.pop(context);
-
                             },
                             icon: Icon(
                               Icons.edit,
@@ -208,7 +206,7 @@ Image.asset(widget.constructionService.image ?? "",width: 60,height: 60,)??null
                 height: 30,
               ),
               Text(
-                widget.constructionService.title,
+                widget.constructionService.title ?? "",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
               SizedBox(
@@ -219,7 +217,7 @@ Image.asset(widget.constructionService.image ?? "",width: 60,height: 60,)??null
               _buildRow(type: "Service Days", detail: "11 Days"),
               _buildRow(type: "Delivery fee", detail: "50.00 SAR"),SizedBox(height: 8,),
 
-Row(children: <Widget>[ Text("Total", style: TextStyle(color: Colors.blueGrey),),Text("515.00 SR",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),) ],mainAxisAlignment: MainAxisAlignment.spaceBetween,)            ],
+              Row(children: <Widget>[ Text("Total", style: TextStyle(color: Colors.blueGrey),),Text("515.00 SR",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),) ],mainAxisAlignment: MainAxisAlignment.spaceBetween,)            ],
           ),
         ));
   }
@@ -239,7 +237,7 @@ Row(children: <Widget>[ Text("Total", style: TextStyle(color: Colors.blueGrey),)
           Text(
             detail,
             style:
-                TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold),
+            TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold),
           ),
         ],
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

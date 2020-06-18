@@ -18,6 +18,31 @@ class FinishingMaterialSubList extends StatefulWidget {
 }
 
 class _FinishingMaterialSubListState extends State<FinishingMaterialSubList> {
+  showAlertDialog(BuildContext context) {
+
+    // set up the button
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () { Navigator.of(context).pop();},
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Warning",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),),
+      content: Text("Server is Required for Performing this Function"),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,12 +83,12 @@ class _FinishingMaterialSubListState extends State<FinishingMaterialSubList> {
                       "32 items available",
                       style: boldText,
                     )),
-                _build(imgPath: "assets/images/grid.png", onTap: () {}),
-                _build(imgPath: "assets/images/search.png", onTap: () {})
+                _build(imgPath: "assets/images/grid.png", onTap: () {showAlertDialog(context);}),
+                _build(imgPath: "assets/images/search.png", onTap: () {showAlertDialog(context);})
               ],
             ),
             Expanded(
-                child: ListView.builder(
+                child: ListView.builder(padding: EdgeInsets.all(10),
                   itemCount: 20,
                   itemBuilder: (build,i){
                   return  ContainerDetailList(

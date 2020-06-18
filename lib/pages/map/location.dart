@@ -88,10 +88,10 @@ Navigator.of(context).pop();
                            //              AppSettings.openLocationSettings();
 
 
-                           AppSettings.openLocationSettings().whenComplete(
-                               CustomNavigator.navigateTo(context, MyLocationMapPage())
-                           );
+                           AppSettings.openLocationSettings().whenComplete(() {
+                             Navigator.of(context).pop();
 
+                           });
                          },
          //() {
 //
@@ -171,7 +171,16 @@ Navigator.of(context).pop();
             onTap: () async {
               GeolocationStatus geolocationStatus  = await Geolocator().checkGeolocationPermissionStatus();
               print(geolocationStatus);
-              _showDialog();
+              if (await Geolocator().isLocationServiceEnabled()) {
+                if (await Geolocator().checkGeolocationPermissionStatus() == GeolocationStatus.granted) {
+                  CustomNavigator.navigateTo(context, MyLocationMapPage());
+                } else {
+                  _showDialog();
+                }
+              } else {
+                _showDialog();
+                print("Location is turned off");
+              }
             },
             buttonName: "Set Your Location",
           )

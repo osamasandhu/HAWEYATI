@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/finishing-material/finishingTimeLocation.dart';
 import 'package:haweyati/pages/finishing-material/finishingorderdetail.dart';
+import 'package:haweyati/pages/map-page.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/container-with-add-remove-item.dart';
@@ -24,6 +25,8 @@ class _OrderGenerateState extends State<OrderGenerate> {
   User selectedUser;
   int selectedRadio;
   int selectedRadioTile;
+  DateTime selectedDate = DateTime.now();
+
   @override
   void initState() {
     super.initState();
@@ -31,21 +34,25 @@ class _OrderGenerateState extends State<OrderGenerate> {
     selectedRadioTile = 0;
     users = User.getUsers();
   }
+
   setSelectedRadio(int val) {
     setState(() {
       selectedRadio = val;
     });
   }
+
   setSelectedRadioTile(int val) {
     setState(() {
       selectedRadioTile = val;
     });
   }
+
   setSelectedUser(User user) {
     setState(() {
       selectedUser = user;
     });
   }
+
   List<Widget> createRadioListUsers() {
     List<Widget> widgets = [];
     for (User user in users) {
@@ -66,6 +73,11 @@ class _OrderGenerateState extends State<OrderGenerate> {
     }
     return widgets;
   }
+
+
+  Color selectedColor;
+
+  String selection;
 
   @override
   Widget build(BuildContext context) {
@@ -98,20 +110,38 @@ class _OrderGenerateState extends State<OrderGenerate> {
           Text("Drum Weight",style: boldText,),
 
           SizedBox(height: 30,),
-Row(children: <Widget>[
-  Expanded(
-    child: RadioListTile(value: null, groupValue: null, onChanged: null,title: Text("12 gram Drum", style: TextStyle(
-          fontSize: 12
-    ))),
-  ),
-  Expanded(
-    child: RadioListTile(value: null, groupValue: null, onChanged: null,title: Text("12 gram Drum", style: TextStyle(
-          fontSize: 12
-    ))),
-  )
+           Row(
+             children: <Widget>[
+               Expanded(
+                 child: RadioListTile(
+                     value: Colors.red,
+                     groupValue: selectedColor,
+                     onChanged: (newVal) {
+                       setState(() {
+                         selectedColor = newVal;
+                       });
+                     },
+                     title: Text("24 gram",
+                         style: TextStyle(
+                             fontWeight: FontWeight.bold, fontSize: 14))),
+               ),
+               Expanded(
+                 child: RadioListTile(
+                     value: Colors.orangeAccent,
+                     groupValue: selectedColor,
+                     onChanged: (newVal) {
+                       setState(() {
+                         selectedColor = newVal;
+                       });
+                     },
+                     title: Text("12-gram ",
+                         style: TextStyle(
+                             fontWeight: FontWeight.bold, fontSize: 14))),
+               )
 //
-],mainAxisAlignment: MainAxisAlignment.spaceBetween,),
-          PlusMinusContainer(
+             ],
+             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+           ),          PlusMinusContainer(
             extra: "Add Extra Days",
             dayprice:" 670.00",
           ),
@@ -130,12 +160,7 @@ Row(children: <Widget>[
                        style: boldText,
                      ),
                      FlatButton.icon(
-                         onPressed: (){
-                       Navigator.of(context).pop();
-                       Navigator.of(context).pop();
-                       Navigator.of(context).pop();
-                       Navigator.of(context).pop();
-                       Navigator.of(context).pop();
+                         onPressed: (){CustomNavigator.navigateTo(context,MyLocationMapPage());
                          },
                          icon: Icon(
                            Icons.edit,

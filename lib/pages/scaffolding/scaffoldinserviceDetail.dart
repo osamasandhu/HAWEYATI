@@ -24,7 +24,8 @@ class _ScaffoldingServicesDetailState extends State<ScaffoldingServicesDetail> {
         title: "Services Detail",
         detail: loremIpsum.substring(0,50), btnName: "Continue",onTap: (){
 
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ScaffoldingTimeAndLocation(
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>
+            ScaffoldingTimeAndLocation(
           constructionService: widget.constructionService,
         )));
 

@@ -13,17 +13,17 @@ import 'package:haweyati/pages/dumpster/dumpstersList.dart';
 
 import 'package:haweyati/widgits/service-item-listing.dart';
 
-class OrderDetail extends StatefulWidget {
+class BuildingOrderDetail extends StatefulWidget {
   DateTime date;
   String time;
   ConstructionService constructionService;
-  OrderDetail({this.constructionService,this.date,this.time});
+  BuildingOrderDetail({this.constructionService,this.date,this.time});
 
   @override
-  _OrderDetailState createState() => _OrderDetailState();
+  _BuildingOrderDetailState createState() => _BuildingOrderDetailState();
 }
 
-class _OrderDetailState extends State<OrderDetail> {
+class _BuildingOrderDetailState extends State<BuildingOrderDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,8 +35,8 @@ class _OrderDetailState extends State<OrderDetail> {
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => PaymentMethod(
-             constructionService: widget.constructionService,
-                    )));
+                  constructionService: widget.constructionService,
+                )));
           },
           showButton: true,
           detail: loremIpsum.substring(0,60,),
@@ -64,7 +64,7 @@ class _OrderDetailState extends State<OrderDetail> {
                               Navigator.pop(context);
 //                              CustomNavigator.navigateTo(context, DumpsterListing());
 
-                              },
+                            },
                             icon: Icon(
                               Icons.edit,
                               color: Theme.of(context).accentColor,
@@ -78,8 +78,8 @@ class _OrderDetailState extends State<OrderDetail> {
                     ),
                     Row(
                       children: <Widget>[
-Image.asset(widget.constructionService.image ?? "",width: 60,height: 60,)??null
-,                        SizedBox(
+                        Image.asset(widget.constructionService.image ?? "",width: 60,height: 60,)??null
+                        ,                        SizedBox(
                           width: 12,
                         ),
                         Text(
@@ -191,14 +191,6 @@ Image.asset(widget.constructionService.image ?? "",width: 60,height: 60,)??null
                     ),
                     _builddetailRow(
                         text1: formattedDate(widget.date), text2: widget.time),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    _buildHeadRow(text1: "Pick-up-Date", text2: "Pick-up-Time"),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    _builddetailRow(text1: formattedDate(widget.date.add(Duration(days: 10))), text2: widget.time)
 
 /////////////////////////////,
                   ],
@@ -219,7 +211,7 @@ Image.asset(widget.constructionService.image ?? "",width: 60,height: 60,)??null
               _buildRow(type: "Service Days", detail: "11 Days"),
               _buildRow(type: "Delivery fee", detail: "50.00 SAR"),SizedBox(height: 8,),
 
-Row(children: <Widget>[ Text("Total", style: TextStyle(color: Colors.blueGrey),),Text("515.00 SR",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),) ],mainAxisAlignment: MainAxisAlignment.spaceBetween,)            ],
+              Row(children: <Widget>[ Text("Total", style: TextStyle(color: Colors.blueGrey),),Text("515.00 SR",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),) ],mainAxisAlignment: MainAxisAlignment.spaceBetween,)            ],
           ),
         ));
   }
@@ -239,7 +231,7 @@ Row(children: <Widget>[ Text("Total", style: TextStyle(color: Colors.blueGrey),)
           Text(
             detail,
             style:
-                TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold),
+            TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold),
           ),
         ],
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
