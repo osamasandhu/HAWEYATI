@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:geocoder/geocoder.dart';
@@ -180,7 +181,7 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
             child: FlatButton.icon(color: Theme.of(context).accentColor, shape: StadiumBorder(),
                 onPressed: ()
                 {CustomNavigator.navigateTo(context, AppHomePage(address: userAddress,));},
-                 icon:Icon(Icons.location_on,color: Colors.white,), label: Text("Set Your Location",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+                 icon:Icon(Icons.location_on,color: Colors.white,), label: Text(tr("Set_Your_Location"),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
           ),) : SizedBox()
         ],
         )

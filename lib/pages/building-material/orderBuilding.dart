@@ -273,7 +273,7 @@ class _BuildingOrderDetailState extends State<BuildingOrderDetail> {
           child: Text(
             text2,
           ),
-          flex: 3,
+          flex: 4,
         ),
       ],
     );

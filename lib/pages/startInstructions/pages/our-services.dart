@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/widgits/align.dart';
 import 'package:haweyati/widgits/instructionpagewidgit.dart';
@@ -15,7 +16,7 @@ class OurServices extends StatelessWidget {
               ],
             )),
 
-        DetailofPage(title: "Our Services",)
+        DetailofPage(title: tr('Our Services'),)
       ],
     );
   }

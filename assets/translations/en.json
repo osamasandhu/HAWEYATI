@@ -5,5 +5,47 @@
   "building" : "Building Material",
   "finishing_material" : "Finishing Material",
   "vehicles" : "Vehicles",
-  "explore" : "Explore our products and services"
+  "explore" : "Explore our products and services",
+  "skip" : "Skip",
+  "Our_Services": "Our Services",
+
+  "services_detail":"Renting different sizes of construction dumpsters and different types of scaffolding. By just easy steps, it will be delivered to your site." ,
+  "Our_product":"Our Product",
+  "product_detail":"You can buy any building & finishing materials as per your location & time schedule without contacting with any person.",
+  "truck_detail":"Need to transfer your materials?Rent the right truck type to suit your materials volume with the right price",
+  "payment_detail":"Pay with Mada, Visa/Mater Card and Apple pay for a secure & hands free deals, or choose cash on delivery option.",
+  "Truck":"Our Truck",
+  "Payment":"Payment & Security",
+  "Location_Detail" : "Please select your site location. This location will be used to show the services & delivering your items.\nYou can edit this location at any time.",
+  "Location": "Location",
+  "YES":"Yes",
+  "NO": "No",
+  "get_Location": "Getting your current location",
+  "Hello": "Hello",
+  "Explore_our_products_services": "Explore_our_products_services",
+  "Construction_Dumpster": "Construction Dumpster",
+  "Scaffolding": "Scaffolding",
+  "Finishing_Materials": "Finishing Materials ",
+  "Pickup_Trucks": "Pickup Trucks",
+  "Your_Rating": "Your Rating",
+  "My_Orders": "My Orders",
+  "My_Invoices": "My Invoices",
+  "Invite_Friends": "Invite Friends",
+  "Rewards": "Rewards",
+
+  "Terms_Conditions": "Terms & Conditions",
+  "Rate_App": "Rate App",
+  "Logout": "Logout",
+  "Login": "Login",
+  "Register": "Register as Supplier",
+  "Settings": "Settings",
+  "Register_as_Supplier": "Register_as_Supplier",
+
+
+
+  "Learn_More_Detail": "We can detect your location by turning on the location service on your phone by clicking YES.If you clicked NO, you will select your location manually.\n\nWe need a drop-off location to show our services at that particular location.Also, you can change it any time from the home page and from check out page.",
+"Set_Your_Location": "Set Your Location",
+  "Use_Location?": "Use Location?",
+  "locationUse?": "This app wants to change your device settings.\nPlease turn on device location to proceed.",
+  "Learn_More": "Learn More"
 }

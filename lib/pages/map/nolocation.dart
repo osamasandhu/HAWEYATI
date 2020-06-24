@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
@@ -47,7 +48,7 @@ class _NoLocationState extends State<NoLocation> {
             onTap: () {
               CustomNavigator.navigateTo(context, MyLocationMapPage());
             },
-            buttonName: "Set Your Location",
+            buttonName: tr('Set_Your_Location'),
           )
         ],
       ),

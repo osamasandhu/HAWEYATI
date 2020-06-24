@@ -78,31 +78,11 @@ class _InstructionsPageState extends State<InstructionsPage> {
 
                 },
                 child: Text(
-                  "Skip",
+                  tr("skip"),
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ))
           ],
         ),
-//        leading: Padding(
-//          padding: const EdgeInsets.only(left: 8.0),
-//          child: InkWell(
-//              child: Image.asset(
-//            "assets/images/language.png",
-//            width: 100,
-//          )),
-//        ),
-//        actions: <Widget>[
-//          FlatButton(
-//              onPressed: () {
-//CustomNavigator.navigateTo(context, MyLocationMapPage());
-//                //CustomNavigator.navigateTo(context, AppHomePage());
-//
-//              },
-//              child: Text(
-//                "Skip",
-//                style: TextStyle(fontSize: 16, color: Colors.white),
-//              ))
-//        ],
       ),
       body: Container(
         decoration: BoxDecoration(image:DecorationImage(fit: BoxFit.cover, image: AssetImage("assets/images/pattern.png")) ),
@@ -155,7 +135,8 @@ class _InstructionsPageState extends State<InstructionsPage> {
                         width: 130,
                         height: 130,
                         image: "assets/images/welcome-page-1_image-6.png"),
-                  ], 'Our Services', 'Lorem ipsum dolor sit amet, consectr adipiscing elit, do eiusm webdmstemporasio.'),
+                  ], tr('Our_Services'),
+                      tr("services_detail")),
                 generateInstructionPage(<Widget>[
                   AlignedImage(
                       dx: 0.55,
@@ -187,7 +168,9 @@ class _InstructionsPageState extends State<InstructionsPage> {
                       width: 150,
                       height: 150,
                       image: "assets/images/welcome-page-2_image-1.png"),
-                ], 'Our Products', 'Lorem ipsum dolor sit amet, consectr adipiscing elit, do eiusm webdmstemporasio.'),
+                ], tr("Our_product"),
+tr("product_detail")
+                ),
                 generateInstructionPage(<Widget>[
                   AlignedImage(
                       dx: 0.55,
@@ -207,7 +190,9 @@ class _InstructionsPageState extends State<InstructionsPage> {
                       width: 220,
                       height: 220,
                       image: "assets/images/welcome-page-3_image-1.png"),
-                ], 'Complete Tracking', 'Lorem ipsum dolor sit amet, consectr adipiscing elit, do eiusm webdmstemporasio.'),
+                ],
+                    tr("Truck"),
+                    tr("truck_detail")),
                 generateInstructionPage(<Widget>[
                   AlignedImage(
                       dx: -0.55,
@@ -227,7 +212,9 @@ class _InstructionsPageState extends State<InstructionsPage> {
                       width: 220,
                       height: 220,
                       image: "assets/images/welcome-page-4_image-2.png"),
-                ], 'Secure Payment', 'Lorem ipsum dolor sit amet, consectr adipiscing elit, do eiusm webdmstemporasio.'),
+                ],
+                    tr("Payment"), 
+                    tr("payment_detail")),
               ]
             )),
 
@@ -274,7 +261,8 @@ class _InstructionsPageState extends State<InstructionsPage> {
               ),
               onPressed: () {
                 setState(() => ++_currentPage);
-                _pageController.animateToPage(_currentPage, duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
+                _pageController.animateToPage(_currentPage, duration: Duration(milliseconds: 200),
+                    curve: Curves.easeInOut);
               },
             ),
     );

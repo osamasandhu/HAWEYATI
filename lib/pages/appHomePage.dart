@@ -66,9 +66,15 @@ class _AppHomePageState extends State<AppHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _drawerKey,
-      backgroundColor: Color(0xfff2f2f2),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(20),
+            bottomLeft: Radius.circular(20),
+          )
+        ),
         iconTheme: new IconThemeData(color: Colors.white),
         centerTitle: true,
         backgroundColor: Color(0xff313f53),
@@ -106,8 +112,65 @@ class _AppHomePageState extends State<AppHomePage> {
               ),
               onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => NotificationPage())))
-        ],
+        ],        bottom:
+      PreferredSize(
+        preferredSize: Size.fromHeight(160),
+        child: Container(
+          padding: const EdgeInsets.all(15),
+          child: Column(children: <Widget>[
+            Text(
+                tr('hello'),
+                style: TextStyle(
+                    fontSize: 17,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold)),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child:
+              Text(
+                tr('explore'),
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+
+            Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30)),
+              height: 50,
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 15, horizontal: 18),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Icon(
+                      Icons.location_on,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                        child: GestureDetector(onTap: (){
+
+                          CustomNavigator.navigateTo(context, MyLocationMapPage());
+                        },
+                          child: Text(
+                            widget.address ?? '',overflow: TextOverflow.ellipsis,),
+                        ))
+                  ],
+                ),
+              ),
+            )
+
+          ], crossAxisAlignment: CrossAxisAlignment.start),
+        ),
       ),
+      ),
+      extendBodyBehindAppBar: true,
       drawer: Drawer(
         child: Container(
             color: Color(0xff313f53),
@@ -149,24 +212,26 @@ class _AppHomePageState extends State<AppHomePage> {
                     SizedBox(
                       height: 10,
                     ),
-                    _buildListTile("assets/images/order.png", "My Orders" ,(){
+                    _buildListTile("assets/images/order.png", tr("My_Orders") ,(){
                         CustomNavigator.navigateTo(context, ViewAllOrders());
                     }),
                     //_buildListTile("assets/images/ride.png", "Your Rides",(){CustomNavigator.navigateTo(context, HaweyatiRewards());}),
                     _buildListTile(
-                        "assets/images/setting.png", "Your Settings",(){CustomNavigator.navigateTo(context, HaweyatiSetting());}),
+                        "assets/images/setting.png", tr("Settings"),(){CustomNavigator.navigateTo(context, HaweyatiSetting());}),
                     _buildListTile(
-                        "assets/images/invite.png", "Invite Friends",(){CustomNavigator.navigateTo(context, ShareInvite());}),
-                    _buildListTile("assets/images/order.png", "Rewards",(){CustomNavigator.navigateTo(context, HaweyatiRewards());} ),
+                        "assets/images/invite.png", tr("Invite_Friends"),(){CustomNavigator.navigateTo(context, ShareInvite());}),
+                    _buildListTile("assets/images/order.png", tr("Rewards"),(){CustomNavigator.navigateTo(context, HaweyatiRewards());} ),
 
                     _buildListTile(
-                        "assets/images/term.png", "Terms and Conditions",(){CustomNavigator.navigateTo(context, TermAndCondition());}),
-                    _buildListTile("assets/images/rate.png", "Rate App",(){CustomNavigator.navigateTo(context, Rate());}),
-                    _buildListTile("assets/images/logout.png", "Logout",(){
+                        "assets/images/term.png", tr("Terms_Conditions"),(){CustomNavigator.navigateTo(context, TermAndCondition());}),
+                    _buildListTile("assets/images/rate.png", tr("Rate_App"),(){CustomNavigator.navigateTo(context, Rate());}),
+                    _buildListTile("assets/images/logout.png", tr("Logout"),(){
 //                        CustomNavigator.navigateTo(context, Rate());
                     }),
                     
-                    ListTile(onTap: (){showAlertDialog(context);}, leading: Icon(Icons.person_add,color: Colors.white,),title: Text("Register as Supplier",style: TextStyle(color: Colors.white,),),dense: true,)
+                    ListTile(onTap: (){showAlertDialog(context);}, 
+                      leading: Icon(Icons.person_add,color: Colors.white,),title:
+                      Text(tr("Register"),style: TextStyle(color: Colors.white,),),dense: true,)
                   ],
                   padding: EdgeInsets.fromLTRB(0, 70, 0, 10),
                 ),
@@ -201,126 +266,40 @@ class _AppHomePageState extends State<AppHomePage> {
               ],
             )),
       ),
-      body: Column(
+      body: ListView(
+        padding: EdgeInsets.fromLTRB(15, 245, 15, 10),
         children: <Widget>[
-          Container(
-           height: MediaQuery.of(context).size.height / 4.8,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(30),
-                  bottomLeft: Radius.circular(30)),
-              color: Color(0xff313f53),
-            ),
-            child: Stack(
-              fit: StackFit.expand,
-              children: <Widget>[
-                Align(
-                    alignment: Alignment(0.9, -0.45),
-                    child: SizedBox(
-                        width: 140,
-                        height: 120,
-                        child: Image.asset(
-                          "assets/images/homepageimage.png",
-                          fit: BoxFit.cover,
-                          width: 70,
-                          height: 100,
-                        ))),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                          tr('hello'),
-                          style: TextStyle(
-                              fontSize: 17,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold)),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        tr('explore'),
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      SizedBox(
-                        height: 18,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(30)),
-                        height: 50,
-                        width: MediaQuery.of(context).size.width,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 18),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Icon(
-                                Icons.location_on,
-                                color: Theme.of(context).accentColor,
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Expanded(
-                                  child: GestureDetector(onTap: (){
-
-                                    CustomNavigator.navigateTo(context, MyLocationMapPage());
-                                  },
-                                    child: Text(
-                                        widget.address ?? '',overflow: TextOverflow.ellipsis,),
-                                  ))
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-              child: ListView(
-            padding: EdgeInsets.fromLTRB(20, 6, 20, 10),
-            children: <Widget>[
-              _buildContainer(
-                  title:  tr('construction_dumpster'),
-                  imgPath: "assets/images/dumpster-bg.png",
-                  onTap: () =>
-                      CustomNavigator.navigateTo(context,DumpsterListing(ConstructionService()))),
-              _buildContainer(
-                  title: tr('scaffolding'),
-                  imgPath: "assets/images/scaffolding-bg.png",
-                  onTap: () =>
-                      CustomNavigator.navigateTo(context, ScaffoldingListing(ConstructionService()))),
-              _buildContainer(
-                title: tr('building'),
-                imgPath: "assets/images/building-materials-bg.png",
-                onTap: () =>
-                    CustomNavigator.navigateTo(context, BuildingMaterialListing(ConstructionService())),
-              ),
-              _buildContainer(
-                  imgPath: "assets/images/finishing-materials-bg.png",
-                  onTap: () {
-                    CustomNavigator.navigateTo(
-                        context,FinishingMaterialListing(ConstructionService()) );
-                  },
-                  title: tr('finishing_material'),
-              ),
-              _buildContainer(
-                  imgPath: "assets/images/delivery-vehaicles-bg.png",
-                  onTap: () {
-                    CustomNavigator.navigateTo(context, VehiclesMapPage());
-                  },
-                  title: tr('vehicles')
-              ),
-            ],
-          ))
+      _buildContainer(
+          title:  tr('Construction_Dumpster'),
+          imgPath: "assets/images/dumpster-bg.png",
+          onTap: () =>
+              CustomNavigator.navigateTo(context,DumpsterListing(ConstructionService()))),
+      _buildContainer(
+          title: tr('Scaffolding'),
+          imgPath: "assets/images/scaffolding-bg.png",
+          onTap: () =>
+              CustomNavigator.navigateTo(context, ScaffoldingListing(ConstructionService()))),
+      _buildContainer(
+        title: tr('building'),
+        imgPath: "assets/images/building-materials-bg.png",
+        onTap: () =>
+            CustomNavigator.navigateTo(context, BuildingMaterialListing(ConstructionService())),
+      ),
+      _buildContainer(
+          imgPath: "assets/images/finishing-materials-bg.png",
+          onTap: () {
+            CustomNavigator.navigateTo(
+                context,FinishingMaterialListing(ConstructionService()) );
+          },
+          title: tr('Finishing_Materials'),
+      ),
+      _buildContainer(
+          imgPath: "assets/images/delivery-vehaicles-bg.png",
+          onTap: () {
+            CustomNavigator.navigateTo(context, VehiclesMapPage());
+          },
+          title: tr('vehicles')
+      ),
         ],
       ),
       floatingActionButton: SizedBox(
