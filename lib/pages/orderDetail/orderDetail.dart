@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/temp-model.dart';
@@ -31,7 +32,7 @@ class _OrderDetailState extends State<OrderDetail> {
         appBar: HaweyatiAppBar(context: context,),
         body: HaweyatiAppBody(
           title: "Orders",
-          btnName: "Continue",
+          btnName: tr("Continue"),
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => PaymentMethod(

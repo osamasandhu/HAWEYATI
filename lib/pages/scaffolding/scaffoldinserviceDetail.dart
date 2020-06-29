@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/temp-model.dart';
@@ -22,7 +23,7 @@ class _ScaffoldingServicesDetailState extends State<ScaffoldingServicesDetail> {
       appBar: HaweyatiAppBar(context: context,),
       body: HaweyatiAppBody(
         title: "Services Detail",
-        detail: loremIpsum.substring(0,50), btnName: "Continue",onTap: (){
+        detail: loremIpsum.substring(0,50), btnName:tr("Continue"),onTap: (){
 
         Navigator.of(context).push(MaterialPageRoute(builder: (context)=>
             ScaffoldingTimeAndLocation(

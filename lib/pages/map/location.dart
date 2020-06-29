@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:haweyati/pages/appHomePage.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:haweyati/widgits/locationAppBar.dart';
@@ -160,6 +161,7 @@ Padding(
                 print("Enabled");
 //                if (await Geolocator().checkGeolocationPermissionStatus() ==
 //                    GeolocationStatus.granted) {
+            //  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MyLocationMapPage()));
                   CustomNavigator.navigateTo(context, MyLocationMapPage());
 //                } else {
 //                    _showDialog();

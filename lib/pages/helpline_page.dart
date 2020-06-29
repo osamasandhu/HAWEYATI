@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:haweyati/pages/chat/chat-page.dart';
 import 'package:haweyati/src/utlis/const.dart';
@@ -13,6 +15,27 @@ class HelplinePage extends StatefulWidget {
 }
 
 class _HelplinePageState extends State<HelplinePage> {
+
+
+  void launchWhatsApp(
+      {@required String phone,
+        @required String message,
+      }) async {
+    String url() {
+      if (Platform.isIOS) {
+        return "whatsapp://wa.me/$phone/?text=${Uri.parse(message)}";
+      } else {
+        return "whatsapp://send?   phone=$phone&text=${Uri.parse(message)}";
+      }
+    }
+
+    if (await canLaunch(url())) {
+      await launch(url());
+    } else {
+      throw 'Could not launch ${url()}';
+    }
+  }
+
   bool _available;
 
   @override
@@ -101,6 +124,11 @@ class _HelplinePageState extends State<HelplinePage> {
       onAction: _available ?
         () {
           _checkAvailability();
+//          if(_available){
+//
+//            launchWhatsApp(phone:" +923472363720", message: "Hello");
+//          }
+
           if(_available){
             CustomNavigator.navigateTo(context, ChatViewPage());
           }

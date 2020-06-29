@@ -13,6 +13,7 @@ import 'package:haweyati/pages/startInstructions/pages/our-services.dart';
 import 'package:haweyati/pages/startInstructions/pages/secure-payment.dart';
 import 'package:haweyati/pages/vehicles-map_page.dart';
 import 'package:haweyati/src/utlis/const.dart';
+import 'package:haweyati/src/utlis/local-data.dart';
 import 'package:haweyati/widgits/align.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 
@@ -25,7 +26,8 @@ class _InstructionsPageState extends State<InstructionsPage> {
   int _currentPage = 0;
   PageController _pageController = PageController(initialPage: 0);
   static List<String> languages = ['English','Arabic'];
-  String selectedLanguage = languages[0];
+  String selectedLanguage = LocalData.currentLng;
+
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,8 @@ class _InstructionsPageState extends State<InstructionsPage> {
                   }).toList(),
                   onChanged: (_) {setState(() {
                     EasyLocalization.of(context).locale = Locale(_=='English' ? 'en' : 'ar');
-                    selectedLanguage=_;
+                    LocalData.currentLng = selectedLanguage = _;
+                    LocalData.write();
                   });
 
                   },
@@ -283,14 +286,14 @@ Widget generateInstructionPage(
         )
       ),
       Padding(
-        padding: const EdgeInsets.only(left: 16.0, bottom: 10, top: 30),
+        padding: const EdgeInsets.fromLTRB(16, 30, 16, 10),
         child: Text(
           title,
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(left: 16.0, bottom: 60),
+        padding: const EdgeInsets.only(left: 16.0, bottom: 60, right: 16),
         child: Text(details),
       )
     ],

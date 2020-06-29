@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/scaffolding/scaffoldinserviceDetail.dart';
@@ -93,7 +94,7 @@ class _FacadeState extends State<Facade> {
             });
           }
         },
-        btnName: "Continue",
+        btnName: tr("Continue"),
       ),
     );
   }

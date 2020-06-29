@@ -19,12 +19,9 @@ import 'package:haweyati/pages/vehicles-map_page.dart';
 import 'package:haweyati/src/ui/widgets/localization-selector.dart';
 import 'package:haweyati/src/utlis/local-data.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
-import 'dumpster/dumpstersList.dart';
-import 'locations-map_page.dart';
+
 
 class AppHomePage extends StatefulWidget {
-  String address;
-  AppHomePage({this.address});
   @override
   _AppHomePageState createState() => _AppHomePageState();
 }
@@ -38,7 +35,6 @@ class _AppHomePageState extends State<AppHomePage> {
 
 
   showAlertDialog(BuildContext context) {
-
     // set up the button
     Widget okButton = FlatButton(
       child: Text("OK"),
@@ -89,23 +85,23 @@ class _AppHomePageState extends State<AppHomePage> {
           ),
         ),
         leading: IconButton(
+          icon: Image.asset(
+            "assets/images/home-page-icon.png",
+            width: 20,
+            height: 20,
+          ),
+          onPressed: () {
+            _drawerKey.currentState.openDrawer();
+          }
+        ),
+        actions: <Widget>[
+          IconButton(
             icon: Image.asset(
-              "assets/images/home-page-icon.png",
+              "assets/images/customer-care.png",
               width: 20,
               height: 20,
             ),
-            onPressed: () {
-              _drawerKey.currentState.openDrawer();
-            }),
-        actions: <Widget>[
-          IconButton(
-              icon: Image.asset(
-                "assets/images/customer-care.png",
-                width: 20,
-                height: 20,
-              ),
-              onPressed: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => HelplinePage()))),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => HelplinePage()))),
           IconButton(
               icon: Image.asset(
                 "assets/images/notification.png",
@@ -120,9 +116,9 @@ class _AppHomePageState extends State<AppHomePage> {
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/homepageimage.png'),
-              fit: BoxFit.scaleDown,
-              alignment: Alignment(1, -0.6)
+                image: AssetImage('assets/images/homepageimage.png'),
+                fit: BoxFit.scaleDown,
+                alignment: Alignment(1, -0.6)
             ),
           ),
           padding: const EdgeInsets.all(15),
@@ -149,13 +145,13 @@ class _AppHomePageState extends State<AppHomePage> {
               },
               padding: EdgeInsets.fromLTRB(5, 13, 5, 13),
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30)
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30)
               ),
               placeholderStyle: TextStyle(
-                color: Colors.black
+                  color: Colors.black
               ),
-              placeholder: widget.address ?? "asd",
+              placeholder: "asd",
               readOnly: true,
               prefix: Padding(
                 padding: const EdgeInsets.only(left: 8, right: 8),
@@ -195,27 +191,27 @@ class _AppHomePageState extends State<AppHomePage> {
               ),
               SizedBox(height: 15),
               Center(
-                child: Text("Arslan Khan",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold
+                  child: Text("Arslan Khan",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
+                      )
                   )
-                )
               ),
               Center(
                 child: FlatButton.icon(
-                onPressed: null,
-                  icon: Image.asset(
-                  "assets/images/star.png",
-                  width: 20,
-                  height: 20,
-                ),
-                  label: Text(
-                    "Rated 5.0",
-                    style: TextStyle(color: Colors.white),
-                  )
+                    onPressed: null,
+                    icon: Image.asset(
+                      "assets/images/star.png",
+                      width: 20,
+                      height: 20,
+                    ),
+                    label: Text(
+                      "Rated 5.0",
+                      style: TextStyle(color: Colors.white),
+                    )
                 ),
               ),
               SizedBox(height: 10),
@@ -223,7 +219,7 @@ class _AppHomePageState extends State<AppHomePage> {
               Expanded(child: SingleChildScrollView(
                 child: Column(children: <Widget>[
                   _buildListTile("assets/images/order.png", tr("My_Orders") ,(){
-                      CustomNavigator.navigateTo(context, ViewAllOrders());
+                    CustomNavigator.navigateTo(context, ViewAllOrders());
                   }),
                   //_buildListTile("assets/images/ride.png", "Your Rides",(){CustomNavigator.navigateTo(context, HaweyatiRewards());}),
                   _buildListTile(
@@ -250,37 +246,37 @@ class _AppHomePageState extends State<AppHomePage> {
       body: ListView(
         padding: EdgeInsets.fromLTRB(15, 245, 15, 10),
         children: <Widget>[
-      _buildContainer(
-          title:  tr('Construction_Dumpster'),
-          imgPath: "assets/images/dumpster-bg.png",
-          onTap: () =>
-              CustomNavigator.navigateTo(context,DumpsterListing(ConstructionService()))),
-      _buildContainer(
-          title: tr('Scaffolding'),
-          imgPath: "assets/images/scaffolding-bg.png",
-          onTap: () =>
-              CustomNavigator.navigateTo(context, ScaffoldingListing(ConstructionService()))),
-      _buildContainer(
-        title: tr('building'),
-        imgPath: "assets/images/building-materials-bg.png",
-        onTap: () =>
-            CustomNavigator.navigateTo(context, BuildingMaterialListing(ConstructionService())),
-      ),
-      _buildContainer(
-          imgPath: "assets/images/finishing-materials-bg.png",
-          onTap: () {
-            CustomNavigator.navigateTo(
-                context,FinishingMaterialListing(ConstructionService()) );
-          },
-          title: tr('Finishing_Materials'),
-      ),
-      _buildContainer(
-          imgPath: "assets/images/delivery-vehaicles-bg.png",
-          onTap: () {
-            CustomNavigator.navigateTo(context, VehiclesMapPage());
-          },
-          title: tr('vehicles')
-      ),
+          _buildContainer(
+              title:  tr('Construction_Dumpster'),
+              imgPath: "assets/images/dumpster-bg.png",
+              onTap: () =>
+                  CustomNavigator.navigateTo(context,DumpsterListing(ConstructionService()))),
+          _buildContainer(
+              title: tr('Scaffolding'),
+              imgPath: "assets/images/scaffolding-bg.png",
+              onTap: () =>
+                  CustomNavigator.navigateTo(context, ScaffoldingListing(ConstructionService()))),
+          _buildContainer(
+            title: tr('building'),
+            imgPath: "assets/images/building-materials-bg.png",
+            onTap: () =>
+                CustomNavigator.navigateTo(context, BuildingMaterialListing(ConstructionService())),
+          ),
+          _buildContainer(
+            imgPath: "assets/images/finishing-materials-bg.png",
+            onTap: () {
+              CustomNavigator.navigateTo(
+                  context,FinishingMaterialListing(ConstructionService()) );
+            },
+            title: tr('Finishing_Materials'),
+          ),
+          _buildContainer(
+              imgPath: "assets/images/delivery-vehaicles-bg.png",
+              onTap: () {
+                CustomNavigator.navigateTo(context, VehiclesMapPage());
+              },
+              title: tr('vehicles')
+          ),
         ],
       ),
       floatingActionButton: SizedBox(
@@ -320,7 +316,7 @@ class _AppHomePageState extends State<AppHomePage> {
       onTap: onTap,
       child: Container(
         width: MediaQuery.of(context).size.width,
- //       margin: EdgeInsets.only(bottom: 1),
+        //       margin: EdgeInsets.only(bottom: 1),
         height: 120,
         decoration: new BoxDecoration(
             image: new DecorationImage(

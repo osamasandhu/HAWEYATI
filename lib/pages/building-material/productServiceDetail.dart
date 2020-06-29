@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/building-material/buildingTimeLocation.dart';
@@ -58,7 +59,7 @@ SizedBox(height: 20,),
 
           ],
           padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
-        ),btnName: "Continue",onTap: (){CustomNavigator.navigateTo(context,
+        ),btnName: tr("Continue"),onTap: (){CustomNavigator.navigateTo(context,
           BuildingTimeAndLocation(constructionService: widget.service,));},showButton: true,
       ),
     );

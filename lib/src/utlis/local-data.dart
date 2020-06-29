@@ -5,6 +5,7 @@ import 'package:haweyati/models/order-model.dart';
 import 'package:path_provider/path_provider.dart';
 
 class LocalData {
+  static var currentLng;
   static const _filename = "haweyati-data.json";
   static  List<Order> _cartProducts = [];
 
@@ -21,6 +22,7 @@ class LocalData {
 
     try {
       await File(dir).writeAsString(jsonEncode({
+        "lng": currentLng,
         "cart": _cartProducts.map((item) => item.toJson()).toList()
       }));
     } catch (e) {
@@ -33,6 +35,7 @@ class LocalData {
 
     try {
       var data = jsonDecode(await File(dir).readAsString()) as Map<String, dynamic>;
+      currentLng = data['lng'] ?? 'English';
       _cartProducts = data['cart']?.map<Order>((item) => Order.fromJson(item))?.toList() ?? [];
     } catch (e) {
       print("Unable to Parse LocalData file.");

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:haweyati/models/order-model.dart';
 import 'package:haweyati/pages/building-material/building-material-List.dart';
@@ -127,27 +128,33 @@ class _TimeAndLocationState extends State<TimeAndLocation> {
                 SizedBox(
                   width: 15,
                 ),
+
                 Expanded(
-                  child: EmptyContainer(
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                      DropdownButton<String>(
-                        underline: SizedBox(),
-                        value: selectedInterval,
-                        items: timeIntervals.map((String value) {
-                          return new DropdownMenuItem<String>(
-                            value: value,
-                            child: Text('$value'),
-                          );
-                        }).toList(),
-                        onChanged: (_) {setState(() {
-                          selectedInterval = _;
-                        });
-                        },
-                      ),
-                    ],)
+                  child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      decoration: BoxDecoration(color:Color(0xfff2f2f2f2),
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                        DropdownButton<String>(
+                          underline: SizedBox(),
+                          value: selectedInterval,
+                          items: timeIntervals.map((String value) {
+                            return new DropdownMenuItem<String>(
+                              value: value,
+                              child: SizedBox(
+                                  width: 150,
+                                  child: Text('$value', textAlign: TextAlign.center)
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (_) {setState(() {
+                            selectedInterval = _;
+                          });
+                          },
+                        ),
+                      ],)
                   ),
-                )
-              ],
+                )   ],
             ),
 
             
@@ -232,13 +239,6 @@ class _TimeAndLocationState extends State<TimeAndLocation> {
             ));
             return;
           }
-//          if(_preferredTime==null){
-//            scaffoldKey.currentState.showSnackBar(SnackBar(
-//              behavior: SnackBarBehavior.floating,
-//              content: Text('Please select drop off time'),
-//            ));
-//            return;
-//          }
           var data = widget.constructionService;
           var quantity = int.parse(data.detail.quantity);
           var pricePerDay = int.parse(data.detail.priceperday);
@@ -263,7 +263,7 @@ class _TimeAndLocationState extends State<TimeAndLocation> {
                     constructionService: widget.constructionService,
                   )));
         },
-        btnName: "Continue",
+        btnName:tr("Continue")
       ),
     );
   }

@@ -48,4 +48,7 @@
   "Use_Location?": "Use Location?",
   "locationUse?": "This app wants to change your device settings.\nPlease turn on device location to proceed.",
   "Learn_More": "Learn More"
+ , "Continue": "Continue",
+
+  "am": "am"
 }

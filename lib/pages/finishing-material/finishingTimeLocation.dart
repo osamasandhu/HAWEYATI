@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:haweyati/pages/building-material/orderBuilding.dart';
 import 'package:haweyati/pages/dumpster/calender/custom-datepicker.dart';
@@ -114,8 +115,12 @@ class _FinishingTimeAndLocationState extends State< FinishingTimeAndLocation> {
                 SizedBox(
                   width: 15,
                 ),
+
                 Expanded(
-                  child: EmptyContainer(
+                  child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      decoration: BoxDecoration(color:Color(0xfff2f2f2f2),
+                          borderRadius: BorderRadius.circular(15)),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                         DropdownButton<String>(
                           underline: SizedBox(),
@@ -123,7 +128,10 @@ class _FinishingTimeAndLocationState extends State< FinishingTimeAndLocation> {
                           items: timeIntervals.map((String value) {
                             return new DropdownMenuItem<String>(
                               value: value,
-                              child: Text('$value'),
+                              child: SizedBox(
+                                  width: 150,
+                                  child: Text('$value', textAlign: TextAlign.center)
+                              ),
                             );
                           }).toList(),
                           onChanged: (_) {setState(() {
@@ -133,8 +141,7 @@ class _FinishingTimeAndLocationState extends State< FinishingTimeAndLocation> {
                         ),
                       ],)
                   ),
-                )
-              ],
+                )   ],
             ),
 
 
@@ -149,14 +156,6 @@ class _FinishingTimeAndLocationState extends State< FinishingTimeAndLocation> {
             ));
             return;
           }
-//          if(_preferredTime==null){
-//            scaffoldKey.currentState.showSnackBar(SnackBar(
-//              behavior: SnackBarBehavior.floating,
-//              content: Text('Please select drop off time'),
-//            ));
-//            return;
-//          }
-
 
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => BuildingOrderDetail(
@@ -166,7 +165,7 @@ class _FinishingTimeAndLocationState extends State< FinishingTimeAndLocation> {
                 constructionService: widget.constructionService,
               )));
         },
-        btnName: "Continue",
+        btnName: tr("Continue"),
       ),
     );
   }

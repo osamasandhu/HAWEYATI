@@ -1,5 +1,6 @@
 
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:haweyati/models/order-model.dart';
 import 'package:haweyati/pages/dumpster/calender/custom-datepicker.dart';
@@ -124,7 +125,10 @@ key: scaffoldKey,      appBar: HaweyatiAppBar(context: context,),
                   width: 15,
                 ),
                 Expanded(
-                  child: EmptyContainer(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                      decoration: BoxDecoration(color:Color(0xfff2f2f2f2),
+                        borderRadius: BorderRadius.circular(15)),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                         DropdownButton<String>(
                           underline: SizedBox(),
@@ -132,7 +136,10 @@ key: scaffoldKey,      appBar: HaweyatiAppBar(context: context,),
                           items: timeIntervals.map((String value) {
                             return new DropdownMenuItem<String>(
                               value: value,
-                              child: Text('$value'),
+                              child: SizedBox(
+                                width: 150,
+                                child: Text('$value', textAlign: TextAlign.center)
+                              ),
                             );
                           }).toList(),
                           onChanged: (_) {setState(() {
@@ -174,7 +181,7 @@ time: selectedInterval,
                 constructionService: widget.constructionService,
               )));
           },
-        btnName: "Continue",
+        btnName: tr("Continue"),
       ),
     );
   }
