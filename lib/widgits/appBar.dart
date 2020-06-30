@@ -44,7 +44,7 @@ class HaweyatiAppBar extends AppBar {
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                                 builder: (context) => AppHomePage(
-                                      address: '',
+
                                     )),
                             (Route<dynamic> route) => false);
                       },

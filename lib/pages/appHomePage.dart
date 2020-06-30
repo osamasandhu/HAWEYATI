@@ -11,7 +11,7 @@ import 'package:haweyati/pages/drawer/share-invite.dart';
 import 'package:haweyati/pages/drawer/term-condition.dart';
 import 'package:haweyati/pages/dumpster/dumpstersList.dart';
 import 'package:haweyati/pages/finishing-material/finishing-material-List.dart';
-import 'package:haweyati/pages/drawer/setting/notification.dart';
+import 'file:///C:/Users/Osama/Workspace/haweyati/lib/notification.dart';
 import 'package:haweyati/pages/helpline_page.dart';
 import 'package:haweyati/pages/orderDetail/all-orders.dart';
 import 'package:haweyati/pages/scaffolding/scaffoldingList.dart';
@@ -19,21 +19,22 @@ import 'package:haweyati/pages/vehicles-map_page.dart';
 import 'package:haweyati/src/ui/widgets/localization-selector.dart';
 import 'package:haweyati/src/utlis/local-data.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dumpster/dumpstersList.dart';
 import 'locations-map_page.dart';
 
 class AppHomePage extends StatefulWidget {
-  String address;
-  AppHomePage({this.address});
   @override
   _AppHomePageState createState() => _AppHomePageState();
 }
 
 class _AppHomePageState extends State<AppHomePage> {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
-
+  String address;
   static List<String> languages = ['English','Arabic',];
   String selectedLanguage = LocalData.currentLng;
+
+
 
 
 
@@ -61,6 +62,20 @@ class _AppHomePageState extends State<AppHomePage> {
         return alert;
       },
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getAddress();
+
+  }
+
+  getAddress() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      address = prefs.getString('address');
+    });
   }
 
 
@@ -145,7 +160,7 @@ class _AppHomePageState extends State<AppHomePage> {
 
             CupertinoTextField(
               onTap: () {
-
+                CustomNavigator.navigateTo(context, MyLocationMapPage(editMode: true,));
               },
               padding: EdgeInsets.fromLTRB(5, 13, 5, 13),
               decoration: BoxDecoration(
@@ -155,7 +170,7 @@ class _AppHomePageState extends State<AppHomePage> {
               placeholderStyle: TextStyle(
                 color: Colors.black
               ),
-              placeholder: widget.address ?? "asd",
+              placeholder: address ?? '',
               readOnly: true,
               prefix: Padding(
                 padding: const EdgeInsets.only(left: 8, right: 8),

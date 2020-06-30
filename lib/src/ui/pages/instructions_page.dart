@@ -1,18 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:haweyati/pages/appHomePage.dart';
-import 'package:haweyati/pages/finishing-material/finishing-material-sub-list.dart';
-import 'package:haweyati/pages/map-page.dart';
-import 'package:haweyati/pages/map/location.dart';
-import 'package:haweyati/pages/map/nolocation.dart';
-import 'package:haweyati/pages/orderDetail/orderDetail.dart';
-import 'package:haweyati/pages/startInstructions/pages/complete-tracking.dart';
-import 'package:haweyati/pages/startInstructions/pages/our-products.dart';
-import 'package:haweyati/pages/startInstructions/pages/our-services.dart';
-import 'package:haweyati/pages/startInstructions/pages/secure-payment.dart';
-import 'package:haweyati/pages/vehicles-map_page.dart';
-import 'package:haweyati/src/utlis/const.dart';
+import 'package:flutter/material.dart';import 'package:haweyati/pages/map/location.dart';
 import 'package:haweyati/src/utlis/local-data.dart';
 import 'package:haweyati/widgits/align.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
@@ -253,7 +241,7 @@ tr("product_detail")
               },
               foregroundColor: Colors.white,
               label: Icon(Icons.arrow_forward),
-              icon: Text("Get Started")
+              icon: Text("Ge")
             )
           : FloatingActionButton(
               elevation: 0,

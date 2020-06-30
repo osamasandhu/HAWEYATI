@@ -12,7 +12,7 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(context: context,),
+      appBar: HaweyatiAppBar(context: context,showCart: false,showHome: false,),
       body: HaweyatiAppBody(
         title: "Notification",
         detail:

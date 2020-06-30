@@ -2,10 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:haweyati/pages/appHomePage.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
-import 'package:haweyati/widgits/locationAppBar.dart';
 import 'package:haweyati/widgits/stackButton.dart';
 import 'package:app_settings/app_settings.dart';
 

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:haweyati/pages/drawer/setting/change-password.dart';
-import 'package:haweyati/pages/drawer/setting/notification.dart';
+import 'file:///C:/Users/Osama/Workspace/haweyati/lib/notification.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
+import 'package:app_settings/app_settings.dart';
 
 import 'setting/profile_page.dart';
 
@@ -16,7 +17,7 @@ class _HaweyatiSettingState extends State<HaweyatiSetting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(context: context,),
+      appBar: HaweyatiAppBar(context: context,showCart: false,showHome: false,),
       body: ListView(
         children: <Widget>[
 
@@ -38,7 +39,15 @@ SizedBox(height: 25,),
             CustomNavigator.navigateTo(context, ProfilePage());
           },)
           ,
-          _buildContainer(title: "Notification",onTap: (){CustomNavigator.navigateTo(context,NotificationPage());}),
+          _buildContainer(title: "Notification",onTap:
+
+              () {
+            AppSettings.openAppSettings()
+                .whenComplete(() {
+              Navigator.of(context).pop();
+            });
+          },
+          ),
           _buildContainer(title: "Change Password",onTap: (){CustomNavigator.navigateTo(context,ChangePassword());}),
         ],
         padding: EdgeInsets.fromLTRB(15, 30, 15, 0),

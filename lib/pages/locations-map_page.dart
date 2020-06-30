@@ -19,6 +19,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 String apiKey = 'AIzaSyDdNpY6LGWgHqRfTRZsKkVhocYOaER325w';
 
 class MyLocationMapPage extends StatefulWidget {
+  final bool editMode;
+  MyLocationMapPage({this.editMode=false});
   @override
   State<MyLocationMapPage> createState() => MyLocationMapPageState();
 }
@@ -32,15 +34,21 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
   List<Marker> allMarkers = [];
   TextEditingController searchAddressField = TextEditingController();
   List<PlacesSearchResult> places = [];
-  bool selectedStartingPoint = false;
-  bool selectedDestinationPoint=false;
   GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: apiKey);
+  SharedPreferences prefs;
 
-  _getCurrentUserLocation() async {
+  _getCurrentUserLocation([bool fromBtn=false]) async {
 
     Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     setState(() {
       currentLocation = LatLng(position.latitude, position.longitude);
+      if(fromBtn){
+        controller.animateCamera(
+          CameraUpdate.newCameraPosition(
+              CameraPosition(target: currentLocation, zoom: 15.0)
+          ),
+        );
+      }
     });
     updateAddress();
     allMarkers.clear();
@@ -120,7 +128,30 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
   @override
   void initState() {
     super.initState();
-    _getCurrentUserLocation();
+    loadData();
+    if(widget.editMode)
+      _editPreviousLocation();
+    else
+      _getCurrentUserLocation();
+  }
+
+  loadData() async {
+    prefs = await SharedPreferences.getInstance();
+  }
+
+  _editPreviousLocation() async {
+    var prefs = await SharedPreferences.getInstance();
+    setState(() {
+     currentLocation = LatLng(prefs.getDouble('latitude'),prefs.getDouble('longitude'));
+     updateAddress();
+    });
+    allMarkers.clear();
+    allMarkers.add(Marker(
+        markerId: MarkerId('0'),
+        position: currentLocation,
+        draggable: true,
+        onDragEnd: onMarkerDragEnd
+    ));
   }
 
   @override
@@ -172,7 +203,7 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
                     ),
                   )),
                   GestureDetector(
-                    onTap: _getCurrentUserLocation,
+                    onTap:()=> _getCurrentUserLocation(true),
                     child: Icon(Icons.my_location)
                   ),
                 ]),
@@ -264,12 +295,13 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
                   }
                 );
 
-                final prefs = await SharedPreferences.getInstance();
+                print(prefs);
                 prefs.setDouble("latitude", currentLocation.latitude);
                 prefs.setDouble("longitude", currentLocation.longitude);
                 prefs.setString("address", await findAddress(currentLocation));
 
-                Navigator.of(context).pop();
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
               },
             ),
           ),

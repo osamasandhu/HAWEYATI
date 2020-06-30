@@ -82,7 +82,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
             StackButton(
               onTap: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => AppHomePage(address: '',)),
+                    MaterialPageRoute(builder: (context) => AppHomePage()),
                     (Route<dynamic> route) => false);
               },
               buttonName: "Home",

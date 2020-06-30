@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:haweyati/pages/drawer/setting/edit-profile.dart';
 import 'package:haweyati/widgits/appBar.dart';
+import 'package:haweyati/widgits/custom-navigator.dart';
 
 
 class ProfilePage extends StatefulWidget {
@@ -12,7 +14,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:HaweyatiAppBar(),
+      appBar:HaweyatiAppBar(showHome: false,showCart: false,),
       body: CustomScrollView(
         slivers: <Widget>[
           SliverToBoxAdapter(
@@ -64,31 +66,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 _profileTile(title: '+113456 786 634',icon: Icons.call,color: Colors.green),
                 _profileTile(title: 'abc@abc.com',icon: Icons.email,color: Colors.purple),
                 _profileTile(title: 'Manchester',icon: Icons.pin_drop,color: Colors.redAccent),
-//                _profileTile(title: 'Bachelors In Computer Science',icon: CupertinoIcons.mail_solid,color: Colors.orange),
-//                _profileTile(title: 'Not Working Yet',icon: Icons.work,color: Colors.black54),
-                Divider(thickness:1.5,),
-                SizedBox(height: 10),
-//                Padding(
-//                  padding: const EdgeInsets.symmetric(horizontal:20.0),
-//                  child: Column(
-//                    children: <Widget>[
-//                      Align(
-//                          alignment: Alignment.topLeft,
-//                          child: Text("About Yourself",style: TextStyle(fontWeight:FontWeight.bold,fontSize: 18))),
-//                      SizedBox(height: 10),
-//                      Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"),
-//                      SizedBox(height: 10),
-//                    ],
-//                  ),
-//                ),
 
-                Divider(thickness:1.5,),
               ],
             ),
           ),
 
         ],
       ),
+      floatingActionButton:FloatingActionButton ( onPressed: (){CustomNavigator.navigateTo(context,EditProfile());},
+        child: Icon(Icons.add,color: Colors.white,),) ,
     );
   }
 

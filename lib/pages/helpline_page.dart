@@ -55,7 +55,7 @@ class _HelplinePageState extends State<HelplinePage> {
   @override
   Widget build(BuildContext context) {
     return NoScrollPage(
-      appBar: HaweyatiAppBar(),
+      appBar: HaweyatiAppBar(showHome: false,showCart: false,),
 
       icon: Image.asset('assets/images/icons/call-dial.png', width: 20),
 

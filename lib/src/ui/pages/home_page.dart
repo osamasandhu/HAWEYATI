@@ -11,7 +11,7 @@ import 'package:haweyati/pages/drawer/share-invite.dart';
 import 'package:haweyati/pages/drawer/term-condition.dart';
 import 'package:haweyati/pages/dumpster/dumpstersList.dart';
 import 'package:haweyati/pages/finishing-material/finishing-material-List.dart';
-import 'package:haweyati/pages/drawer/setting/notification.dart';
+import 'file:///C:/Users/Osama/Workspace/haweyati/lib/notification.dart';
 import 'package:haweyati/pages/helpline_page.dart';
 import 'package:haweyati/pages/orderDetail/all-orders.dart';
 import 'package:haweyati/pages/scaffolding/scaffoldingList.dart';

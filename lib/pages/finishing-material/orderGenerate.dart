@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/finishing-material/finishingTimeLocation.dart';
 import 'package:haweyati/pages/finishing-material/finishingorderdetail.dart';
-import 'package:haweyati/pages/map-page.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/container-with-add-remove-item.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:haweyati/widgits/emptyContainer.dart';
 import 'package:haweyati/widgits/stackButton.dart';
+
+import '../locations-map_page.dart';
 
 class OrderGenerate extends StatefulWidget {
 
