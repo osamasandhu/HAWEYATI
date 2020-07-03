@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/temp-model.dart';
-import 'package:haweyati/pages/dumpster/dumpstersList.dart';
+import 'file:///C:/Users/Osama/Workspace/haweyati/lib/src/ui/pages/services/dumpsters/dumpsters-list_page.dart';
 import 'package:haweyati/pages/payment/payment-method.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/src/utlis/date-formatter.dart';
@@ -10,7 +10,7 @@ import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:haweyati/widgits/emptyContainer.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
-import 'package:haweyati/pages/dumpster/dumpstersList.dart';
+import 'file:///C:/Users/Osama/Workspace/haweyati/lib/src/ui/pages/services/dumpsters/dumpsters-list_page.dart';
 
 import 'package:haweyati/widgits/service-item-listing.dart';
 

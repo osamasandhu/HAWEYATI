@@ -39,12 +39,7 @@ class _SubtileContainerState extends State<SubtileContainer> {
             child: Text(
               widget.subtitle,
              ),
-          ),
-          trailing: IconButton(
-              icon: Icon(Icons.arrow_forward_ios),
-              onPressed: () {
-                print("dfds");
-              }),
+          )
         ),
       ),
     );

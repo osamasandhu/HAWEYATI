@@ -19,7 +19,9 @@ class VerificationPhoneNumber extends StatefulWidget {
 }
 
 class _VerificationPhoneNumberState extends State<VerificationPhoneNumber> {
+  FocusNode _node = FocusNode();
   TextEditingController phone;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -83,7 +85,7 @@ class _VerificationPhoneNumberState extends State<VerificationPhoneNumber> {
                       width: 15,
                     ),
                     GestureDetector(
-                        child: Text(
+      onTap: (){Navigator.of(context).pop();},                  child: Text(
                       "Change",
                       style: TextStyle(color: Theme.of(context).accentColor),
                     ))
@@ -94,9 +96,9 @@ class _VerificationPhoneNumberState extends State<VerificationPhoneNumber> {
                   child: Row(
                     children: <Widget>[
 
-           _buildField(),
+           _buildField(_node),
                       SizedBox(width: 60,)
-                    ,  _buildField(),SizedBox(width: 60,)         ,  _buildField(),SizedBox(width: 60,)  ,         _buildField()
+                    ,  _buildField(null),SizedBox(width: 60,)         ,  _buildField(null),SizedBox(width: 60,)  ,         _buildField(null, true)
                     ],
                   ),
                 ),
@@ -107,14 +109,17 @@ class _VerificationPhoneNumberState extends State<VerificationPhoneNumber> {
   }
 
 
-  Widget _buildField(){
+  Widget _buildField(FocusNode _node, [bool last = false]){
     return Expanded(
-        child: TextFormField(
+        child: TextFormField(keyboardType: TextInputType.phone,
           obscureText: true,
           textAlign: TextAlign.center,
           inputFormatters: [
             LengthLimitingTextInputFormatter(1),
           ],
+          onChanged: (String val){
+            FocusScope.of(context).nextFocus();
+            },
           decoration: InputDecoration(
               hintText: "-",
               hintStyle: TextStyle(fontWeight: FontWeight.bold)),

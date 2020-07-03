@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/widgits/emptyContainer.dart';
 
@@ -17,21 +18,23 @@ class DatePickerField extends StatefulWidget {
 class _DatePickerFieldState extends State<DatePickerField> {
   var _textFieldController = TextEditingController();
 
-  @override initState() {
-    super.initState();
-//    _textFieldController.text = DatePickerField.formattedDate(widget.date);
-//    widget.onChanged(widget.date);
-  }
-
   @override build(context) => GestureDetector(
     onTap: (){
-      showDatePicker(
+      showDatePicker(initialDatePickerMode: DatePickerMode.day,
           context: context,
           lastDate: DateTime(3000),
           firstDate: DateTime.now(),
           initialDate: DateTime.now(),
 
-          builder: (context, child) => Theme(data: ThemeData.dark(), child: child,)
+          builder: (context, child) => Theme(data: ThemeData.dark(), child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 500,
+                child: child
+              ),
+            ],
+            mainAxisAlignment: MainAxisAlignment.center,
+          ))
       ).then((date) {
         setState(() {
           if (date != null) this._textFieldController.text = DatePickerField.formattedDate(date); widget.onChanged(date);
@@ -44,10 +47,8 @@ class _DatePickerFieldState extends State<DatePickerField> {
         padding: const EdgeInsets.symmetric(vertical: 12.0),
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-
             Text(_textFieldController.text.isEmpty ? "Select Date" : _textFieldController.text),
-            Icon(Icons.date_range),
-
+            Icon(Icons.date_range, color: Colors.grey.shade700),
           ],
         ),
       ),

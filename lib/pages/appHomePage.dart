@@ -7,9 +7,9 @@ import 'package:haweyati/pages/building-material/building-material-List.dart';
 import 'package:haweyati/pages/drawer/haweyati-rewards.dart';
 import 'package:haweyati/pages/drawer/haweyati-setting.dart';
 import 'package:haweyati/pages/drawer/rate.dart';
+import 'package:haweyati/pages/drawer/setting/profile_page.dart';
 import 'package:haweyati/pages/drawer/share-invite.dart';
 import 'package:haweyati/pages/drawer/term-condition.dart';
-import 'package:haweyati/pages/dumpster/dumpstersList.dart';
 import 'package:haweyati/pages/finishing-material/finishing-material-List.dart';
 import 'file:///C:/Users/Osama/Workspace/haweyati/lib/notification.dart';
 import 'package:haweyati/pages/helpline_page.dart';
@@ -20,7 +20,7 @@ import 'package:haweyati/src/ui/widgets/localization-selector.dart';
 import 'package:haweyati/src/utlis/local-data.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dumpster/dumpstersList.dart';
+import '../src/ui/pages/services/dumpsters/dumpsters-list_page.dart';
 import 'locations-map_page.dart';
 
 class AppHomePage extends StatefulWidget {
@@ -201,39 +201,41 @@ class _AppHomePageState extends State<AppHomePage> {
                   },
                 ),
               ),
-              Center(
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.white,
-                  radius: 50,
+              GestureDetector(onTap: (){CustomNavigator.navigateTo(context,ProfilePage());},
+                child: Container(child: Column(children: <Widget>[Center(
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.white,
+                    radius: 50,
+                  ),
                 ),
-              ),
-              SizedBox(height: 15),
-              Center(
-                child: Text("Arslan Khan",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold
-                  )
-                )
-              ),
-              Center(
-                child: FlatButton.icon(
-                onPressed: null,
-                  icon: Image.asset(
-                  "assets/images/star.png",
-                  width: 20,
-                  height: 20,
-                ),
-                  label: Text(
-                    "Rated 5.0",
-                    style: TextStyle(color: Colors.white),
-                  )
-                ),
-              ),
-              SizedBox(height: 10),
+                  SizedBox(height: 15),
+                  Center(
+                      child: Text("Arslan Khan",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold
+                          )
+                      )
+                  ),
+                  Center(
+                    child: FlatButton.icon(
+                        onPressed: null,
+                        icon: Image.asset(
+                          "assets/images/star.png",
+                          width: 20,
+                          height: 20,
+                        ),
+                        label: Text(
+                          "Rated 5.0",
+                          style: TextStyle(color: Colors.white),
+                        )
+                    ),
+                  ),],),),
+              )
+              ,SizedBox(height: 10),
 
               Expanded(child: SingleChildScrollView(
                 child: Column(children: <Widget>[
@@ -269,7 +271,7 @@ class _AppHomePageState extends State<AppHomePage> {
           title:  tr('Construction_Dumpster'),
           imgPath: "assets/images/dumpster-bg.png",
           onTap: () =>
-              CustomNavigator.navigateTo(context,DumpsterListing(ConstructionService()))),
+              CustomNavigator.navigateTo(context, DumpstersListPage())),
       _buildContainer(
           title: tr('Scaffolding'),
           imgPath: "assets/images/scaffolding-bg.png",
