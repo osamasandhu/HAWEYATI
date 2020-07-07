@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/dumpstermodel.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/dumpster/dumpsterDetail.dart';
 import 'package:haweyati/pages/finishing-material/finishing-material-sub-list.dart';
 import 'package:haweyati/src/app.dart';
+import 'package:haweyati/src/ui/widgets/scrollable_page.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
@@ -21,26 +23,28 @@ class FinishingMaterialListing extends StatefulWidget {
 class _FinishingMaterialListingState extends State<FinishingMaterialListing> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: HaweyatiAppBar(context: context,
-      ),
-      body: HaweyatiAppBody(
-          title: "Finishing Material",
-          detail: loremIpsum.substring(0, 70),
-          child: ListView.builder(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            itemCount: dummyFinishingMaterial.length,
-            itemBuilder: (context, i) {
-              return ContainerDetailList(
-                name: dummyFinishingMaterial[i].title,
-                imgpath: dummyFinishingMaterial[i].image,
-                ontap: (){ CustomNavigator.navigateTo(
+    return ScrollablePage(child:
+
+    SliverList(
+      delegate: SliverChildBuilderDelegate(
+              (context, i) {
+            return ContainerDetailList(
+              name: dummyFinishingMaterial[i].title,
+              imgpath: dummyFinishingMaterial[i].image,
+
+              ontap: () {
+                CustomNavigator.navigateTo(
                     context,
-                    FinishingMaterialSubList(dummyFinishingMaterial[i]));},
-              );
-            },
-          )),
-      //  backgroundColor: Color(0xfff2f2f2f2),
-    );
+                    FinishingMaterialSubList(
+                        dummyFinishingMaterial[i]
+                    )
+                );
+              },
+            );
+          },
+          childCount: dummyFinishingMaterial.length
+      ),
+    ),title:tr("finishing_material"),subtitle: loremIpsum.substring(0,36),);
+    ;
   }
 }

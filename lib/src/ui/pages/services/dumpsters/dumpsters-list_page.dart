@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/dumpstermodel.dart';
 import 'package:haweyati/models/temp-model.dart';
@@ -9,10 +10,12 @@ import 'package:haweyati/widgits/list-of-items.dart';
 
 class DumpstersListPage extends ScrollablePage {
   DumpstersListPage(): super(
-    title: "Construction Dumpster",
+    title: tr("construction_dumpster"),
     subtitle: loremIpsum.substring(0, 70),
 
-    child: SliverList(
+    child:
+
+    SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, i) {
           return ContainerDetailList(

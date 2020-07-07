@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/dumpstermodel.dart';
 import 'package:haweyati/models/temp-model.dart';
@@ -21,7 +22,7 @@ class _ScaffoldingListingState extends State<ScaffoldingListing> {
   @override
   Widget build(BuildContext context) {
     return ScrollablePage(
-      title: "Scaffolding",
+      title: tr("scaffolding"),
       showBackgroundImage: true,
       subtitle: loremIpsum.substring(0,60),
       child: SliverList(delegate: SliverChildListDelegate([

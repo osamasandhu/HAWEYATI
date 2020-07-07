@@ -9,8 +9,8 @@ import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:haweyati/widgits/list-of-items.dart';
 
 class FinishingMaterialSubList extends StatefulWidget {
- ConstructionService service;
- FinishingMaterialSubList(this.service);
+  ConstructionService service;
+  FinishingMaterialSubList(this.service);
 
   @override
   _FinishingMaterialSubListState createState() =>
@@ -19,16 +19,20 @@ class FinishingMaterialSubList extends StatefulWidget {
 
 class _FinishingMaterialSubListState extends State<FinishingMaterialSubList> {
   showAlertDialog(BuildContext context) {
-
     // set up the button
     Widget okButton = FlatButton(
       child: Text("OK"),
-      onPressed: () { Navigator.of(context).pop();},
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
     );
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Warning",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),),
+      title: Text(
+        "Warning",
+        style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+      ),
       content: Text("Server is Required for Performing this Function"),
       actions: [
         okButton,
@@ -43,69 +47,198 @@ class _FinishingMaterialSubListState extends State<FinishingMaterialSubList> {
       },
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff2f2f2f2),
-      appBar: HaweyatiAppBar(context: context,
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage(widget.service.image)), ),
-                  width: 100,
-                  height: 100,
-                  
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  widget.service.title,
-                  textAlign: TextAlign.center,
-                  style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                    flex: 5,
-                    child: Text(
-                      "32 items available",
-                      style: boldText,
-                    )),
-                _build(imgPath: "assets/images/grid.png", onTap: () {showAlertDialog(context);}),
-                _build(imgPath: "assets/images/search.png", onTap: () {showAlertDialog(context);})
-              ],
-            ),
-            Expanded(
-                child: ListView.builder(padding: EdgeInsets.all(10),
-                  itemCount: 20,
-                  itemBuilder: (build,i){
-                  return  ContainerDetailList(
-                    imgpath: widget.service.image,
-                    name: widget.service.title,
-                    ontap: () {
-
-                      print("ds");
-                      CustomNavigator.navigateTo(context, FinishingMaterialDetail(constructionService: widget.service,));},
-                  );
-                },
-
-            ))
-          ],
+        backgroundColor: Color(0xfff2f2f2f2),
+        appBar: HaweyatiAppBar(
+          context: context,
         ),
-      ),
-    );
+        body: CustomScrollView(
+          slivers: <Widget>[
+            SliverToBoxAdapter(
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(widget.service.image)),
+                    ),
+                    width: 100,
+                    height: 100,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    widget.service.title,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                        flex: 5,
+                        child: Text(
+                          "32 items available",
+                          style: boldText,
+                        )),
+                    _build(
+                        imgPath: "assets/images/grid.png",
+                        onTap: () {
+                          showAlertDialog(context);
+                        }),
+                    _build(
+                        imgPath: "assets/images/search.png",
+                        onTap: () {
+                          showAlertDialog(context);
+                        })
+                  ],
+                ),
+              ),
+            ),
+SliverList(delegate: SliverChildBuilderDelegate((context, i){
+
+  return  Padding(
+    padding: EdgeInsets.symmetric(horizontal: 15),
+    child: ContainerDetailList(
+                      imgpath: widget.service.image,
+                      name: widget.service.title,
+                      ontap: () {
+
+                        print("ds");
+                        CustomNavigator.navigateTo(context, FinishingMaterialDetail(constructionService: widget.service,));},
+                    ),
+  );
+    })
+)
+
+
+          ],
+        )
+
+//      SliverList(delegate: SliverChildListDelegate([
+//
+//
+//      Row(
+//      children: <Widget>[
+//      Container(
+//      decoration: BoxDecoration(
+//      image: DecorationImage(image: AssetImage(widget.service.image)), ),
+//    width: 100,
+//    height: 100,
+//
+//    ),
+//    SizedBox(
+//    width: 10,
+//    ),
+//    Text(
+//    widget.service.title,
+//    textAlign: TextAlign.center,
+//    style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+//    )
+//    ],
+//    ),
+//    SizedBox(
+//    height: 20,
+//    ),
+//    Row(
+//    children: <Widget>[
+//    Expanded(
+//    flex: 5,
+//    child: Text(
+//    "32 items available",
+//    style: boldText,
+//    )),
+//    _build(imgPath: "assets/images/grid.png", onTap: () {showAlertDialog(context);}),
+//    _build(imgPath: "assets/images/search.png", onTap: () {showAlertDialog(context);})
+//    ],
+//    ),
+//    Expanded(
+//    child: ListView.builder(padding: EdgeInsets.all(10),
+//    itemCount: 20,
+//    itemBuilder: (build,i){
+//    return
+//
+//    ContainerDetailList(
+//    imgpath: widget.service.image,
+//    name: widget.service.title,
+//    ontap: () {
+//
+//    print("ds");
+//    CustomNavigator.navigateTo(context, FinishingMaterialDetail(constructionService: widget.service,));},
+//    );
+//    },
+//
+//    )
+//
+//    )])),
+
+//
+//      Padding(
+//        padding: EdgeInsets.all(20),
+//        child: Column(
+//          children: <Widget>[
+//            Row(
+//              children: <Widget>[
+//                Container(
+//                  decoration: BoxDecoration(
+//                  image: DecorationImage(image: AssetImage(widget.service.image)), ),
+//                  width: 100,
+//                  height: 100,
+//
+//                ),
+//                SizedBox(
+//                  width: 10,
+//                ),
+//                Text(
+//                  widget.service.title,
+//                  textAlign: TextAlign.center,
+//                  style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+//                )
+//              ],
+//            ),
+//            SizedBox(
+//              height: 20,
+//            ),
+//            Row(
+//              children: <Widget>[
+//                Expanded(
+//                    flex: 5,
+//                    child: Text(
+//                      "32 items available",
+//                      style: boldText,
+//                    )),
+//                _build(imgPath: "assets/images/grid.png", onTap: () {showAlertDialog(context);}),
+//                _build(imgPath: "assets/images/search.png", onTap: () {showAlertDialog(context);})
+//              ],
+//            ),
+//            Expanded(
+//                child: ListView.builder(padding: EdgeInsets.all(10),
+//                  itemCount: 20,
+//                  itemBuilder: (build,i){
+//                  return  ContainerDetailList(
+//                    imgpath: widget.service.image,
+//                    name: widget.service.title,
+//                    ontap: () {
+//
+//                      print("ds");
+//                      CustomNavigator.navigateTo(context, FinishingMaterialDetail(constructionService: widget.service,));},
+//                  );
+//                },
+//
+//            ))
+//          ],
+//        ),
+//      ),
+        );
   }
 
   Widget _build({String imgPath, Function onTap}) {

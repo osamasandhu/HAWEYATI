@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:haweyati/pages/building-material/orderBuilding.dart';
 import 'package:haweyati/pages/dumpster/calender/custom-datepicker.dart';
+import 'package:haweyati/src/ui/widgets/scrollable_page.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 
 import 'package:image_picker/image_picker.dart';
@@ -46,7 +47,123 @@ class _FinishingTimeAndLocationState extends State< FinishingTimeAndLocation> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+    return 
+      ScrollablePage(key: scaffoldKey,title: "Location & Time",subtitle: loremIpsum.substring(0,65),child: SliverList(delegate: SliverChildListDelegate([
+
+        EmptyContainer(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    "Drop off Location",
+                    style: boldText,
+                  ),
+                  FlatButton.icon(
+                      onPressed: () {
+                        Navigator.of(context).pop();    },
+                      icon: Icon(
+                        Icons.edit,
+                        color: Theme.of(context).accentColor,
+                      ),
+                      label: Text(
+                        "Edit",
+                        style:
+                        TextStyle(color: Theme.of(context).accentColor),
+                      ))
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.location_on,
+                    color: Theme.of(context).accentColor,
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(loremIpsum.substring(0, 40)),
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        _buildRow(
+            dropoffdate: "Drop-off Date", dropofftime: "Drop-off Time"),
+        Row(
+          children: <Widget>[
+
+            Expanded(
+              child: DatePickerField(
+                onChanged: (date) => dateTime = date,
+              ),
+            ),
+            SizedBox(
+              width: 15,
+            ),
+
+            Expanded(
+              child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  decoration: BoxDecoration(color:Color(0xfff2f2f2f2),
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                    DropdownButton<String>(
+                      underline: SizedBox(),
+                      value: selectedInterval,
+                      items: timeIntervals.map((String value) {
+                        return new DropdownMenuItem<String>(
+                          value: value,
+                          child: SizedBox(
+                              width: 150,
+                              child: Text('$value', textAlign: TextAlign.center)
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (_) {setState(() {
+                        selectedInterval = _;
+                      });
+                      },
+                    ),
+                  ],)
+              ),
+            )   ],
+        ),
+
+
+      ])),action: tr(("Continue")),onAction:
+          () {
+        if(dateTime==null){
+          scaffoldKey.currentState.showSnackBar(SnackBar(
+            content: Text('Please select drop off date'),
+            behavior: SnackBarBehavior.floating,
+          ));
+          return;
+        }
+
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => BuildingOrderDetail(
+//                time: _preferredTime,
+              time: selectedInterval,
+              date: dateTime,
+              constructionService: widget.constructionService,
+            )));
+      },
+          showButtonBackground: true,);
+      
+      
+      Scaffold(
       key: scaffoldKey,      appBar: HaweyatiAppBar(context: context,),
       body: HaweyatiAppBody(
         title: "Time & Location",
@@ -148,7 +265,10 @@ class _FinishingTimeAndLocationState extends State< FinishingTimeAndLocation> {
           ],
         ),
         showButton: true,
-        onTap: () {
+        
+        
+        onTap:
+            () {
           if(dateTime==null){
             scaffoldKey.currentState.showSnackBar(SnackBar(
               content: Text('Please select drop off date'),
@@ -165,6 +285,8 @@ class _FinishingTimeAndLocationState extends State< FinishingTimeAndLocation> {
                 constructionService: widget.constructionService,
               )));
         },
+        
+        
         btnName: tr("Continue"),
       ),
     );

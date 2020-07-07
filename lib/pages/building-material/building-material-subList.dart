@@ -4,6 +4,7 @@ import 'package:haweyati/pages/building-material/buildingDetrail.dart';
 import 'package:haweyati/pages/dumpster/dumpsterDetail.dart';
 import 'package:haweyati/pages/dumpster/dumpsterServicesdetail.dart';
 import 'package:haweyati/pages/finishing-material/finishing_material_detail.dart';
+import 'package:haweyati/src/ui/widgets/scrollable_page.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
@@ -21,7 +22,37 @@ class BuildingMaterialSubList extends StatefulWidget {
 class _BuildingMaterialSubListState extends State<BuildingMaterialSubList> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+
+ScrollablePage(
+
+  title: widget.service.title,
+  subtitle: loremIpsum.substring(0,90),
+  child: SliverList(
+      delegate: SliverChildBuilderDelegate(
+              (context, i) {
+            return           ContainerDetailList(
+              imgpath: widget.service.image,
+              name: widget.service.title,
+              ontap: () {
+                print("ds");
+                CustomNavigator.navigateTo(
+                    context,
+                    BuildingDetail(serviceDetail:  widget.service,)
+                )
+                ;
+              },
+            );
+
+          },
+          childCount: 22
+      )
+
+  //SliverList(delegate: SliverChildListDelegate( (context,i){}),),
+
+));
+
+      Scaffold(
       appBar: HaweyatiAppBar(context: context,),
       body: HaweyatiAppBody(
 //          showButton: true,
@@ -34,7 +65,8 @@ class _BuildingMaterialSubListState extends State<BuildingMaterialSubList> {
 
 padding: EdgeInsets.symmetric(horizontal: 20),            itemCount: 20,
             itemBuilder: (build, i) {
-          return ContainerDetailList(
+          return
+            ContainerDetailList(
             imgpath: widget.service.image,
             name: widget.service.title,
             ontap: () {
@@ -52,3 +84,18 @@ BuildingDetail(serviceDetail:  widget.service,)
     );
   }
 }
+
+
+
+
+//
+//ContainerDetailList(
+//imgpath: widget.service.image,
+//name: widget.service.title,
+//ontap: () {
+//print("ds");
+//CustomNavigator.navigateTo(
+//context,
+//BuildingDetail(serviceDetail:  widget.service,)
+//)
+//;
