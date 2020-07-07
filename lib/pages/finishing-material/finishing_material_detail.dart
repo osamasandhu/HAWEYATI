@@ -15,7 +15,15 @@ FinishingMaterialDetail({this.constructionService});
   _FinishingMaterialDetailState createState() => _FinishingMaterialDetailState();
 }
 
-class _FinishingMaterialDetailState extends State<FinishingMaterialDetail> {
+class _FinishingMaterialDetailState extends State<FinishingMaterialDetail>with SingleTickerProviderStateMixin {
+
+PageController controller;
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller=PageController(initialPage: 0);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: Color(0xffffffff),
@@ -29,13 +37,28 @@ class _FinishingMaterialDetailState extends State<FinishingMaterialDetail> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 250,
-                      child: (Image.asset(widget.constructionService.image,fit: BoxFit.cover,)),
-                    ),
+
                     SizedBox(
-                      height: 20,
+                      child: PageView( children: <Widget>[
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 250,
+                          child: (Image.asset(widget.constructionService.image,fit: BoxFit.cover,)),
+                        ),Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 250,
+                          child: (Image.asset(widget.constructionService.image,fit: BoxFit.cover,)),
+                        ),Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 250,
+                          child: (Image.asset(widget.constructionService.image,fit: BoxFit.cover,)),
+                        ),Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 250,
+                          child: (Image.asset(widget.constructionService.image,fit: BoxFit.cover,)),
+                        ),
+
+                      ],controller: controller,),height: 250,width: MediaQuery.of(context).size.width,
                     ),
                     Text(
                      widget.constructionService.title,

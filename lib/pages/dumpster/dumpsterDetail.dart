@@ -12,7 +12,15 @@ class ServicesItemDetail extends StatefulWidget {
   _ServicesItemDetailState createState() => _ServicesItemDetailState();
 }
 
-class _ServicesItemDetailState extends State<ServicesItemDetail> {
+class _ServicesItemDetailState extends State<ServicesItemDetail> with SingleTickerProviderStateMixin{
+
+  PageController controller;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller=PageController(initialPage: 0);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: Color(0xffffffff),
@@ -25,11 +33,40 @@ class _ServicesItemDetailState extends State<ServicesItemDetail> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 250,
-                  child: (Image.asset(widget.serviceDetail.image,fit: BoxFit.cover,)),
-                ),
+
+                SizedBox(
+                  child: PageView( children: <Widget>[
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 250,
+                      child: (
+                          Image.asset(widget.serviceDetail.image,fit: BoxFit.cover,)
+                      ),
+                    ),Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 250,
+                      child: (
+                          Image.asset(widget.serviceDetail.image,fit: BoxFit.cover,)
+                      ),
+                    ),Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 250,
+                      child: (
+                          Image.asset(widget.serviceDetail.image,fit: BoxFit.cover,)
+                      ),
+                    ),Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 250,
+                      child: (
+                          Image.asset(widget.serviceDetail.image,fit: BoxFit.cover,)
+                      ),
+                    ),
+
+                  ],controller: controller,),height: 250,width: MediaQuery.of(context).size.width,
+                )
+
+
+,
                 SizedBox(
                   height: 20,
                 ),
