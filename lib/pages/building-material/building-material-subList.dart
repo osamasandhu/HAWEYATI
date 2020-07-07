@@ -1,101 +1,66 @@
 import 'package:flutter/material.dart';
-import 'package:haweyati/models/temp-model.dart';
+import 'package:haweyati/models/building-material_model.dart';
+import 'package:haweyati/models/building-material_sublist.dart';
 import 'package:haweyati/pages/building-material/buildingDetrail.dart';
-import 'package:haweyati/pages/dumpster/dumpsterDetail.dart';
-import 'package:haweyati/pages/dumpster/dumpsterServicesdetail.dart';
-import 'package:haweyati/pages/finishing-material/finishing_material_detail.dart';
-import 'package:haweyati/src/ui/widgets/scrollable_page.dart';
+import 'package:haweyati/services/bm-sublist_service.dart';
+import 'package:haweyati/services/haweyati-service.dart';
 import 'package:haweyati/src/utlis/const.dart';
+import 'package:haweyati/src/utlis/simple-future-builder.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
 import 'package:haweyati/widgits/list-of-items.dart';
 
 class BuildingMaterialSubList extends StatefulWidget {
-  ConstructionService service;
-  BuildingMaterialSubList(this.service);
+  final BuildingMaterials buildingMaterials;
+  BuildingMaterialSubList({this.buildingMaterials});
   @override
   _BuildingMaterialSubListState createState() =>
       _BuildingMaterialSubListState();
 }
 
 class _BuildingMaterialSubListState extends State<BuildingMaterialSubList> {
+
+  Future<List<BMSubList>> bmSublist;
+  var _service = BMSublistService();
+
+
+  @override
+  void initState() {
+    super.initState();
+    bmSublist =_service.getBMSublist(widget.buildingMaterials.sId);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return
-
-ScrollablePage(
-
-  title: widget.service.title,
-  subtitle: loremIpsum.substring(0,90),
-  child: SliverList(
-      delegate: SliverChildBuilderDelegate(
-              (context, i) {
-            return           ContainerDetailList(
-              imgpath: widget.service.image,
-              name: widget.service.title,
-              ontap: () {
-                print("ds");
-                CustomNavigator.navigateTo(
-                    context,
-                    BuildingDetail(serviceDetail:  widget.service,)
-                )
-                ;
-              },
-            );
-
-          },
-          childCount: 22
-      )
-
-  //SliverList(delegate: SliverChildListDelegate( (context,i){}),),
-
-));
-
-      Scaffold(
+    return Scaffold(
       appBar: HaweyatiAppBar(context: context,),
       body: HaweyatiAppBody(
 //          showButton: true,
 //          onTap: () {},
 //          btnName: "Buy Now",
-          title:widget.service.title,
+          title:  'Building Material',
           detail: loremIpsum.substring(0, 90),
-          child:
-          ListView.builder(
-
-padding: EdgeInsets.symmetric(horizontal: 20),            itemCount: 20,
-            itemBuilder: (build, i) {
-          return
-            ContainerDetailList(
-            imgpath: widget.service.image,
-            name: widget.service.title,
-            ontap: () {
-              print("ds");
-              CustomNavigator.navigateTo(
-                  context,
-BuildingDetail(serviceDetail:  widget.service,)
-              )
-              ;
-            },
-          );
+          child: SimpleFutureBuilder.simpler(
+            future: bmSublist,
+            context: context,
+            builder: (AsyncSnapshot<List<BMSubList>> snapshot){
+              return ListView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                itemCount: snapshot.data.length,
+                itemBuilder: (context,i){
+                  var bmSubList = snapshot.data[i];
+                  return  ContainerDetailList(
+                      name: bmSubList.name,
+                      imgpath: bmSubList.images[0].name,
+                      ontap: (){
+                        CustomNavigator.navigateTo(context, BuildingDetail(item: bmSubList,));
+                      }) ;
+                },
+              );
             },
           )
       ),
     );
   }
 }
-
-
-
-
-//
-//ContainerDetailList(
-//imgpath: widget.service.image,
-//name: widget.service.title,
-//ontap: () {
-//print("ds");
-//CustomNavigator.navigateTo(
-//context,
-//BuildingDetail(serviceDetail:  widget.service,)
-//)
-//;

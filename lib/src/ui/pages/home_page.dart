@@ -9,16 +9,17 @@ import 'package:haweyati/pages/drawer/haweyati-setting.dart';
 import 'package:haweyati/pages/drawer/rate.dart';
 import 'package:haweyati/pages/drawer/share-invite.dart';
 import 'package:haweyati/pages/drawer/term-condition.dart';
+import 'package:haweyati/pages/dumpster/dumpstersList.dart';
 import 'package:haweyati/pages/finishing-material/finishing-material-List.dart';
-import 'file:///C:/Users/Osama/Workspace/haweyati/lib/notification.dart';
 import 'package:haweyati/pages/helpline_page.dart';
 import 'package:haweyati/pages/orderDetail/all-orders.dart';
 import 'package:haweyati/pages/scaffolding/scaffoldingList.dart';
 import 'package:haweyati/pages/vehicles-map_page.dart';
-import 'package:haweyati/src/ui/pages/services/dumpsters/dumpsters-list_page.dart';
 import 'package:haweyati/src/ui/widgets/localization-selector.dart';
 import 'package:haweyati/src/utlis/local-data.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
+
+import '../../../notification.dart';
 
 
 class AppHomePage extends StatefulWidget {
@@ -250,23 +251,23 @@ class _AppHomePageState extends State<AppHomePage> {
               title:  tr('Construction_Dumpster'),
               imgPath: "assets/images/dumpster-bg.png",
               onTap: () =>
-                  CustomNavigator.navigateTo(context, DumpstersListPage())),
+                  CustomNavigator.navigateTo(context,DumpsterListing())),
           _buildContainer(
               title: tr('Scaffolding'),
               imgPath: "assets/images/scaffolding-bg.png",
               onTap: () =>
-                  CustomNavigator.navigateTo(context, ScaffoldingListing(ConstructionService()))),
+                  CustomNavigator.navigateTo(context, ScaffoldingListing())),
           _buildContainer(
             title: tr('building'),
             imgPath: "assets/images/building-materials-bg.png",
             onTap: () =>
-                CustomNavigator.navigateTo(context, BuildingMaterialListing(ConstructionService())),
+                CustomNavigator.navigateTo(context, BuildingMaterialListing()),
           ),
           _buildContainer(
             imgPath: "assets/images/finishing-materials-bg.png",
             onTap: () {
               CustomNavigator.navigateTo(
-                  context,FinishingMaterialListing(ConstructionService()) );
+                  context,FinishingMaterialListing() );
             },
             title: tr('Finishing_Materials'),
           ),

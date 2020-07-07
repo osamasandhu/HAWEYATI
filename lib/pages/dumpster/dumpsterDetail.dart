@@ -1,26 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:haweyati/models/dumpster_model.dart';
+import 'package:haweyati/models/pricing_model.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/dumpster/dumpsterServicesdetail.dart';
+import 'package:haweyati/services/haweyati-service.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/stackButton.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ServicesItemDetail extends StatefulWidget {
-  ConstructionService serviceDetail;
-
-  ServicesItemDetail({this.serviceDetail});
+  final Dumpsters dumpster;
+  ServicesItemDetail({this.dumpster});
   @override
   _ServicesItemDetailState createState() => _ServicesItemDetailState();
 }
 
-class _ServicesItemDetailState extends State<ServicesItemDetail> with SingleTickerProviderStateMixin{
-
-  PageController controller;
+class _ServicesItemDetailState extends State<ServicesItemDetail> {
+  SharedPreferences prefs;
+  Pricing pricing;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    controller=PageController(initialPage: 0);
+    initDetail();
   }
+
+  initDetail() async {
+    var prefs = await SharedPreferences.getInstance();
+    widget.dumpster.pricing.forEach((element) {
+      if(element.city== prefs.getString('city')){
+        setState(() {
+          pricing = element;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: Color(0xffffffff),
@@ -33,45 +47,16 @@ class _ServicesItemDetailState extends State<ServicesItemDetail> with SingleTick
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-
-                SizedBox(
-                  child: PageView( children: <Widget>[
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 250,
-                      child: (
-                          Image.asset(widget.serviceDetail.image,fit: BoxFit.cover,)
-                      ),
-                    ),Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 250,
-                      child: (
-                          Image.asset(widget.serviceDetail.image,fit: BoxFit.cover,)
-                      ),
-                    ),Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 250,
-                      child: (
-                          Image.asset(widget.serviceDetail.image,fit: BoxFit.cover,)
-                      ),
-                    ),Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 250,
-                      child: (
-                          Image.asset(widget.serviceDetail.image,fit: BoxFit.cover,)
-                      ),
-                    ),
-
-                  ],controller: controller,),height: 250,width: MediaQuery.of(context).size.width,
-                )
-
-
-,
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 250,
+                  child: (Image.network(HaweyatiService.convertImgUrl(widget.dumpster.images[0].name),fit: BoxFit.cover,)),
+                ),
                 SizedBox(
                   height: 20,
                 ),
                 Text(
-                  widget.serviceDetail.title,
+                  widget.dumpster.size,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 SizedBox(
@@ -81,14 +66,14 @@ class _ServicesItemDetailState extends State<ServicesItemDetail> with SingleTick
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      widget.serviceDetail.detail.sr,
+                      pricing?.rent.toString(),
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     Text(
-                      widget.serviceDetail.detail.days,
+                      pricing?.days.toString(),
                       style: TextStyle(color: Colors.black54),
                     )
                   ],
@@ -96,16 +81,16 @@ class _ServicesItemDetailState extends State<ServicesItemDetail> with SingleTick
                 SizedBox(
                   height: 20,
                 ),
-                Text(widget.serviceDetail.detail.description),
+                Text(widget.dumpster.description),
               ],
             ),
           ),
           StackButton(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => DumpsterServicesDetail(constructionService: widget.serviceDetail,
-
-                      )));
+//              Navigator.of(context).push(MaterialPageRoute(
+//                  builder: (context) => DumpsterServicesDetail(constructionService: widget.serviceDetail,
+//
+//                      )));
             },
             buttonName: "Rent Now",
           )

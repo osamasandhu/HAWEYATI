@@ -318,7 +318,7 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
 
   Future<String> findAddress(LatLng cords) async{
 
-    var addresses = await Geocoder.local.findAddressesFromCoordinates(Coordinates(cords.latitude,cords.longitude));
+    var addresses = await Geocoder.google(apiKey).findAddressesFromCoordinates(Coordinates(cords.latitude,cords.longitude));
     String formattedAddress = "";
     if (addresses.first.addressLine.contains(",")) {
       List<String> descriptionSplit = addresses.first.addressLine.split(",");

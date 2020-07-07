@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:haweyati/pages/drawer/setting/change-password.dart';
-import 'file:///C:/Users/Osama/Workspace/haweyati/lib/notification.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:app_settings/app_settings.dart';
-
 import 'setting/profile_page.dart';
 
 
