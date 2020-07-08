@@ -14,7 +14,9 @@ class DropDownContainer extends StatefulWidget {
 
 class _DropDownContainerState extends State<DropDownContainer> {
   int quantity = 0;
- static List<String> sizeList =<String>[
+  double quantityHalf = 0.0;
+
+  static List<String> sizeList =<String>[
 
     "1 Meter", "1.5 Meter", "2 Meter","2.5 Meter", "3 Meter", "3.5 Meter","4 Meter"
   ];
@@ -34,6 +36,24 @@ class _DropDownContainerState extends State<DropDownContainer> {
     });
     widget.onValueChange(quantity);
   }
+
+
+
+
+  _incrementHalf() {
+    setState(() {
+      quantityHalf+=0.5;
+    });
+    widget.onValueChange(quantity);
+  }
+
+  _decrementHalf() {
+    setState(() {
+      quantityHalf-=0.5;
+    });
+    widget.onValueChange(quantity);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -78,18 +98,18 @@ class _DropDownContainerState extends State<DropDownContainer> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Container(
+                        child: Container(width: 50,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             color: Colors.white,
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
+                                horizontal: 8, vertical: 8),
                             child: Text(
                               "$quantity",
                               style:
-                                  TextStyle(fontSize: 12, color: Colors.black),
+                                  TextStyle(fontSize: 12, color: Colors.black),textAlign: TextAlign.center,
                             ),
                           ),
                         ),
@@ -123,28 +143,89 @@ class _DropDownContainerState extends State<DropDownContainer> {
                 children: <Widget>[
                   Text(widget.dayprice),
 
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).accentColor,
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          icon: Icon(
+                            Icons.remove,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            if (quantityHalf > 0) {
+                              _decrementHalf();
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Container(width: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.white,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 8),
+                            child: Text(
+                              "$quantityHalf",
+                              style:
+                              TextStyle(fontSize: 12, color: Colors.black),textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            color: Theme.of(context).accentColor),
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          icon: Icon(
+                            Icons.add,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
 
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    color: Colors.white,
-                    child: DropdownButton<String>(
-                      underline: SizedBox(),
-
-                      value: selection,
-                      items: sizeList
-                          .map((String value) {
-                        return new DropdownMenuItem<String>(
-                          value: value,
-                          child: new Text(value,),
-                        );
-                      }).toList(),
-                      onChanged: (_) {setState(() {
-                        selection=_;
-                      });
-
-                      },
-                    ),
+                            if(quantityHalf < 6.0){
+                              _incrementHalf();
+                            }
+                          },
+                        ),
+                      ),
+                    ],
                   )
+//                  Container(
+//                    padding: EdgeInsets.symmetric(horizontal: 10),
+//                    color: Colors.white,
+//                    child: DropdownButton<String>(
+//                      underline: SizedBox(),
+//
+//                      value: selection,
+//                      items: sizeList
+//                          .map((String value) {
+//                        return new DropdownMenuItem<String>(
+//                          value: value,
+//                          child: new Text(value,),
+//                        );
+//                      }).toList(),
+//                      onChanged: (_) {setState(() {
+//                        selection=_;
+//                      });
+//
+//                      },
+//                    ),
+//                  )
                 ],
               )
             ],

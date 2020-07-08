@@ -115,7 +115,13 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
       setState(()  {
         currentLocation = tempLatLng;
         updateAddress();
-        searchAddressField.text = userAddress;
+        allMarkers.clear();
+        allMarkers.add(Marker(
+          markerId: MarkerId('0'),
+          position: currentLocation,
+          draggable: true,
+          onDragEnd: onMarkerDragEnd,
+        ));
         controller.animateCamera(
           CameraUpdate.newCameraPosition(
             CameraPosition(target: currentLocation, zoom: 16.0),
@@ -264,7 +270,7 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
           ],
         ),
       ),
-      bottomNavigationBar: Material(
+      bottomNavigationBar: userAddress!=null ?  Material(
         elevation: 10,
         child: Padding(
           padding: const EdgeInsets.all(15),
@@ -298,7 +304,7 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
                 print(prefs);
                 prefs.setDouble("latitude", currentLocation.latitude);
                 prefs.setDouble("longitude", currentLocation.longitude);
-                prefs.setString("address", await findAddress(currentLocation));
+                prefs.setString("address", userAddress);
 
                 Navigator.of(context)
                     .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
@@ -306,7 +312,7 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
             ),
           ),
         ),
-      ),
+      ) : SizedBox(),
     );
   }
 
