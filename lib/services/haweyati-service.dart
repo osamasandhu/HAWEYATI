@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:convert';
 import 'package:dio/dio.dart';
@@ -5,8 +6,6 @@ import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/src/utlis/local-data.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
-
-
 
 abstract class HaweyatiService<T> {
 
@@ -57,8 +56,8 @@ abstract class HaweyatiService<T> {
     return jsonDecode(encodedData).cast<Map<String, dynamic>>();
   }
 
-  static getConvertedImageUrl(String url) {
-    return "$apiUrl/$url";
+  static resolveImage(String url) {
+    return "$apiUrl/uploads/$url";
   }
 
   T parse(Map<String, dynamic> item);

@@ -17,65 +17,25 @@ class HelplinePage extends StatefulWidget {
 class _HelplinePageState extends State<HelplinePage> {
 
 
+  void launchWhatsApp(
+      {@required String phone,
+        @required String message,
+      }) async {
+    String url() {
+      if (Platform.isIOS) {
+        return "whatsapp://wa.me/$phone/?text=${Uri.parse(message)}";
+      } else {
+        return "whatsapp://send?   phone=$phone&text=${Uri.parse(message)}";
+      }
+    }
 
-
-  void _showbottomsheet() {
-    showModalBottomSheet(
-        backgroundColor: Colors.transparent,
-        context: context,
-        isDismissible: true,
-        builder: (builder) {
-
-          return Container(padding: EdgeInsets.symmetric(vertical: 30), color: Colors.white,
-
-            child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: <Widget>[
-
-              IconButton(icon: Icon(Icons.call,color: Colors.blue,), onPressed:() {
-                _checkAvailability();
-
-                if (_available) launch("tel:+923472363720");
-              } )
-              ,
-              IconButton(icon: Icon(Icons.call,color: Colors.green,), onPressed: (){        _launchWhatsapp('+923472363720');
-              } )
-            ],),
-          );
-        });
-  }
-
-
-
-  _launchWhatsapp(String phone) async {
-    if (await canLaunch(phone)) {
-      await launch('whatsapp://send?phone=$phone');
+    if (await canLaunch(url())) {
+      await launch(url());
     } else {
-      await launch('https://api.whatsapp.com/send?phone=$phone‬');
-//      throw 'Could not launch $url';
+      throw 'Could not launch ${url()}';
     }
   }
 
-
-
-//
-//  void launchWhatsApp(
-//      {@required String phone,
-//        @required String message,
-//      }) async {
-//    String url() {
-//      if (Platform.isIOS) {
-//        return "whatsapp://wa.me/$phone/?text=${Uri.parse(message)}";
-//      } else {
-//        return "whatsapp://send?   phone=$phone&text=${Uri.parse(message)}";
-//      }
-//    }
-//
-//    if (await canLaunch(url())) {
-//      await launch(url());
-//    } else {
-//      throw 'Could not launch ${url()}';
-//    }
-//  }
-//
   bool _available;
 
   @override
@@ -162,7 +122,18 @@ class _HelplinePageState extends State<HelplinePage> {
 
       action: 'Get Help',
       onAction: _available ?
-        () {_showbottomsheet(); }:
+        () {
+          _checkAvailability();
+//          if(_available){
+//
+//            launchWhatsApp(phone:" +923472363720", message: "Hello");
+//          }
+
+          if(_available){
+            CustomNavigator.navigateTo(context, ChatViewPage());
+          }
+//          if (_available) launch("tel:+923472363720");
+        }:
         null,
     );
   }

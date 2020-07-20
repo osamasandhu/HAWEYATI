@@ -157,13 +157,14 @@ Padding(
               print(geolocationStatus);
               if (await Geolocator().isLocationServiceEnabled()) {
                 print("Enabled");
-                if (await Geolocator().checkGeolocationPermissionStatus() ==
-                    GeolocationStatus.granted) {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MyLocationMapPage()));
+//                if (await Geolocator().checkGeolocationPermissionStatus() ==
+//                    GeolocationStatus.granted) {
+            //  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MyLocationMapPage()));
                   CustomNavigator.navigateTo(context, MyLocationMapPage());
-                } else {
-   //                 _showDialog();
-                }
+//                } else {
+//                    _showDialog();
+//                  _/showAlert();
+//                }
               } else {
                 _showAlert();
 

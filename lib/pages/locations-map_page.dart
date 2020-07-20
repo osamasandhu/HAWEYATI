@@ -10,6 +10,7 @@ import 'package:geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
+import 'package:haweyati/models/order-time_and_location.dart';
 import 'package:haweyati/pages/appHomePage.dart';
 import 'package:haweyati/src/ui/widgets/localization-selector.dart';
 import 'package:haweyati/widgits/appBar.dart';
@@ -19,13 +20,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 String apiKey = 'AIzaSyDdNpY6LGWgHqRfTRZsKkVhocYOaER325w';
 
 class MyLocationMapPage extends StatefulWidget {
+  final bool timeAndLocation;
   final bool editMode;
-  MyLocationMapPage({this.editMode=false});
+  MyLocationMapPage({this.editMode=false,this.timeAndLocation=false});
   @override
   State<MyLocationMapPage> createState() => MyLocationMapPageState();
 }
 
 class MyLocationMapPageState extends State<MyLocationMapPage> {
+  String city;
   String userAddress;
   Completer<GoogleMapController> _controller = Completer();
   GoogleMapController controller;
@@ -115,13 +118,7 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
       setState(()  {
         currentLocation = tempLatLng;
         updateAddress();
-        allMarkers.clear();
-        allMarkers.add(Marker(
-          markerId: MarkerId('0'),
-          position: currentLocation,
-          draggable: true,
-          onDragEnd: onMarkerDragEnd,
-        ));
+        searchAddressField.text = userAddress;
         controller.animateCamera(
           CameraUpdate.newCameraPosition(
             CameraPosition(target: currentLocation, zoom: 16.0),
@@ -214,29 +211,6 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
                   ),
                 ]),
               )
-//              CupertinoTextField(
-//                placeholder: "Enter Your Location",
-//                prefix: Padding(
-//                  padding: const EdgeInsets.symmetric(horizontal: 8),
-//                  child: Icon(Icons.location_on, color: Theme.of(context).accentColor),
-//                ),
-//                suffix: Padding(
-//                  padding: const EdgeInsets.symmetric(horizontal: 8),
-//                  child: IconButton(
-//                      icon: Icon(Icons.my_location),
-//                    onPressed: (){
-//                        print('called');
-//                    },
-//                  ),
-//                ),
-//                clearButtonMode: OverlayVisibilityMode.always,
-//                padding: EdgeInsets.symmetric(vertical: 9),
-//                decoration: BoxDecoration(
-//                  color: Colors.white,
-//                  borderRadius: BorderRadius.circular(30)
-//                ),
-//                controller: searchAddressField,
-//              ),
             ),
           ),
         ),
@@ -270,7 +244,7 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
           ],
         ),
       ),
-      bottomNavigationBar: userAddress!=null ?  Material(
+      bottomNavigationBar: Material(
         elevation: 10,
         child: Padding(
           padding: const EdgeInsets.all(15),
@@ -283,6 +257,16 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
               color: Theme.of(context).accentColor,
               label: Text(tr('Set_Your_Location')),
               onPressed: () async {
+
+                if(widget.timeAndLocation){
+                  OrderLocation location = OrderLocation(
+                    cords: currentLocation,
+                    address: userAddress,
+                  );
+
+                  Navigator.of(context).pop(location);
+                  return;
+                }
                 showDialog(
                   context: context,
                   builder: (context) {
@@ -305,6 +289,8 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
                 prefs.setDouble("latitude", currentLocation.latitude);
                 prefs.setDouble("longitude", currentLocation.longitude);
                 prefs.setString("address", userAddress);
+                prefs.setString('city', city);
+                print(city);
 
                 Navigator.of(context)
                     .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
@@ -312,12 +298,11 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
             ),
           ),
         ),
-      ) : SizedBox(),
+      ),
     );
   }
 
   Future<String> findAddress(LatLng cords) async{
-
     var addresses = await Geocoder.google(apiKey).findAddressesFromCoordinates(Coordinates(cords.latitude,cords.longitude));
     String formattedAddress = "";
     if (addresses.first.addressLine.contains(",")) {
@@ -332,6 +317,7 @@ class MyLocationMapPageState extends State<MyLocationMapPage> {
     } else {
       formattedAddress = addresses.first.addressLine;
     }
+    city = addresses.first.locality;
     return formattedAddress;
   }
 

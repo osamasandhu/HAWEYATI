@@ -12,7 +12,7 @@ class _HaweyatiRewardsState extends State<HaweyatiRewards> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HaweyatiAppBar(context: context,showCart: false,showHome: false,),
+      appBar: HaweyatiAppBar(context: context,),
       body: ListView(
         padding: EdgeInsets.fromLTRB(10, 40, 10, 10),
         children: <Widget>[
@@ -105,29 +105,57 @@ class _HaweyatiRewardsState extends State<HaweyatiRewards> {
               ],
             ),
           ),
-          _buildText(text: "Construction Dumpster"),
-
-          container(points: "450 points",count: 2,name: "20 Yard Dumspter")
-          ,
-
-          _buildText(text: "Scaffolding"),
-
-          container(points: "1230 points",count: 3,name: "Scaffolding")
-,
-
-
-          _buildText(text: "Building Material"),
-
-          container(points: "600 points",count: 6,name: "Sands")
-          ,
+          SizedBox(
+            height: 20,
+          ),
           _buildText(text: "Finishing Material"),
-
-          container(points: "1100 points",count: 12,name: "Maepi>")
-          ,
-          _buildText(text: "Vehicles"),
-
-          container(name: "Vehicles",count: 4,points: "2300 ")
-
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            height: 200,
+            width: MediaQuery.of(context).size.width,
+            child: ListView(
+              children: <Widget>[
+                _buildHorizontalList(
+                    text1: "Get Mapefill", text2: "1200 points"),
+                _buildHorizontalList(
+                    text1: "Get Mapefill", text2: "1200 points"),
+                _buildHorizontalList(
+                    text1: "Get Mapefill", text2: "1200 points"),
+                _buildHorizontalList(
+                    text1: "Get Mapefill", text2: "1200 points"),
+                _buildHorizontalList(
+                    text1: "Get Mapefill", text2: "1200 points"),
+              ],
+              scrollDirection: Axis.horizontal,
+            ),
+          ),SizedBox(
+            height: 20,
+          ),
+          _buildText(text: "Building Material"),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            height: 200,
+            width: MediaQuery.of(context).size.width,
+            child: ListView(
+              children: <Widget>[
+                _buildHorizontalList(
+                    text1: "Get Mapefill", text2: "1200 points"),
+                _buildHorizontalList(
+                    text1: "Get Mapefill", text2: "1200 points"),
+                _buildHorizontalList(
+                    text1: "Get Mapefill", text2: "1200 points"),
+                _buildHorizontalList(
+                    text1: "Get Mapefill", text2: "1200 points"),
+                _buildHorizontalList(
+                    text1: "Get Mapefill", text2: "1200 points"),
+              ],
+              scrollDirection: Axis.horizontal,
+            ),
+          ),
 
         ],
       ),
@@ -135,50 +163,39 @@ class _HaweyatiRewardsState extends State<HaweyatiRewards> {
   }
 
   Widget _buildText({String text}) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 25,left: 8),
-      child: Text(
-        text,
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-      ),
+    return Text(
+      text,
+      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
     );
   }
 
   Widget _buildHorizontalList({String text1, String text2}) {
-    return Row(
-      children: <Widget>[
-        Column(
-            children: <Widget>[
-              Container(
-
-             //     margin: EdgeInsets.only(right: 20),
-                height: 160,
-                width: 140,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-boxShadow: [BoxShadow(spreadRadius: 1,blurRadius: 5,color: Colors.grey)],
-                  borderRadius: BorderRadius.circular(20),
-                //  border: Border.all(width: 1, color: Colors.black),
-                ),
-                child: Image.asset('assets/images/Sand 1.png',fit: BoxFit.contain,),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  text1,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 2, 0, 0),
-                child: Text(text2),
-              )
-            ],
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start),
-        SizedBox(width: 30,)
-      ],
-    );
+    return Column(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(right: 20),
+            height: 140,
+            width: 140,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(width: 1, color: Colors.black),
+            ),
+            child: Image.asset('assets/images/Sand 1.png'),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              text1,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(10, 2, 0, 0),
+            child: Text(text2),
+          )
+        ],
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start);
   }
 
   Widget _buildButton({Function onTap, String buttonName}) {
@@ -200,19 +217,4 @@ boxShadow: [BoxShadow(spreadRadius: 1,blurRadius: 5,color: Colors.grey)],
       ),
     );
   }
-
-  Widget container({String name, String points,int count}){
-    return  Container(
-      height: 230,
-      width: MediaQuery.of(context).size.width,
-      child: ListView.builder(          padding: EdgeInsets.only(top: 15,left: 8),
-        itemCount: count, itemBuilder: (context,i){
-          return _buildHorizontalList(text1: name,text2:points);
-
-        },
-        scrollDirection: Axis.horizontal,
-      ),
-    );
-  }
 }
-

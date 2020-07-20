@@ -1,11 +1,11 @@
 import 'package:haweyati/models/dumpster_model.dart';
-import 'package:haweyati/services/haweyati-service.dart';
+import 'package:haweyati/services/item-available-service.dart';
 
-class DumpstersService extends HaweyatiService<Dumpsters> {
+class DumpstersService extends ItemAvailableService<Dumpster> {
   @override
-  Dumpsters parse(Map<String, dynamic> item) => Dumpsters.fromJson(item);
+  Dumpster parse(Map<String, dynamic> item) => Dumpster.fromJson(item);
 
-  Future<List<Dumpsters>> getDumpsters(String city) {
+  Future<List<Dumpster>> getAvailable([String city]) {
     return this.getAll('dumpsters/available?city=$city');
   }
 

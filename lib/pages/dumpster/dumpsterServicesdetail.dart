@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/dumpster_model.dart';
-import 'package:haweyati/pages/dumpster/time-location.dart';
+import 'file:///C:/Users/Osama/Workspace/Projects/haweyati/lib/src/ui/pages/services/dumpsters/time-location.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/container-with-add-remove-item.dart';
@@ -38,7 +38,7 @@ class _DumpsterServicesDetailState extends State<DumpsterServicesDetail> {
         title: "Services Detail",
         detail: loremIpsum.substring(0,50),
         btnName: tr("Continue"),onTap: (){
-
+          
         var box = Hive.box('dumpster');
         if(extraDay!=0){
           box.put('extra_days', extraDay);

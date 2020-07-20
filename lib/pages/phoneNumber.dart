@@ -1,28 +1,30 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/auth-pages/signup.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/verification.dart';
+import 'package:haweyati/services/auth-service.dart';
+import 'package:haweyati/src/utlis/validators.dart';
 import 'package:haweyati/widgits/appBar.dart';
+import 'package:haweyati/widgits/custom-navigator.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
 import 'package:haweyati/widgits/haweyati_Textfield.dart';
 
 class PhoneNumber extends StatefulWidget {
-
-
-  ConstructionService constructionService;
+  final ConstructionService constructionService;
   PhoneNumber({this.constructionService});
   @override
   _PhoneNumberState createState() => _PhoneNumberState();
 }
 
 class _PhoneNumberState extends State<PhoneNumber> {
-  TextEditingController phone;
+  bool autoValidate = false;
+  var key = GlobalKey<FormState>();
+  TextEditingController phone = TextEditingController();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    phone = TextEditingController();
   }
 
   @override
@@ -31,9 +33,14 @@ class _PhoneNumberState extends State<PhoneNumber> {
         appBar: HaweyatiAppBar(context: context,),
         floatingActionButton: FloatingActionButton(
           onPressed: (){
-print(widget.constructionService);
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>VerificationPhoneNumber(constructionService: widget.constructionService,)));
-            },
+            if(key.currentState.validate()){
+              CustomNavigator.navigateTo(context, VerificationPhoneNumber(phoneNumber: phone.text,));
+            }else{
+              setState(() {
+                autoValidate=true;
+              });
+            }
+           },
           child: Icon(
             Icons.arrow_forward,
             color: Colors.white,
@@ -69,7 +76,7 @@ print(widget.constructionService);
                 Padding(
                   padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
                   child: Text(
-                    "Enter Your Phone Number to Login",
+                    "Enter Your Phone Number in International Format to Login",
                     style: TextStyle(fontSize: 15),
                     textAlign: TextAlign.center,
                   ),
@@ -77,9 +84,18 @@ print(widget.constructionService);
                 SizedBox(
                   height: 15,
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 30, 15, 100),
-                  child: HaweyatiTextField(controller: phone,label: "Phone Number",context: context,keyboardType: TextInputType.phone,),
+                Form(
+                  key: key,
+                  autovalidate: autoValidate,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 30, 15, 100),
+                    child: HaweyatiTextField(
+
+                      validator: (value)=> phoneValidator(value),
+                      controller: phone,label: "Phone Number",
+                      context: context,keyboardType: TextInputType.phone,
+                    ),
+                  ),
                 ),
               ],
             )

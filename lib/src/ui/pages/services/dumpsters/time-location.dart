@@ -23,8 +23,8 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../locations-map_page.dart';
-import '../phoneNumber.dart';
+import '../../../../../pages/locations-map_page.dart';
+import '../../../../../pages/phoneNumber.dart';
 
 class TimeAndLocation extends StatefulWidget {
   ConstructionService constructionService;

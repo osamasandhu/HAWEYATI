@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haweyati/models/temp-model.dart';
 import 'package:haweyati/pages/payment/visa.dart';
-import 'package:haweyati/src/ui/widgets/scrollable_page.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/widgits/appBar.dart';
 import 'package:haweyati/widgits/haweyati-appbody.dart';
@@ -52,24 +51,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
 
   @override
   Widget build(BuildContext context) {
-    return
-      ScrollablePage(title: "Payment Method",subtitle: loremIpsum.substring(0,115),action: "Done",showButtonBackground: true,child: SliverList(delegate: SliverChildListDelegate([
-        _buildPaymentContainer(
-            imgPath: "assets/images/mada.png", onTap: () => setState(() => _selectedIndex = 0), text: "Mada", index: 0),
-        _buildPaymentContainer(
-            imgPath: "assets/images/apple-pay.png", onTap: () => setState(() => _selectedIndex = 1), text: "Apple", index: 1),
-        _buildPaymentContainer(
-            imgPath: "assets/images/credit-card.png", onTap: () => setState(() => _selectedIndex = 2), text: "Credit Card ", index: 2),
-        _buildPaymentContainer(
-            imgPath: "assets/images/cash-on-delivery.png", onTap: () => setState(() => _selectedIndex = 3), text: "Cash on Delivery", index: 3)
-
-      ])),onAction:  () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => VisaCard(
-              constructionService: widget.constructionService,
-            )));
-      },);
-      Scaffold(
+    return Scaffold(
       appBar: HaweyatiAppBar(context: context,),
       body: HaweyatiAppBody(
         onTap: () {

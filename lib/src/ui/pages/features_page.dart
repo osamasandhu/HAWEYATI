@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/pages/map/location.dart';
-import 'package:haweyati/pages/map/setLocation.dart';
 import 'package:haweyati/src/ui/pages/location/pre-location_page.dart';
 import 'package:haweyati/src/ui/widgets/localization-selector.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
@@ -51,7 +50,7 @@ class _FeaturesPageState extends State<FeaturesPage> {
               child: FlatButton(
                 textColor: Colors.white,
                 child: Text(tr("skip")),
-                onPressed: () =>  CustomNavigator.navigateTo(context, Location()) // Navigator.of(context).pushNamed('/pre-location')
+                onPressed: () =>  CustomNavigator.navigateTo(context, PreLocationPage()) // Navigator.of(context).pushNamed('/pre-location')
               ),
             ): Container(width: 70)
           ],

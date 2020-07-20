@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class SimpleFutureBuilder<T> extends FutureBuilder<T> {
   SimpleFutureBuilder({
@@ -19,22 +18,28 @@ class SimpleFutureBuilder<T> extends FutureBuilder<T> {
 
     builder: (context, AsyncSnapshot<T> snapshot) {
       if (snapshot.hasData) {
+
         switch(snapshot.connectionState) {
           case ConnectionState.none:
             return noneChild;
           case ConnectionState.waiting:
-            return waitingChild;
+            if (waitingChild != null)
+              return waitingChild;
+            return builder(snapshot);
           case ConnectionState.active:
-            return activeChild;
+            if (activeChild != null)
+              return activeChild;
+            return SliverToBoxAdapter(child: Container());
           case ConnectionState.done:
             if (snapshot.hasData)
               return builder(snapshot);
-            else return noDataChild;
+            return noDataChild;
         }
       } else if (snapshot.hasError)
         return errorBuilder(snapshot.error.toString());
 
-      return waitingChild;
+      if (waitingChild != null) return waitingChild;
+      else return SliverToBoxAdapter(child: Container());
     }
   );
 
@@ -48,30 +53,42 @@ class SimpleFutureBuilder<T> extends FutureBuilder<T> {
     noneChild: Text("No Connection was found"),
     noDataChild: Text("No Data was found"),
     unknownChild: Text("Unknown Error Occurred"),
-    activeChild: Center(child: CircularProgressIndicator()),
-    waitingChild: Center(child: CircularProgressIndicator()),
+    activeChild: Center(child: Column(children: <Widget>[
+      CircularProgressIndicator(strokeWidth: 2),
+      Text('Please Wait ...')
+    ])),
+    waitingChild: Center(child: Column(children: <Widget>[
+      CircularProgressIndicator(strokeWidth: 2),
+      Text('Please Wait ...')
+    ])),
 
-    errorBuilder: (String error) => Center(child: Container(child:  Text("An error occured!"),)),
+    errorBuilder: (String error) => Center(child: Container(child:  Text(error))),
     builder: builder,
   );
 
   SimpleFutureBuilder.simplerSliver({
+    bool showLoading = true,
     @required Future<T> future,
     @required BuildContext context,
     @required Function(AsyncSnapshot<T>) builder
   }): this(
-    context: context,
     future: future,
+    context: context,
     noneChild: SliverToBoxAdapter(child: Text("No Connection was found")),
     noDataChild: SliverToBoxAdapter(child: Text("No Data was found")),
     unknownChild: SliverToBoxAdapter(child: Text("Unknown Error Occurred")),
-    activeChild: SliverToBoxAdapter(child: Center(child: CircularProgressIndicator())),
-    waitingChild: SliverToBoxAdapter(child: Center(child: CircularProgressIndicator())),
+    activeChild: showLoading ? SliverToBoxAdapter(child: Center(child: Column(children: <Widget>[
+      CircularProgressIndicator(strokeWidth: 2),
+      SizedBox(height: 10),
+      Text('Please Wait ...')
+    ]))): null,
+    waitingChild: showLoading ? SliverToBoxAdapter(child: Center(child: Column(children: <Widget>[
+      CircularProgressIndicator(strokeWidth: 2),
+      SizedBox(height: 10),
+      Text('Please Wait ...')
+    ]))): null,
 
-    errorBuilder: (String error) => SliverToBoxAdapter(child: Center(child: Container(child: Text("An error occured!")
-    )
-    )
-    ),
+    errorBuilder: (String error) => SliverToBoxAdapter(child: Center(child: Container(child: Text("An error occurred!")))),
     builder: builder,
   );
 }

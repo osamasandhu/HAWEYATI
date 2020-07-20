@@ -7,11 +7,10 @@ import 'package:haweyati/src/utlis/const.dart';
 
 class ServiceAvailability extends HaweyatiService<AvailableServices> {
   @override
-    AvailableServices parse(Map<String, dynamic> item) => AvailableServices.fromJson(item);
+  AvailableServices parse(Map<String, dynamic> item) => AvailableServices.fromJson(item);
 
-
-  Future<AvailableServices> getAvailableServices(LatLng cords) async {
-    return this.getOne('suppliers/available?lat=${cords.latitude}&lng=${cords.longitude}');
+  Future<AvailableServices> getAvailableServices(String city) async {
+    return this.getOne('suppliers/available/$city');
   }
 
 }

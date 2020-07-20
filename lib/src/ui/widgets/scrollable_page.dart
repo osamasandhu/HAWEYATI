@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haweyati/widgits/appBar.dart';
@@ -29,6 +28,7 @@ class ScrollablePage extends StatelessWidget {
     return Scaffold(
       key: key,
       appBar: HaweyatiAppBar(),
+      backgroundColor: Colors.white,
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(

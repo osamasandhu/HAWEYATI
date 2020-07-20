@@ -1,26 +1,20 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:haweyati/custom-care.dart';
-import 'package:haweyati/models/temp-model.dart';
-import 'package:haweyati/pages/building-material/building-material-List.dart';
-import 'package:haweyati/pages/drawer/haweyati-rewards.dart';
-import 'package:haweyati/pages/drawer/haweyati-setting.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:haweyati/models/available-services_model.dart';
 import 'package:haweyati/pages/drawer/rate.dart';
 import 'package:haweyati/pages/drawer/share-invite.dart';
+import 'package:haweyati/services/service-availability_service.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:haweyati/pages/drawer/term-condition.dart';
-import 'package:haweyati/pages/dumpster/dumpstersList.dart';
-import 'package:haweyati/pages/finishing-material/finishing-material-List.dart';
-import 'package:haweyati/pages/helpline_page.dart';
 import 'package:haweyati/pages/orderDetail/all-orders.dart';
-import 'package:haweyati/pages/scaffolding/scaffoldingList.dart';
-import 'package:haweyati/pages/vehicles-map_page.dart';
-import 'package:haweyati/src/ui/widgets/localization-selector.dart';
-import 'package:haweyati/src/utlis/local-data.dart';
+import 'package:haweyati/src/utlis/simple-future-builder.dart';
 import 'package:haweyati/widgits/custom-navigator.dart';
-
-import '../../../notification.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:haweyati/pages/drawer/haweyati-rewards.dart';
+import 'package:haweyati/pages/drawer/haweyati-setting.dart';
+import 'package:haweyati/src/ui/widgets/localization-selector.dart';
 
 class AppHomePage extends StatefulWidget {
   @override
@@ -28,38 +22,25 @@ class AppHomePage extends StatefulWidget {
 }
 
 class _AppHomePageState extends State<AppHomePage> {
-  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+  final _service = ServiceAvailability();
+  final _drawerKey = GlobalKey<ScaffoldState>();
 
-  static List<String> languages = ['English','Arabic',];
-  String selectedLanguage = LocalData.currentLng;
+  String _address = 'Loading ....';
+  Future<AvailableServices> _availableServices;
 
+  @override
+  void initState() {
+    super.initState();
 
-
-  showAlertDialog(BuildContext context) {
-    // set up the button
-    Widget okButton = FlatButton(
-      child: Text("OK"),
-      onPressed: () { Navigator.of(context).pop();},
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text("Warning",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),),
-      content: Text("This Functionality will be available after Supplier App is develop."),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
+    SharedPreferences.getInstance().then((prefs) {
+      this._address = prefs.getString('address');
+      setState(() {
+        this._availableServices = _service.getAvailableServices(
+            prefs.getString('city')
+        );
+      });//..then((value) => this.setState(() => prefs.setString('city', value.city)));
+    });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -91,9 +72,7 @@ class _AppHomePageState extends State<AppHomePage> {
             width: 20,
             height: 20,
           ),
-          onPressed: () {
-            _drawerKey.currentState.openDrawer();
-          }
+          onPressed: () => _drawerKey.currentState.openDrawer()
         ),
         actions: <Widget>[
           IconButton(
@@ -102,69 +81,54 @@ class _AppHomePageState extends State<AppHomePage> {
               width: 20,
               height: 20,
             ),
-            onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => HelplinePage()))),
+            onPressed: () => Navigator.of(context).pushNamed('/helpline')
+          ),
           IconButton(
-              icon: Image.asset(
-                "assets/images/notification.png",
-                width: 20,
-                height: 20,
-              ),
-              onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => NotificationPage())))
-        ],        bottom:
-      PreferredSize(
-        preferredSize: Size.fromHeight(160),
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
+            icon: Image.asset(
+              "assets/images/notification.png",
+              width: 20,
+              height: 20,
+            ),
+            ///TODO: Fix This.
+            onPressed: () => Navigator.of(context).pushNamed('/dumpsters-list')
+          )
+        ],
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(160),
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
                 image: AssetImage('assets/images/homepageimage.png'),
                 fit: BoxFit.scaleDown,
                 alignment: Alignment(1, -0.6)
-            ),
-          ),
-          padding: const EdgeInsets.all(15),
-          child: Column(children: <Widget>[
-            Text(
-                tr('hello'),
-                style: TextStyle(
-                    fontSize: 17,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold)),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 20),
-              child:
-              Text(
-                tr('explore'),
-                style: TextStyle(color: Colors.white),
               ),
             ),
+            padding: const EdgeInsets.all(15),
+            child: Column(children: <Widget>[
+              Text(tr('hello'), style: TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold)),
+              Padding(padding: const EdgeInsets.only(top: 8, bottom: 20), child: Text(tr('explore'), style: TextStyle(color: Colors.white))),
 
-            CupertinoTextField(
-              onTap: () {
-
-              },
-              padding: EdgeInsets.fromLTRB(5, 13, 5, 13),
-              decoration: BoxDecoration(
+              CupertinoTextField(
+                onTap: () => Navigator.of(context).pushNamed('/location'),
+                padding: EdgeInsets.fromLTRB(5, 13, 5, 13),
+                decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(30)
-              ),
-              placeholderStyle: TextStyle(
-                  color: Colors.black
-              ),
-              placeholder: "asd",
-              readOnly: true,
-              prefix: Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8),
-                child: Icon(
-                  Icons.location_on,
-                  color: Theme.of(context).accentColor,
+                ),
+                placeholderStyle: TextStyle(color: Colors.black),
+                placeholder: this._address,
+                readOnly: true,
+                prefix: Padding(
+                  padding: const EdgeInsets.only(left: 8, right: 8),
+                  child: Icon(
+                    Icons.location_on,
+                    color: Theme.of(context).accentColor,
+                  ),
                 ),
               ),
-            ),
-          ], crossAxisAlignment: CrossAxisAlignment.start),
+            ], crossAxisAlignment: CrossAxisAlignment.start),
+          ),
         ),
-      ),
       ),
       extendBodyBehindAppBar: true,
       drawer: Drawer(
@@ -232,10 +196,8 @@ class _AppHomePageState extends State<AppHomePage> {
                   _buildListTile(
                       "assets/images/term.png", tr("Terms_Conditions"),(){CustomNavigator.navigateTo(context, TermAndCondition());}),
                   _buildListTile("assets/images/rate.png", tr("Rate_App"),(){CustomNavigator.navigateTo(context, Rate());}),
-                  _buildListTile("assets/images/logout.png", tr("Logout"),(){
-//                        CustomNavigator.navigateTo(context, Rate());
-                  }),
-                  ListTile(onTap: (){showAlertDialog(context);},
+                  _buildListTile("assets/images/logout.png", tr("Logout"),() {}),
+                  ListTile(onTap: (){/*showAlertDialog(context);*/},
                     leading: Icon(Icons.person_add,color: Colors.white,),title:
                     Text(tr("Register"),style: TextStyle(color: Colors.white,),),dense: true,)
                 ]),
@@ -244,41 +206,30 @@ class _AppHomePageState extends State<AppHomePage> {
           ),
         ),
       ),
-      body: ListView(
-        padding: EdgeInsets.fromLTRB(15, 245, 15, 10),
-        children: <Widget>[
-          _buildContainer(
-              title:  tr('Construction_Dumpster'),
-              imgPath: "assets/images/dumpster-bg.png",
-              onTap: () =>
-                  CustomNavigator.navigateTo(context,DumpsterListing())),
-          _buildContainer(
-              title: tr('Scaffolding'),
-              imgPath: "assets/images/scaffolding-bg.png",
-              onTap: () =>
-                  CustomNavigator.navigateTo(context, ScaffoldingListing())),
-          _buildContainer(
-            title: tr('building'),
-            imgPath: "assets/images/building-materials-bg.png",
-            onTap: () =>
-                CustomNavigator.navigateTo(context, BuildingMaterialListing()),
+
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 230, 10, 0),
+        child: CustomScrollView(slivers: <Widget>[
+          CupertinoSliverRefreshControl(
+            onRefresh: () async => this._availableServices,
           ),
-          _buildContainer(
-            imgPath: "assets/images/finishing-materials-bg.png",
-            onTap: () {
-              CustomNavigator.navigateTo(
-                  context,FinishingMaterialListing() );
-            },
-            title: tr('Finishing_Materials'),
-          ),
-          _buildContainer(
-              imgPath: "assets/images/delivery-vehaicles-bg.png",
-              onTap: () {
-                CustomNavigator.navigateTo(context, VehiclesMapPage());
-              },
-              title: tr('vehicles')
-          ),
-        ],
+          SliverToBoxAdapter(child: SizedBox(height: 17)),
+          SimpleFutureBuilder.simplerSliver(
+              showLoading: false,
+              context: context,
+              future: this._availableServices,
+              builder: (AsyncSnapshot<AvailableServices> snapshot) {
+                if (snapshot.data.services.isEmpty) {
+                  return SliverToBoxAdapter(child: Text('No services are yet available in your region'));
+                } else {
+                  return SliverList(delegate: SliverChildBuilderDelegate(
+                          (context, i) => _ServiceContainer(snapshot.data.services[i]),
+                      childCount: snapshot.data.services.length
+                  ));
+                }
+              }
+          )
+        ]),
       ),
       floatingActionButton: SizedBox(
         width: 65,
@@ -292,48 +243,90 @@ class _AppHomePageState extends State<AppHomePage> {
               width: 30,
               height: 30,
               color: Colors.black,
-            )),
+            )
+        ),
       ),
     );
   }
 
   Widget _buildListTile(String imgPath, String title,Function onTap) {
-    return ListTile(onTap: onTap,dense: true,
-      leading: Image.asset(
-        imgPath,
-        width: 20,
-        height: 30,
-      ),
-      title: Text(
-        title,
-        style: TextStyle(color: Colors.white),
-      ),
-    );
-  }
-
-  Widget _buildContainer(
-      {String title, Color color, String imgPath, Function onTap}) {
-    return GestureDetector(
+    return ListTile(
+      dense: true,
       onTap: onTap,
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        //       margin: EdgeInsets.only(bottom: 1),
-        height: 120,
-        decoration: new BoxDecoration(
-            image: new DecorationImage(
-              image: new AssetImage(imgPath),
-              fit: BoxFit.fill,
-            ),
-            borderRadius: BorderRadius.circular(20)),
-        child: Center(
-          child: Text(
-            title,
-            style: TextStyle(
-                color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-        ),
-      ),
-//      ),
+      leading: Image.asset(imgPath, width: 20, height: 30),
+      title: Text(title, style: TextStyle(color: Colors.white)),
     );
   }
 }
+
+class _ServiceContainerDetail {
+  final String page;
+  final String title;
+  final String image;
+
+  const _ServiceContainerDetail({
+    this.page,
+    this.title,
+    this.image
+  });
+}
+class _ServiceContainer extends StatelessWidget {
+  final String service;
+  _ServiceContainer(this.service);
+
+  final _map = {
+    'Construction Dumpster': const _ServiceContainerDetail(
+        title: 'Construction_Dumpster',
+        image: 'dumpster-bg.png',
+        page: '/dumpsters-list'
+    ),
+    'Scaffolding': const _ServiceContainerDetail(
+        title: 'Scaffolding',
+        image: 'scaffolding-bg.png',
+        page: '/scaffoldings-list'
+    ),
+    'Building Material': const _ServiceContainerDetail(
+        title: 'building',
+        image: 'building-materials-bg.png',
+        page: '/building-materials-list'
+    ),
+    'Finishing Material': const _ServiceContainerDetail(
+        title: 'Finishing_Materials',
+        image: 'finishing-materials-bg.png',
+        page: '/finishing-materials-list'
+    ),
+    'Delivery Vehicle': const _ServiceContainerDetail(
+        title: 'vehicles',
+        image: 'delivery-vehaicles-bg.png',
+        page: '/scaffoldings-list'
+    )
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    final service = _map[this.service];
+
+    return GestureDetector(
+        onTap: () => Navigator.of(context).pushNamed(service.page),
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: 120,
+          decoration: new BoxDecoration(
+              image: new DecorationImage(
+                image: new AssetImage('assets/images/' + service.image),
+                fit: BoxFit.fill,
+              ),
+              borderRadius: BorderRadius.circular(20)
+          ),
+          child: Center(
+            child: Text(tr(service.title), style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.bold
+            )),
+          ),
+        )
+    );
+  }
+}
+

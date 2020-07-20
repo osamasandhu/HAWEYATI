@@ -6,6 +6,7 @@ import 'package:haweyati/models/finishing-material_sublist_model.dart';
 import 'package:haweyati/pages/finishing-material/finishing_material_detail.dart';
 import 'package:haweyati/services/fn-sublist_service.dart';
 import 'package:haweyati/services/haweyati-service.dart';
+import 'package:haweyati/src/ui/widgets/service-list-item.dart';
 import 'package:haweyati/src/utlis/const.dart';
 import 'package:haweyati/src/utlis/simple-future-builder.dart';
 import 'package:haweyati/widgits/appBar.dart';
@@ -112,12 +113,15 @@ class _FinishingMaterialSubListState extends State<FinishingMaterialSubList> {
                       itemCount: snapshot.data.length,
                       itemBuilder: (build,i){
                         var item = snapshot.data[i];
-                        return  ContainerDetailList(
-                          imgpath: item.images[0].name,
-                          name: item.name,
-//                          ontap: () {
-//                            CustomNavigator.navigateTo(context, FinishingMaterialDetail(constructionService: widget.service,));},
-                        );
+                        return
+                          ServiceListItem(name:item.name, onTap: null,image: item.images[0].name,);
+
+//                          ContainerDetailList(
+//                          imgpath: item.images[0].name,
+//                          name: item.name,
+////                          ontap: () {
+////                            CustomNavigator.navigateTo(context, FinishingMaterialDetail(constructionService: widget.service,));},
+//                        );
                       },
 
                     );

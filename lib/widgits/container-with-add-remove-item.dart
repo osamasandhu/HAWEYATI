@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class PlusMinusContainer extends StatefulWidget {
+  final String extra;
+  final String dayprice;
+  final Function(int) onQuantityChange;
+  final Function(int) onValueChange;
 
-
-  String extra;
-  String dayprice;
-  Function(int) onValueChange;
-
-
-
-  PlusMinusContainer({this.dayprice,this.extra, this.onValueChange});
+  PlusMinusContainer({this.dayprice,this.extra, this.onValueChange,this.onQuantityChange});
 
   @override
   _PlusMinusContainerState createState() => _PlusMinusContainerState();
@@ -22,16 +19,12 @@ class _PlusMinusContainerState extends State<PlusMinusContainer> {
   int quantity = 0;
 
   _increment(){
-
- setState(() {
-   quantity++;
- });
- widget.onValueChange(quantity);
-
+     setState(() {
+       quantity++;
+     });
+     widget.onValueChange(quantity);
   }
   _decrement(){
-
-
     setState(() {
       quantity--;
     });
@@ -51,9 +44,9 @@ class _PlusMinusContainerState extends State<PlusMinusContainer> {
         padding: const EdgeInsets.all(20),
         child: Row(
           children: <Widget>[
-
           Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment:CrossAxisAlignment.start,children: <Widget>[
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment:CrossAxisAlignment.start,children: <Widget>[
               Text(
             widget.extra,
             style: TextStyle(
@@ -68,10 +61,7 @@ class _PlusMinusContainerState extends State<PlusMinusContainer> {
 
           ),
 
-Row(children: <Widget>[
-
-
-
+        Row(children: <Widget>[
   Container(
     width: 30,
     height: 30,
@@ -135,12 +125,3 @@ Row(children: <Widget>[
     );
   }
 }
-
-
-
-//IconButton(
-//icon:
-//Icon(Icons.remove),
-//onPressed: () {
-//},
-//),

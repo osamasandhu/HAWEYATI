@@ -1,60 +1,39 @@
-import 'images_model.dart';
-import 'pricing_model.dart';
+import 'image_model.dart';
+import 'rent_model.dart';
 
-class Dumpsters {
-  List<String> suppliers;
-  String sId;
+class Dumpster {
+  String id;
   String size;
   String description;
-  List<Pricing> pricing;
-  List<Images> images;
-  int iV;
 
-  Dumpsters(
-      {this.suppliers,
-        this.sId,
-        this.size,
-        this.description,
-        this.pricing,
-        this.images,
-        this.iV});
+  List<Rent> pricing;
+  List<String> suppliers;
+  ImageData image;
 
-  Dumpsters.fromJson(Map<String, dynamic> json) {
-    suppliers = json['suppliers'].cast<String>();
-    sId = json['_id'];
+  Dumpster({
+    this.id,
+    this.size,
+    this.image,
+    this.pricing,
+    this.suppliers,
+    this.description
+  });
+
+  Dumpster.fromJson(Map<String, dynamic> json) {
+    id = json['_id'];
     size = json['size'];
+    suppliers = json['suppliers'].cast<String>();
     description = json['description'];
-    if (json['pricing'] != null) {
-      pricing = List<Pricing>();
-      json['pricing'].forEach((v) {
-        pricing.add( Pricing.fromJson(v));
-      });
-    }
-    if (json['images'] != null) {
-      images = new List<Images>();
-      json['images'].forEach((v) {
-        images.add(Images.fromJson(v));
-      });
-    }
-    iV = json['__v'];
+    image =  ImageData.fromJson(json['image']);
+    pricing = (json['pricing'] as List)?.map((rent) => Rent.fromJson(rent))?.toList();
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['suppliers'] = this.suppliers;
-    data['_id'] = this.sId;
-    data['size'] = this.size;
-    data['description'] = this.description;
-    if (this.pricing != null) {
-      data['pricing'] = this.pricing.map((v) => v.toJson()).toList();
-    }
-    if (this.images != null) {
-      data['images'] = this.images.map((v) => v.toJson()).toList();
-    }
-    data['__v'] = this.iV;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+    "_id": id,
+    "size": size,
+    "suppliers": suppliers,
+    "description": description,
+    "images": image.toJson(),
+    "pricing": pricing.map((e) => e.toJson()).toList()
+  };
 }
-
-
-
